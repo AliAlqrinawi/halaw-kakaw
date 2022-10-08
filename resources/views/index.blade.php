@@ -34,7 +34,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Service::count() }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white"></h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -74,7 +74,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Work::count() }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white"></h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -93,7 +93,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\client::count() }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white"></h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
                         {{--										<span class="float-right my-auto mr-auto">--}}
@@ -197,108 +197,6 @@
 {{--    <script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>--}}
 <script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
 
-<script>
-    var table = $('#get_client').DataTable({
-        // processing: true,
-        ajax: '{!! route('get_client') !!}',
-        columns: [
-            {'data': 'id' ,
-                'className': 'text-center text-lg text-medium'},
-            {'data': 'name' ,
-                'className': 'text-center text-lg text-medium'},
-            {'data': 'email' ,
-                'className': 'text-center text-lg text-medium'},
-            {'data': 'description' ,
-                'className': 'text-center text-lg text-medium'},
-            {'data': 'image' ,
-                'className': 'text-center text-lg text-medium' ,
-                render:function (data, row, type){
-                    if(data){
-                        return `<img src="{{ request()->getSchemeAndHttpHost().'/uploads/' }}${data}" class="h-40 w-60">`
-                    }else {
-                        return `<img src="{{ asset('admin/images/favicon.png') }}" class="h-60 w-60">`
-                    }
-                        }
-            },
-            {
-                'data': 'created_at' ,
-                'className': 'text-center text-lg text-medium' ,
-                render: function (data) {
-                    if (data == null) return "";
-                    var date = new Date(data);
-                    var month = date.getMonth() + 1;
-                    return date.getDate() + "/"  + (month.toString().length > 1 ? month : "0" + month) + "/"  + date.getFullYear();
-                }},
-        ],
-    });
-    $('.table-responsive').addClass('col-12');
-</script>
-{{--<script>--}}
-{{--$(function() {--}}
-{{--    'use strict';--}}
-
-{{--    {--}}
-{{--        {--}}
-
-{{--            var morrisData2 =--}}
-{{--        }--}}
-{{--    } {--}}
-{{--        {--}}
-{{--            {--}}
-{{--                {--}}
-{{--                    $stats--}}
-{{--                }--}}
-{{--            };--}}
-
-{{--        }--}}
-{{--    }--}}
-{{--    //     alert(morrisData2);--}}
-
-{{--    new Morris.Bar({--}}
-{{--        element: 'morrisBar2',--}}
-{{--        data: morrisData2,--}}
-{{--        xkey: 'date',--}}
-{{--        ykeys: ['value'],--}}
-{{--        labels: ['التوقعات', 'المباريات', 'الفائزين'],--}}
-{{--        barColors: ['#6d6ef3', '#285cf7', '#f7557a'],--}}
-{{--        gridTextSize: 11,--}}
-{{--        hideHover: 'auto',--}}
-{{--        resize: true--}}
-{{--    });--}}
-
-
-
-
-{{--});--}}
-{{--</script>--}}
-<script>
-$('#modaldemo9').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var services_name = button.data('services_name')
-    var modal = $(this)
-    modal.find('.modal-body #id').val(id);
-    modal.find('.modal-body #services_name').val(services_name);
-})
-</script>
-
-<script>
-$('#exampleModal2', function(event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-
-    console.log(id)
-
-});
-
-// sample calendar events data
-'use strict'
-var curYear = moment().format('YYYY');
-var curMonth = moment().format('MM');
-
-
-
-
 
 // Birthday Events Source
 var azBirthdayEvents = {
@@ -331,28 +229,3 @@ var azOtherEvents = {
 </script>
 
 @endsection
-
-{{--                        @foreach(App\Models\client::get() as $client)--}}
-{{--                        <tbody>--}}
-{{--                            <tr>--}}
-{{--                                <td class="text-center text-lg text-medium">{{ $client->id }}</td>--}}
-{{--                                <td class="text-center text-lg text-medium">{{ $client->name }}</td>--}}
-{{--                                <td class="text-center text-lg text-medium">{{ $client->email }}</td>--}}
-{{--                                <td class="text-center text-lg text-medium">{{ $client->description }}</td>--}}
-{{--                                <td>--}}
-{{--                                    <div class="media">--}}
-{{--                                        <div class="card-aside-img">--}}
-{{--                                            <img src="{{asset('uploads/'.$client->image)}}" alt="img"--}}
-{{--                                                class="h-60 w-60">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="media-body">--}}
-{{--                                            <div class="card-item-desc mt-0">--}}
-{{--                                                <h6 class="font-weight-semibold mt-0 text-uppercase"></h6>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-{{--                                <td class="text-center text-lg text-medium">{{ $client->created_at }}</td>--}}
-{{--                            </tr>--}}
-{{--                        </tbody>--}}
-{{--                        @endforeach--}}
