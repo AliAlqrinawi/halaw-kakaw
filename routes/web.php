@@ -26,3 +26,5 @@ require __DIR__.'/admin.php';
 require __DIR__.'/client.php';
 require __DIR__.'/category.php';
 require __DIR__.'/roles.php';
+require __DIR__.'/setting.php';
+require __DIR__.'/prodect.php';

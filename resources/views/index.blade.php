@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('css')
 
-<link rel="stylesheet" href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}"  />
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" />
 
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
@@ -54,7 +54,7 @@
                     <div class="d-flex">
                         <div class="">
                             <h4 class="tx-20 font-weight-bold mb-1 text-white">
-                                </h4>
+                            </h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -106,31 +106,6 @@
             <span id="compositeline4" class="pt-1">5,9,5,6,4,12,18,14,10,15,12,5,8,5,12,5,12,10,16,12</span>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xl-12 col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <!-- Shopping Cart-->
-                <div class="product-details table-responsive text-nowrap">
-                    <h3 class="text-center">{{ trans('clients') }}</h3>
-                    <table class="table table-bordered table-hover mb-0 text-nowrap col-sm-12" id="get_client">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">{{ trans('Name') }}</th>
-                                <th class="text-center">{{ trans('Email') }}</th>
-                                <th class="text-center">{{ trans('Description') }}</th>
-                                <th class="text-center">{{ trans('Image') }}</th>
-                                <th class="text-center">{{ trans('Created') }}</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 <!-- Container closed -->
 @endsection
@@ -185,6 +160,13 @@
 <!--Internal Chart Morris js -->
 <script src="{{URL::asset('assets/js/chart.morris.js')}}"></script>
 
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  Chart.bundle js -->
+<script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+<!-- Internal Select2 js-->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<!--Internal Chartjs js -->
+<script src="{{URL::asset('assets/js/chart.chartjs.js')}}"></script>
 
 <script src="{{URL::asset('assets/plugins/moment/min/moment.min.js')}}"></script>
 <!--Internal  Date picker js -->
@@ -197,7 +179,7 @@
 {{--    <script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>--}}
 <script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
 
-
+<script>
 // Birthday Events Source
 var azBirthdayEvents = {
     id: 2,

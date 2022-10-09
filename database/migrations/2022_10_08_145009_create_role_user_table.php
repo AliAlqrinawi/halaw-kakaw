@@ -13,12 +13,15 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_user', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained('role')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->primary(['role_id' , 'user_id']);
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('role_user')){
+            Schema::create('role_user', function (Blueprint $table) {
+                $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+                $table->primary(['role_id' , 'user_id']);
+                $table->timestamps();
+            });
+        }
+      
     }
 
     /**

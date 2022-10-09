@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => "dashbord",
+        'prefix' => "admin",
         'middleware' => ['auth']
 ] , function (){
     Route::controller(UsersAndAdminController::class)->group(function () {

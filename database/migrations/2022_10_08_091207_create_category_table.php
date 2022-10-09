@@ -13,16 +13,18 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
-            $table->id();
-            $table->string('title_en');
-            $table->string('title_ar');
-            $table->string('description_en');
-            $table->string('description_ar');
-            $table->string('image')->nullable();
-            $table->enum('status', array('0', '1'))->default('1')->comment("Active = 1 , Not Active = 0");
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('categories')){
+            Schema::create('categories', function (Blueprint $table) {
+                $table->id();
+                $table->string('title_en');
+                $table->string('title_ar');
+                $table->string('description_en');
+                $table->string('description_ar');
+                $table->string('image')->nullable();
+                $table->enum('status', array('0', '1'))->default('1')->comment("Active = 1 , Not Active = 0");
+                $table->timestamps();
+            });
+        }
     }
 
     /**
