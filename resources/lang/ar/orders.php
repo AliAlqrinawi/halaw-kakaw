@@ -1,0 +1,35 @@
+<?php
+
+return [
+    'page_title' => 'ادراة الطلبات',
+    'content_title' => 'ادراة الطلبات',
+    'ip' => 'IP',
+    'status' => 'الحالة',
+    'domain' => 'الدومين',
+    'created_at' => 'تاريخ الإنشاء',
+    'updated_at' => 'تاريخ التعديل',
+    'is_active' => 'مفعل',
+    'selected_users_landry' => 'تم تعديل حالة الطلب بنجاح',
+    'error_users_landry' => 'حدث خطأ أثناء تعديل الطلب',
+    'js_lang' => [
+        'activated' => 'مفعل',
+        'disactivated' => 'غير مفعل',
+        'yes' => 'نعم',
+        'no' => 'لا',
+        'clothes.none' => 'غير محدد',
+        'clothes.row_found' => 'تم ايجاد القطعة',
+        'clothes.no_row_found' => 'لم يتم ايجاد القطعة',
+        'clothes.error_delete_row' => 'خطأ أثناء عملية القطعة',
+        'clothes.success_delete_row' => 'تم حذف القطعة',
+        'clothes.success_add_alert' => 'تم إضافة القطعة جديد',
+        'clothes.error_add_alert' => 'حصل خطأ أثناء عملية إضافة القطعة',
+        'clothes.success_update_alert' => 'تم تعديل القطعة بنجاح',
+        'clothes.error_update_alert' => 'حصل خطأ أثناء عملية تعديل القطعة',
+        'clothes.alert_not_found' => 'لم يتم ايجاد القطعة',
+        'clothes.status_updated' => 'تم تعديل حالة القطعة بنحاح',
+        'clothes.status_updated_error' => 'حدث خطأ أثناء عملية تحديث حالة القطعة',
+        'orders.selected_users_landry' => 'تم استلام الطلب فى المغسلة بنجاح',
+        'orders.error_users_landry' => 'حدث خطأ أثناء استلام الطلب',
+        'same_driver' => 'برجاء اختيار سائق اخر غير السائق الحالى ',
+    ]
+];
