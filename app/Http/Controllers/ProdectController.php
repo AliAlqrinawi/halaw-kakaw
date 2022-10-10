@@ -12,11 +12,34 @@ class ProdectController extends Controller
     public function index()
     {
         $cat = Category::get();
+        // $prodects = Product::with(['categories' , 'user'])->get();
+        // dd($prodects);
         return view('Prodect.index' , compact('cat'));
     }
 
     public function get_prodect (){
         $prodects = Product::with(['categories' , 'user'])->get();
+        if ($prodects) {
+            return response()->json([
+                'message' => 'Data Found',
+                'status' => 200,
+                'data' => $prodects 
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Data Not Found',
+                'status' => 404,
+            ]);
+        }
+    }
+    public function index_show()
+    {
+        $cat = Category::get();
+        return view('Prodect.show' , compact('cat'));
+    }
+
+    public function show ($id){
+        $prodects = Product::where('cat_id' , $id)->with(['categories' , 'user'])->get();
         if ($prodects) {
             return response()->json([
                 'message' => 'Data Found',
@@ -86,6 +109,22 @@ class ProdectController extends Controller
             ]);
             }
           else {
+            return response()->json([
+                'message' => 'Data Not Found',
+                'status' => 404,
+            ]);
+        }
+    }
+
+    public function delete ($id){
+        $product = Product::find($id);
+        if ($product) {
+            $product->delete();
+            return response()->json([
+                'message' => 'Data Found',
+                'status' => 200,
+            ]);
+        } else {
             return response()->json([
                 'message' => 'Data Not Found',
                 'status' => 404,

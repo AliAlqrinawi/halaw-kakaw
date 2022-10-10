@@ -229,9 +229,14 @@
     <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
     <script>
     var local = "{{ App::getLocale() }}";
+    var id = "{{ request()->route('id') }}";
+    // console.log(id);
     var table = $('#get_Prodects').DataTable({
-        // processing: true,
-        ajax: '{!! route("get_prodect") !!}',
+        processing: true,   
+        ajax: {
+        url: '{!!"http://127.0.0.1:8000/admin/clothes/show/"!!}'+id,
+        cache: true
+        },
         columns: [
             {
                 'data': 'id',

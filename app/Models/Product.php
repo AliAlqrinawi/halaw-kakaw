@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     
-    protected $table = "prodects";
+    protected $table = "clothes";
 
     protected $fillable = ['title_ar' , 'title_en' , 'nota_en' , 
     'nota_ar' , 'image' , 'price' ,
@@ -24,5 +24,11 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class , 'user_id'  , 'id');
+    }
+
+    
+    public function ads()
+    {
+        return $this->hasMany(Ads::class , 'product_id ' , 'id');
     }
 }

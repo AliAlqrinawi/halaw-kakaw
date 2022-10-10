@@ -17,4 +17,9 @@ class Category extends Model
         return $this->hasMany(Product::class , 'id_cat' , 'id');
     }
 
+    public function ads()
+    {
+        return $this->hasMany(Ads::class , 'id_cat' , 'id');
+    }
+
 }

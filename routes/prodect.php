@@ -20,17 +20,21 @@ Route::group(
         'middleware' => ['auth']
 ] , function (){
     Route::controller(ProdectController::class)->group(function () {
-        Route::get('prodect', 'index')->name('prodect');
+        Route::get('clothes', 'index')->name('prodect');
 
-        Route::get('prodect/get', 'get_prodect')->name('get_prodect');
+        Route::get('clothes/get', 'get_prodect')->name('get_prodect');
 
-        Route::post('prodect/add' , 'add_prodect')->name('add_prodect');
+        Route::post('clothes/add' , 'add_prodect')->name('add_prodect');
 
-        Route::get('prodect/edit/{id}' , 'edit')->name('prodect.edit');
+        Route::get('clothes/{id}', 'index_show')->name('prodect.show');
 
-        Route::post('prodect/update/{id}' , 'update')->name('prodect.update');
+        Route::get('clothes/show/{id}', 'show')->name('get_show');
 
-        // Route::delete('client/delete/{id}' , 'client_delete')->name('client.delete');
+        Route::get('clothes/edit/{id}' , 'edit')->name('prodect.edit');
+
+        Route::post('clothes/update/{id}' , 'update')->name('prodect.update');
+
+        Route::delete('clothes/delete/{id}' , 'delete')->name('prodect.delete');   
     });
 });
 

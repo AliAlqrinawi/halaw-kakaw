@@ -208,7 +208,7 @@
                 'className': 'text-center text-lg text-medium',
                 render: function(data, row, type) {
                     if (local == "en") {
-                        return data.title_en;
+                        return `<a href ="{{ url('admin/clothes/') }}/${data.id}">${data.title_en}</a>`;
                     } else {
                         return data.title_ar;
                     }
@@ -393,7 +393,5 @@
             }
         });
     });
-    </script>
-
-
-    @endsection
+</script>
+@endsection

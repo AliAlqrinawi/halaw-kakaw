@@ -9,7 +9,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $settings=Setting::where('set_group','global')->get();
+        $settings=Setting::where('set_group','general')->get();
         return view('setting.index',compact('settings'));
     }
 
