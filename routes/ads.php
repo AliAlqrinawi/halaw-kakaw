@@ -24,13 +24,13 @@ Route::group(
 
         Route::get('ads/get', 'get_ads')->name('get_ads');
 
-        // Route::post('admin/add' , 'add_admin')->name('add_admin');
+        Route::post('ads/add' , 'add_ads')->name('add_ads');
 
-        // Route::get('admin/edit/{id}' , 'edit')->name('admin.edit');
+        Route::get('ads/edit/{id}' , 'edit')->name('ads.edit');
 
-        // Route::post('admin/update/{id}' , 'update')->name('admin.update');
+        Route::post('ads/update/{id}' , 'update')->name('ads.update');
 
-        // Route::delete('admin/delete/{id}' , 'delete')->name('admin.delete');
+        Route::delete('ads/delete/{id}' , 'delete')->name('ads.delete');
     });
 });
 

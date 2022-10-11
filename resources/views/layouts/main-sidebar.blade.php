@@ -95,6 +95,24 @@
             </li>
 
             <li class="slide">
+                <a class="side-menu__item" href="{{ route('app_user') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('App User')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('contact') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Contact')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
                     <img class="side-menu__icon" style=" width: 30px; height: 30px;"
                         src="{{url('https://img.icons8.com/nolan/64/settings--v1.png')}}" />

@@ -30,3 +30,5 @@ require __DIR__.'/setting.php';
 require __DIR__.'/prodect.php';
 require __DIR__.'/coupon.php';
 require __DIR__.'/ads.php';
+require __DIR__.'/app_user.php';
+require __DIR__.'/contact.php';

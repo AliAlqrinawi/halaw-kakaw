@@ -22,7 +22,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Categories</span>
+                Ads</span>
         </div>
 
     </div>
@@ -32,38 +32,58 @@
 
 @section('content')
 <div id="error_message"></div>
-<div class="modal" id="modalAddCategory">
+<div class="modal" id="modalAddAds">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">Ads</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form id="formcategory" enctype="multipart/form-data">
+                <form id="formAds" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Einglish :</label>
-                            <input type="text" class="form-control" name="title_en" required>
+                            <label for="exampleInputEmail1">Ads url :</label>
+                            <input type="text" class="form-control" name="url" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Arabic :</label>
-                            <input type="text" class="form-control" name="title_ar" required>
+                            <label for="exampleInputEmail1">Ads lauout title :</label>
+                            <input type="text" class="form-control" name="lauout_title" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Einglish :</label>
-                            <textarea class="form-control" name="description_en" rows="3" required></textarea>
+                            <label for="exampleInputEmail1">Ads layout :</label>
+                            <input type="number" class="form-control" name="layout" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Arabic :</label>
-                            <textarea class="form-control" name="description_ar" rows="3" required></textarea>
+                            <label for="exampleInputEmail1">Ads days :</label>
+                            <input type="number" class="form-control" name="days" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Image :</label>
+                            <label for="exampleInputEmail1">Ads cost :</label>
+                            <input type="number" class="form-control" name="cost" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Ads Image :</label>
                             <input type="file" class="form-control" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Category Status :</label>
+                            <label class="form-label"> Ads Category :</label>
+                            <select name="cat_id" class="form-control">
+                                @foreach($category as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Ads prodect :</label>
+                            <select name="product_id" class="form-control">
+                                @foreach($prodect as $prodect)
+                                    <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
+                                @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Ads Status :</label>
                             <select name="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Not Active</option>
@@ -71,7 +91,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">Save</button>
+                        <button type="submit" class="btn btn-success AddAds" id="AddAds">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -80,41 +100,59 @@
     </div>
 </div>
 <!-- End Basic modal -->
-<div class="modal" id="modalEditCategory">
+<div class="modal" id="modalEditAds">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">Ads</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formeditadmin" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="id_category">
+                    <input type="hidden" class="form-control" id="id_Ads">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Einglish :</label>
-                            <input type="text" class="form-control" id="title_en" name="title_en" required>
+                            <label for="exampleInputEmail1">Ads url :</label>
+                            <input type="text" class="form-control" name="url" id="url" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Arabic :</label>
-                            <input type="text" class="form-control" id="title_ar" name="title_ar" required>
+                            <label for="exampleInputEmail1">Ads lauout title :</label>
+                            <input type="text" class="form-control" name="lauout_title" id="lauout_title" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Einglish :</label>
-                            <textarea class="form-control" id="description_en" name="description_en" rows="3"
-                                required></textarea>
+                            <label for="exampleInputEmail1">Ads layout :</label>
+                            <input type="number" class="form-control" name="layout" id="layout" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Arabic :</label>
-                            <textarea class="form-control" id="description_ar" name="description_ar" rows="3"
-                                required></textarea>
+                            <label for="exampleInputEmail1">Ads days :</label>
+                            <input type="number" class="form-control" name="days" id="days" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Image :</label>
-                            <input type="file" class="form-control" id="image" name="image" required>
+                            <label for="exampleInputEmail1">Ads cost :</label>
+                            <input type="number" class="form-control" name="cost" id="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Category Status :</label>
+                            <label for="exampleInputEmail1">Ads Image :</label>
+                            <input type="file" class="form-control" name="image" id="image" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Ads Category :</label>
+                            <select name="cat_id" id="cat_id" class="form-control">
+                                @foreach($category as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Ads prodect :</label>
+                            <select name="product_id" id="product_id" class="form-control">
+                                @foreach($prodec as $prodect)
+                                    <option value="{{ $prodect->id }}">{{ $prodect->title_en  }}</option>
+                                @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Ads Status :</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Not Active</option>
@@ -140,22 +178,24 @@
             <div class="card-header pb-0">
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
-                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Category</a>
+                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddAds">
+                            <a href="#" style="font-weight: bold; color: beige;">Add Ads</a>
                         </button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
-                    <table class="table table-hover" id="get_categories" style=" text-align: center;">
+                    <table class="table table-hover" id="get_Ads" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Title</th>
-                                <th class="border-bottom-0">Description</th>
-                                <th class="border-bottom-0">Image</th>
-                                <th class="border-bottom-0">Status</th>
+                                <th class="border-bottom-0">Url</th>
+                                <th class="border-bottom-0">Place of Ads</th>
+                                <th class="border-bottom-0">number of days</th>
+                                <th class="border-bottom-0">Today's cost</th>
+                                <th class="border-bottom-0">status</th>
+                                <th class="border-bottom-0">Created_at</th>
                                 <th class="border-bottom-0">Processes</th>
                             </tr>
                         </thead>
@@ -196,46 +236,29 @@
     <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
     <script>
     var local = "{{ App::getLocale() }}";
-    var table = $('#get_categories').DataTable({
+    var table = $('#get_Ads').DataTable({
         // processing: true,
         ajax: '{!! route("get_ads") !!}',
-        columns: [{
+        columns: [
+            {
                 'data': 'id',
                 'className': 'text-center text-lg text-medium'
             },
             {
-                'data': null,
-                'className': 'text-center text-lg text-medium',
-                render: function(data, row, type) {
-                    if (local == "en") {
-                        return `<a href ="{{ url('admin/clothes/') }}/${data.id}">${data.title_en}</a>`;
-                    } else {
-                        return data.title_ar;
-                    }
-                },
+                'data': 'url',
+                'className': 'text-center text-lg text-medium'
             },
             {
-                'data': null,
-                'className': 'text-center text-lg text-medium',
-                render: function(data, row, type) {
-                    if (local == "en") {
-                        return data.description_en;
-                    } else {
-                        return data.description_ar;
-                    }
-                },
+                'data': 'lauout_title',
+                'className': 'text-center text-lg text-medium'
             },
             {
-                'data': null,
-                render: function(data, row, type) {
-                    if (data.image) {
-                        return `<img 
-                        src="${data.image}"
-                                        style="width: 40px;height: 40px">`;
-                    } else {
-                        return "No Image";
-                    }
-                },
+                'data': 'days',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': 'cost',
+                'className': 'text-center text-lg text-medium'
             },
             {
                 'data': null,
@@ -249,25 +272,29 @@
                 },
             },
             {
+                'data': 'created_at',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
                 'data': null,
                 render: function(data, row, type) {
-                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
+                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAds" data-id="${data.id}"><i class="las la-trash"></i></button>`;
                 },
                 orderable: false,
                 searchable: false
             },
         ],
     });
-    //  view modal Category
-    $(document).on('click', '#ShowModalAddCategory', function(e) {
+    //  view modal Ads
+    $(document).on('click', '#ShowModalAddAds', function(e) {
         e.preventDefault();
-        $('#modalAddCategory').modal('show');
+        $('#modalAddAds').modal('show');
     });
-    // Category admin
-    $(document).on('click', '.AddCategory', function(e) {
+    // // Ads admin
+    $(document).on('click', '.AddAds', function(e) {
         e.preventDefault();
-        let formdata = new FormData($('#formcategory')[0]);
+        let formdata = new FormData($('#formAds')[0]);
         // console.log(formdata);
         // console.log("formdata");
         $.ajaxSetup({
@@ -277,30 +304,30 @@
         });
         $.ajax({
             type: 'POST',
-            url: '{{ route("add_category") }}',
+            url: '{{ route("add_ads") }}',
             data: formdata,
             contentType: false,
             processData: false,
             success: function(response) {
                 // console.log("Done");
-                $('#AddCategory').text('Saving');
+                $('#AddAds').text('Saving');
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-info");
                 $('#error_message').text(response.message);
-                $('#modalAddCategory').modal('hide');
-                $('#formcategory')[0].reset();
+                $('#modalAddAds').modal('hide');
+                $('#formAds')[0].reset();
                 table.ajax.reload();
             }
         });
     });
-    // view modification data
-    $(document).on('click', '#ShowModalEditCategory', function(e) {
+    // // view modification data
+    $(document).on('click', '#ShowModalEditAds', function(e) {
         e.preventDefault();
-        var id_category = $(this).data('id');
-        $('#modalEditCategory').modal('show');
+        var id_Ads = $(this).data('id');
+        $('#modalEditAds').modal('show');
         $.ajax({
             type: 'GET',
-            url: '{{ url("dashbord/category/edit") }}/' + id_category,
+            url: '{{ url("admin/ads/edit") }}/' + id_Ads,
             data: "",
             success: function(response) {
                 console.log(response);
@@ -310,16 +337,13 @@
                     $('#error_message').addClass("alert alert-danger");
                     $('#error_message').text(response.message);
                 } else {
-                    $('#id_category').val(id_category);
-                    $('#title_en').val(response.data.title_en);
-                    $('#title_ar').val(response.data.title_ar);
-                    $('#description_en').val(response.data.description_en);
-                    $('#description_ar').val(response.data.description_ar);
-                    if (response.data.status == '1') {
-                        $("select option[value='1']").attr("selected", "selected");
-                    } else {
-                        $("select option[value='0']").attr("selected", "selected");
-                    }
+                    $('#id_Ads').val(id_Ads);
+                    $('#url').val(response.data.url);
+                    $('#layout').val(response.data.layout);
+                    $('#lauout_title').val(response.data.lauout_title);
+                    $('#days').val(response.data.days);
+                    $('#cost').val(response.data.cost);
+                    $('#image').val(response.data.image);
                 }
             }
         });
@@ -327,15 +351,18 @@
     $(document).on('click', '#EditClient', function(e) {
         e.preventDefault();
         var data = {
-            title_en: $('#title_en').val(),
-            title_ar: $('#title_ar').val(),
-            description_en: $('#description_en').val(),
-            description_ar: $('#description_ar').val(),
+            url: $('#url').val(),
+            layout: $('#layout').val(),
+            lauout_title: $('#lauout_title').val(),
+            days: $('#days').val(),
+            cost: $('#cost').val(),
             image: $('#image').val(),
             status: $('#status').val(),
+            cat_id : $('#cat_id ').val(),
+            product_id  : $('#product_id  ').val(),
         };
         // let formdata = new FormData($('#formeditadmin')[0]);
-        var id_category = $('#id_category').val();
+        var id_Ads = $('#id_Ads').val();
         console.log(data);
         $.ajaxSetup({
             headers: {
@@ -344,7 +371,7 @@
         });
         $.ajax({
             type: 'POST',
-            url: '{{ url("dashbord/category/update") }}/' + id_category,
+            url: '{{ url("admin/ads/update") }}/' + id_Ads,
             data: data,
             dataType: false,
             success: function(response) {
@@ -365,15 +392,15 @@
                     $('#error_message').html("");
                     $('#error_message').addClass("alert alert-info");
                     $('#error_message').text(response.message);
-                    $('#modalEditCategory').modal('hide');
+                    $('#modalEditAds').modal('hide');
                     table.ajax.reload();
                 }
             }
         });
     });
-    $(document).on('click', '#DeleteCategory', function(e) {
+    $(document).on('click', '#DeleteAds', function(e) {
         e.preventDefault();
-        var id_category = $(this).data('id');
+        var id_Ads = $(this).data('id');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -381,7 +408,7 @@
         });
         $.ajax({
             type: 'DELETE',
-            url: '{{ url("dashbord/category/delete") }}/' + id_category,
+            url: '{{ url("admin/ads/delete") }}/' + id_Ads,
             data: '',
             contentType: false,
             processData: false,
