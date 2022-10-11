@@ -300,7 +300,7 @@
         $('#modalEditCategory').modal('show');
         $.ajax({
             type: 'GET',
-            url: '{{ url("dashbord/category/edit") }}/' + id_category,
+            url: '{{ url("admin/category/edit") }}/' + id_category,
             data: "",
             success: function(response) {
                 console.log(response);
@@ -344,7 +344,7 @@
         });
         $.ajax({
             type: 'POST',
-            url: '{{ url("dashbord/category/update") }}/' + id_category,
+            url: '{{ url("admin/category/update") }}/' + id_category,
             data: data,
             dataType: false,
             success: function(response) {
@@ -381,7 +381,7 @@
         });
         $.ajax({
             type: 'DELETE',
-            url: '{{ url("dashbord/category/delete") }}/' + id_category,
+            url: '{{ url("admin/category/delete") }}/' + id_category,
             data: '',
             contentType: false,
             processData: false,
