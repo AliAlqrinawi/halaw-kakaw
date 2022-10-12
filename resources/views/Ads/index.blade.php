@@ -70,17 +70,17 @@
                             <label class="form-label"> Ads Category :</label>
                             <select name="cat_id" class="form-control">
                                 @foreach($category as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
                                 @endforeach
-                                </select>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="form-label"> Ads prodect :</label>
                             <select name="product_id" class="form-control">
                                 @foreach($prodect as $prodect)
-                                    <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
+                                <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
                                 @endforeach
-                                </select>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="form-label"> Ads Status :</label>
@@ -139,17 +139,17 @@
                             <label class="form-label"> Ads Category :</label>
                             <select name="cat_id" id="cat_id" class="form-control">
                                 @foreach($category as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
                                 @endforeach
-                                </select>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="form-label"> Ads prodect :</label>
                             <select name="product_id" id="product_id" class="form-control">
                                 @foreach($prodec as $prodect)
-                                    <option value="{{ $prodect->id }}">{{ $prodect->title_en  }}</option>
+                                <option value="{{ $prodect->id }}">{{ $prodect->title_en  }}</option>
                                 @endforeach
-                                </select>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="form-label"> Ads Status :</label>
@@ -204,221 +204,217 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
+</div>
+@endsection
+@section('js')
 
-    @endsection
-
-    @section('js')
-
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <!-- Internal Select2.min js -->
-    <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-    <script src="{{URL::asset('assets/js/select2.js')}}"></script>
-    <!-- Internal Nice-select js-->
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
-    <script>
-    var local = "{{ App::getLocale() }}";
-    var table = $('#get_Ads').DataTable({
-        // processing: true,
-        ajax: '{!! route("get_ads") !!}',
-        columns: [
-            {
-                'data': 'id',
-                'className': 'text-center text-lg text-medium'
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<!-- Internal Nice-select js-->
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
+<script>
+var local = "{{ App::getLocale() }}";
+var table = $('#get_Ads').DataTable({
+    // processing: true,
+    ajax: '{!! route("get_ads") !!}',
+    columns: [{
+            'data': 'id',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'url',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'lauout_title',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'days',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'cost',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                var phone;
+                if (data.status == '1') {
+                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                } else {
+                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                }
             },
-            {
-                'data': 'url',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': 'lauout_title',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': 'days',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': 'cost',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    var phone;
-                    if (data.status == '1') {
-                        return `<button class="btn btn-success-gradient btn-block">Active</button>`;
-                    } else {
-                        return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
-                    }
-                },
-            },
-            {
-                'data': 'created_at',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
+        },
+        {
+            'data': 'created_at',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
                                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteAds" data-id="${data.id}"><i class="las la-trash"></i></button>`;
-                },
-                orderable: false,
-                searchable: false
             },
-        ],
+            orderable: false,
+            searchable: false
+        },
+    ],
+});
+//  view modal Ads
+$(document).on('click', '#ShowModalAddAds', function(e) {
+    e.preventDefault();
+    $('#modalAddAds').modal('show');
+});
+// // Ads admin
+$(document).on('click', '.AddAds', function(e) {
+    e.preventDefault();
+    let formdata = new FormData($('#formAds')[0]);
+    // console.log(formdata);
+    // console.log("formdata");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    //  view modal Ads
-    $(document).on('click', '#ShowModalAddAds', function(e) {
-        e.preventDefault();
-        $('#modalAddAds').modal('show');
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("add_ads") }}',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // console.log("Done");
+            $('#AddAds').text('Saving');
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-info");
+            $('#error_message').text(response.message);
+            $('#modalAddAds').modal('hide');
+            $('#formAds')[0].reset();
+            table.ajax.reload();
+        }
     });
-    // // Ads admin
-    $(document).on('click', '.AddAds', function(e) {
-        e.preventDefault();
-        let formdata = new FormData($('#formAds')[0]);
-        // console.log(formdata);
-        // console.log("formdata");
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("add_ads") }}',
-            data: formdata,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                // console.log("Done");
-                $('#AddAds').text('Saving');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
-                $('#error_message').text(response.message);
-                $('#modalAddAds').modal('hide');
-                $('#formAds')[0].reset();
-                table.ajax.reload();
-            }
-        });
-    });
-    // // view modification data
-    $(document).on('click', '#ShowModalEditAds', function(e) {
-        e.preventDefault();
-        var id_Ads = $(this).data('id');
-        $('#modalEditAds').modal('show');
-        $.ajax({
-            type: 'GET',
-            url: '{{ url("admin/ads/edit") }}/' + id_Ads,
-            data: "",
-            success: function(response) {
-                console.log(response);
-                if (response.status == 404) {
-                    console.log('error');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#id_Ads').val(id_Ads);
-                    $('#url').val(response.data.url);
-                    $('#layout').val(response.data.layout);
-                    $('#lauout_title').val(response.data.lauout_title);
-                    $('#days').val(response.data.days);
-                    $('#cost').val(response.data.cost);
-                    $('#image').val(response.data.image);
-                }
-            }
-        });
-    });
-    $(document).on('click', '#EditClient', function(e) {
-        e.preventDefault();
-        var data = {
-            url: $('#url').val(),
-            layout: $('#layout').val(),
-            lauout_title: $('#lauout_title').val(),
-            days: $('#days').val(),
-            cost: $('#cost').val(),
-            image: $('#image').val(),
-            status: $('#status').val(),
-            cat_id : $('#cat_id ').val(),
-            product_id  : $('#product_id  ').val(),
-        };
-        // let formdata = new FormData($('#formeditadmin')[0]);
-        var id_Ads = $('#id_Ads').val();
-        console.log(data);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ url("admin/ads/update") }}/' + id_Ads,
-            data: data,
-            dataType: false,
-            success: function(response) {
-                console.log(response);
-                if (response.status == 400) {
-                    // errors
-                    $('#list_error_messagee').html("");
-                    $('#list_error_messagee').addClass("alert alert-danger");
-                    $.each(response.errors, function(key, error_value) {
-                        $('#list_error_messagee').append('<li>' + error_value + '</li>');
-                    });
-                } else if (response.status == 404) {
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#EditClient').text('Saving');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-info");
-                    $('#error_message').text(response.message);
-                    $('#modalEditAds').modal('hide');
-                    table.ajax.reload();
-                }
-            }
-        });
-    });
-    $(document).on('click', '#DeleteAds', function(e) {
-        e.preventDefault();
-        var id_Ads = $(this).data('id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'DELETE',
-            url: '{{ url("admin/ads/delete") }}/' + id_Ads,
-            data: '',
-            contentType: false,
-            processData: false,
-            success: function(response) {
+});
+// // view modification data
+$(document).on('click', '#ShowModalEditAds', function(e) {
+    e.preventDefault();
+    var id_Ads = $(this).data('id');
+    $('#modalEditAds').modal('show');
+    $.ajax({
+        type: 'GET',
+        url: '{{ url("admin/ads/edit") }}/' + id_Ads,
+        data: "",
+        success: function(response) {
+            console.log(response);
+            if (response.status == 404) {
+                console.log('error');
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-danger");
                 $('#error_message').text(response.message);
+            } else {
+                $('#id_Ads').val(id_Ads);
+                $('#url').val(response.data.url);
+                $('#layout').val(response.data.layout);
+                $('#lauout_title').val(response.data.lauout_title);
+                $('#days').val(response.data.days);
+                $('#cost').val(response.data.cost);
+                $('#image').val(response.data.image);
+            }
+        }
+    });
+});
+$(document).on('click', '#EditClient', function(e) {
+    e.preventDefault();
+    var data = {
+        url: $('#url').val(),
+        layout: $('#layout').val(),
+        lauout_title: $('#lauout_title').val(),
+        days: $('#days').val(),
+        cost: $('#cost').val(),
+        image: $('#image').val(),
+        status: $('#status').val(),
+        cat_id: $('#cat_id ').val(),
+        product_id: $('#product_id  ').val(),
+    };
+    // let formdata = new FormData($('#formeditadmin')[0]);
+    var id_Ads = $('#id_Ads').val();
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("admin/ads/update") }}/' + id_Ads,
+        data: data,
+        dataType: false,
+        success: function(response) {
+            console.log(response);
+            if (response.status == 400) {
+                // errors
+                $('#list_error_messagee').html("");
+                $('#list_error_messagee').addClass("alert alert-danger");
+                $.each(response.errors, function(key, error_value) {
+                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                });
+            } else if (response.status == 404) {
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-danger");
+                $('#error_message').text(response.message);
+            } else {
+                $('#EditClient').text('Saving');
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-info");
+                $('#error_message').text(response.message);
+                $('#modalEditAds').modal('hide');
                 table.ajax.reload();
             }
-        });
+        }
     });
+});
+$(document).on('click', '#DeleteAds', function(e) {
+    e.preventDefault();
+    var id_Ads = $(this).data('id');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        url: '{{ url("admin/ads/delete") }}/' + id_Ads,
+        data: '',
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
 </script>
 @endsection

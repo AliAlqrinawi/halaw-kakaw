@@ -53,7 +53,7 @@
         <div class="card">
             <div class="card-header pb-0">
 
-                <h4>{{trans('setting.general_settings')}}</h4>
+                <h4>{{trans('menu.global')}}</h4>
                 <hr>
             </div>
 
@@ -78,6 +78,20 @@
                         @elseif($x->key_id == 'conditions_en')
                         <div class="col-md-10">
                             <textarea class="form-control" name="{{ $x->key_id }}" id="summernote2">@if(isset($x->value)){{$x->value}}@endif</textarea>
+                        </div>
+                        @elseif($x->key_id == 'force_update')
+                        <div class="col-md-10">
+                            <select name="force_update" class="form-control">
+                                    <option value="1" @if($x->key_id == 'force_update' && $x->key_id == 'force_update') >نعم</option>
+                                    <option value="0">لا</option>
+                            </select>
+                        </div>
+                        @elseif($x->key_id == 'force_close')
+                        <div class="col-md-10">
+                            <select name="force_close" class="form-control">
+                                    <option value="1">نعم</option>
+                                    <option value="0">لا</option>
+                            </select>
                         </div>
                         @else
                         <div class="col-md-10">

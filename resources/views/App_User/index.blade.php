@@ -55,113 +55,110 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
+</div>
+@endsection
 
-    @endsection
+@section('js')
 
-    @section('js')
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<!-- Internal Nice-select js-->
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
+<script>
+var local = "{{ App::getLocale() }}";
+var table = $('#get_appUser').DataTable({
+    // processing: true,
+    ajax: '{!! route("get_appUser") !!}',
+    columns: [{
+            'data': 'id',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': null,
+            'className': 'text-center text-lg text-medium',
+            render: function(data, row, type) {
+                return data.first_name + " " + last_name;
+            },
+        },
+        {
+            'data': 'email',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'mobile_number',
+        },
+        {
+            'data': 'credit',
+        },
+        {
+            'data': 'address',
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                var phone;
+                if (data.status == 'active') {
 
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <!-- Internal Select2.min js -->
-    <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-    <script src="{{URL::asset('assets/js/select2.js')}}"></script>
-    <!-- Internal Nice-select js-->
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
-    <script>
-    var local = "{{ App::getLocale() }}";
-    var table = $('#get_appUser').DataTable({
-        // processing: true,
-        ajax: '{!! route("get_appUser") !!}',
-        columns: [{
-                'data': 'id',
-                'className': 'text-center text-lg text-medium'
-            },
-            {
-                'data': null,
-                'className': 'text-center text-lg text-medium',
-                render: function(data, row, type) {
-                    return data.first_name + " " + last_name;
-                },
-            },
-            {
-                'data': 'email',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'mobile_number',
-            },
-            {
-                'data': 'credit',
-            },
-            {
-                'data': 'address',
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    var phone;
-                    if (data.status == 'active') {
+                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
 
-                        return `<button class="btn btn-success-gradient btn-block">Active</button>`;
-
-                    }else if(data.status == 'inactive'){
-                        return `<button class="btn btn-warning-gradient btn-block">Active</button>`;
-                    }
-                    else {
-                        return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
-                    }
-                },
+                } else if (data.status == 'inactive') {
+                    return `<button class="btn btn-warning-gradient btn-block">Active</button>`;
+                } else {
+                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                }
             },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditappUser" data-id="${data.id}"><i class="las la-pen"></i></button>
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditappUser" data-id="${data.id}"><i class="las la-pen"></i></button>
                                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
-                },
-                orderable: false,
-                searchable: false
             },
-        ],
+            orderable: false,
+            searchable: false
+        },
+    ],
+});
+$(document).on('click', '#DeleteappUser', function(e) {
+    e.preventDefault();
+    var id_appUser = $(this).data('id');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    $(document).on('click', '#DeleteappUser', function(e) {
-        e.preventDefault();
-        var id_appUser = $(this).data('id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'DELETE',
-            url: '{{ url("admin/appUser/delete") }}/' + id_appUser,
-            data: '',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-danger");
-                $('#error_message').text(response.message);
-                table.ajax.reload();
-            }
-        });
+    $.ajax({
+        type: 'DELETE',
+        url: '{{ url("admin/appUser/delete") }}/' + id_appUser,
+        data: '',
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
     });
+});
 </script>
 @endsection

@@ -3,7 +3,7 @@
 use App\Http\Controllers\UsersAndAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => "admin",
+        'prefix' => LaravelLocalization::setLocale()."/admin",
         'middleware' => ['auth']
 ] , function (){
     Route::controller(UsersAndAdminController::class)->group(function () {

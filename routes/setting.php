@@ -16,8 +16,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 
-Route::group([
-    'prefix' => "admin",
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale()."/admin",
+
+    // 'prefix' => "admin",
     'middleware' => ['auth']
 ],  function () {
         Route::get('setting/global' , [SettingController::class , 'index'])->name('setting.global');

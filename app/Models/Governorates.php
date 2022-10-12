@@ -9,6 +9,10 @@ class Governorates extends Model
 {
     use HasFactory;
 
+    protected $table = "governorates";
+
+    protected $fillable = ['title_en' , 'title_ar' , 'status'];
+
     public function governorates()
     {
         return $this->hasMany(App_users::class , 'region_id ' , 'id');

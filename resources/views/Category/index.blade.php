@@ -164,234 +164,230 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-    @endsection
-
-    @section('js')
-
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <!-- Internal Select2.min js -->
-    <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-    <script src="{{URL::asset('assets/js/select2.js')}}"></script>
-    <!-- Internal Nice-select js-->
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
-    <script>
-    var local = "{{ App::getLocale() }}";
-    var table = $('#get_categories').DataTable({
-        // processing: true,
-        ajax: '{!! route("get_categories") !!}',
-        columns: [{
-                'data': 'id',
-                'className': 'text-center text-lg text-medium'
+</div>
+@endsection
+@section('js')
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<!-- Internal Nice-select js-->
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
+<script>
+var local = "{{ App::getLocale() }}";
+var table = $('#get_categories').DataTable({
+    // processing: true,
+    ajax: '{!! route("get_categories") !!}',
+    columns: [{
+            'data': 'id',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': null,
+            'className': 'text-center text-lg text-medium',
+            render: function(data, row, type) {
+                if (local == "en") {
+                    return `<a href ="{{ url('admin/clothes/') }}/${data.id}">${data.title_en}</a>`;
+                } else {
+                    return data.title_ar;
+                }
             },
-            {
-                'data': null,
-                'className': 'text-center text-lg text-medium',
-                render: function(data, row, type) {
-                    if (local == "en") {
-                        return `<a href ="{{ url('admin/clothes/') }}/${data.id}">${data.title_en}</a>`;
-                    } else {
-                        return data.title_ar;
-                    }
-                },
+        },
+        {
+            'data': null,
+            'className': 'text-center text-lg text-medium',
+            render: function(data, row, type) {
+                if (local == "en") {
+                    return data.description_en;
+                } else {
+                    return data.description_ar;
+                }
             },
-            {
-                'data': null,
-                'className': 'text-center text-lg text-medium',
-                render: function(data, row, type) {
-                    if (local == "en") {
-                        return data.description_en;
-                    } else {
-                        return data.description_ar;
-                    }
-                },
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    if (data.image) {
-                        return `<img 
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                if (data.image) {
+                    return `<img 
                         src="${data.image}"
                                         style="width: 40px;height: 40px">`;
-                    } else {
-                        return "No Image";
-                    }
-                },
+                } else {
+                    return "No Image";
+                }
             },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    var phone;
-                    if (data.status == '1') {
-                        return `<button class="btn btn-success-gradient btn-block">Active</button>`;
-                    } else {
-                        return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
-                    }
-                },
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                var phone;
+                if (data.status == '1') {
+                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                } else {
+                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                }
             },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
                                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
-                },
-                orderable: false,
-                searchable: false
             },
-        ],
+            orderable: false,
+            searchable: false
+        },
+    ],
+});
+//  view modal Category
+$(document).on('click', '#ShowModalAddCategory', function(e) {
+    e.preventDefault();
+    $('#modalAddCategory').modal('show');
+});
+// Category admin
+$(document).on('click', '.AddCategory', function(e) {
+    e.preventDefault();
+    let formdata = new FormData($('#formcategory')[0]);
+    // console.log(formdata);
+    // console.log("formdata");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    //  view modal Category
-    $(document).on('click', '#ShowModalAddCategory', function(e) {
-        e.preventDefault();
-        $('#modalAddCategory').modal('show');
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("add_category") }}',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // console.log("Done");
+            $('#AddCategory').text('Saving');
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-info");
+            $('#error_message').text(response.message);
+            $('#modalAddCategory').modal('hide');
+            $('#formcategory')[0].reset();
+            table.ajax.reload();
+        }
     });
-    // Category admin
-    $(document).on('click', '.AddCategory', function(e) {
-        e.preventDefault();
-        let formdata = new FormData($('#formcategory')[0]);
-        // console.log(formdata);
-        // console.log("formdata");
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("add_category") }}',
-            data: formdata,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                // console.log("Done");
-                $('#AddCategory').text('Saving');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
-                $('#error_message').text(response.message);
-                $('#modalAddCategory').modal('hide');
-                $('#formcategory')[0].reset();
-                table.ajax.reload();
-            }
-        });
-    });
-    // view modification data
-    $(document).on('click', '#ShowModalEditCategory', function(e) {
-        e.preventDefault();
-        var id_category = $(this).data('id');
-        $('#modalEditCategory').modal('show');
-        $.ajax({
-            type: 'GET',
-            url: '{{ url("admin/category/edit") }}/' + id_category,
-            data: "",
-            success: function(response) {
-                console.log(response);
-                if (response.status == 404) {
-                    console.log('error');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#id_category').val(id_category);
-                    $('#title_en').val(response.data.title_en);
-                    $('#title_ar').val(response.data.title_ar);
-                    $('#description_en').val(response.data.description_en);
-                    $('#description_ar').val(response.data.description_ar);
-                    if (response.data.status == '1') {
-                        $("select option[value='1']").attr("selected", "selected");
-                    } else {
-                        $("select option[value='0']").attr("selected", "selected");
-                    }
-                }
-            }
-        });
-    });
-    $(document).on('click', '#EditClient', function(e) {
-        e.preventDefault();
-        var data = {
-            title_en: $('#title_en').val(),
-            title_ar: $('#title_ar').val(),
-            description_en: $('#description_en').val(),
-            description_ar: $('#description_ar').val(),
-            image: $('#image').val(),
-            status: $('#status').val(),
-        };
-        // let formdata = new FormData($('#formeditadmin')[0]);
-        var id_category = $('#id_category').val();
-        console.log(data);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ url("admin/category/update") }}/' + id_category,
-            data: data,
-            dataType: false,
-            success: function(response) {
-                console.log(response);
-                if (response.status == 400) {
-                    // errors
-                    $('#list_error_messagee').html("");
-                    $('#list_error_messagee').addClass("alert alert-danger");
-                    $.each(response.errors, function(key, error_value) {
-                        $('#list_error_messagee').append('<li>' + error_value + '</li>');
-                    });
-                } else if (response.status == 404) {
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#EditClient').text('Saving');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-info");
-                    $('#error_message').text(response.message);
-                    $('#modalEditCategory').modal('hide');
-                    table.ajax.reload();
-                }
-            }
-        });
-    });
-    $(document).on('click', '#DeleteCategory', function(e) {
-        e.preventDefault();
-        var id_category = $(this).data('id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'DELETE',
-            url: '{{ url("admin/category/delete") }}/' + id_category,
-            data: '',
-            contentType: false,
-            processData: false,
-            success: function(response) {
+});
+// view modification data
+$(document).on('click', '#ShowModalEditCategory', function(e) {
+    e.preventDefault();
+    var id_category = $(this).data('id');
+    $('#modalEditCategory').modal('show');
+    $.ajax({
+        type: 'GET',
+        url: '{{ url("admin/category/edit") }}/' + id_category,
+        data: "",
+        success: function(response) {
+            console.log(response);
+            if (response.status == 404) {
+                console.log('error');
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-danger");
                 $('#error_message').text(response.message);
+            } else {
+                $('#id_category').val(id_category);
+                $('#title_en').val(response.data.title_en);
+                $('#title_ar').val(response.data.title_ar);
+                $('#description_en').val(response.data.description_en);
+                $('#description_ar').val(response.data.description_ar);
+                if (response.data.status == '1') {
+                    $("select option[value='1']").attr("selected", "selected");
+                } else {
+                    $("select option[value='0']").attr("selected", "selected");
+                }
+            }
+        }
+    });
+});
+$(document).on('click', '#EditClient', function(e) {
+    e.preventDefault();
+    var data = {
+        title_en: $('#title_en').val(),
+        title_ar: $('#title_ar').val(),
+        description_en: $('#description_en').val(),
+        description_ar: $('#description_ar').val(),
+        image: $('#image').val(),
+        status: $('#status').val(),
+    };
+    // let formdata = new FormData($('#formeditadmin')[0]);
+    var id_category = $('#id_category').val();
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("admin/category/update") }}/' + id_category,
+        data: data,
+        dataType: false,
+        success: function(response) {
+            console.log(response);
+            if (response.status == 400) {
+                // errors
+                $('#list_error_messagee').html("");
+                $('#list_error_messagee').addClass("alert alert-danger");
+                $.each(response.errors, function(key, error_value) {
+                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                });
+            } else if (response.status == 404) {
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-danger");
+                $('#error_message').text(response.message);
+            } else {
+                $('#EditClient').text('Saving');
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-info");
+                $('#error_message').text(response.message);
+                $('#modalEditCategory').modal('hide');
                 table.ajax.reload();
             }
-        });
+        }
     });
+});
+$(document).on('click', '#DeleteCategory', function(e) {
+    e.preventDefault();
+    var id_category = $(this).data('id');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        url: '{{ url("admin/category/delete") }}/' + id_category,
+        data: '',
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
 </script>
 @endsection

@@ -31,22 +31,21 @@
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/fluency/48/000000/dashboard-layout.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Dashboard')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.dashboard')}}</span>
                 </a>
             </li>
             <li class="side-item side-item-category">General</li>
-
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
                     <img class="side-menu__icon" style=" width: 30px; height: 30px;"
                         src="{{url('https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-monitor-online-education-icongeek26-outline-colour-icongeek26-1.png')}}" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Admins and Users')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.users')}}</span>
                     <i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('admin') }}">{{trans('Admins')}}</a></li>
+                            href="{{ route('admin') }}">{{trans('menu.admins')}}</a></li>
                     <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('client') }}">{{trans('Clients')}}</a></li>
+                            href="{{ route('client') }}">{{trans('menu.customers')}}</a></li>
                 </ul>
             </li>
 
@@ -54,61 +53,79 @@
                 <a class="side-menu__item" href="{{ route('roles.index') }}">
                     <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/344/service.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Roles')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.roles')}}</span>
                 </a>
             </li>
 
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('category') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/nolan/344/categorize.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Department manag')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.cats')}}</span>
                 </a>
             </li>
 
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('prodect') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/nolan/344/grocery-shelf.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('All Prodects')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.products')}}</span>
                 </a>
             </li>
 
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('coupons') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/nolan/344/online-shop-sale.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Coupons')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.coupons')}}</span>
                 </a>
             </li>
 
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('ads') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/344/external-ads-ads-icongeek26-outline-colour-icongeek26-7.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Ads')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.ads')}}</span>
                 </a>
             </li>
 
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('app_user') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/nolan/344/customer-insight.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('App User')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.appusers')}}</span>
+                </a>
+            </li>
+            
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('contact') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/nolan/344/email.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.contact')}}</span>
                 </a>
             </li>
 
             <li class="slide">
-                <a class="side-menu__item" href="{{ route('contact') }}">
+                <a class="side-menu__item" href="{{ route('payment') }}">
                     <img class="side-menu__icon"
-                        src="{{url('https://img.icons8.com/external-filled-color-icons-papa-vector/344/external-Setting-protecting-privacy-online-filled-color-icons-papa-vector.png')}}"
+                        src="{{url('https://img.icons8.com/nolan/344/card-security.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Contact')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.payment')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('countries') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/nolan/344/region-code.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.regions')}}</span>
                 </a>
             </li>
 
@@ -116,13 +133,13 @@
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
                     <img class="side-menu__icon" style=" width: 30px; height: 30px;"
                         src="{{url('https://img.icons8.com/nolan/64/settings--v1.png')}}" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('Settings')}}</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.setting')}}</span>
                     <i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('setting.global') }}">{{trans('Setting Global')}}</a></li>
+                            href="{{ route('setting.global') }}">{{trans('menu.global')}}</a></li>
                     <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('setting.social') }}">{{trans('Setting Social')}}</a></li>
+                            href="{{ route('setting.social') }}">{{trans('menu.social')}}</a></li>
                 </ul>
             </li>
         </ul>

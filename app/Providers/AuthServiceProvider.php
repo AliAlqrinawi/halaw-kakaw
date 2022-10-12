@@ -25,6 +25,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // master user Big Admin
+        Gate::before(function ($user , $permissions){
+            if($user->id == 1){
+                return true;
+            }
+        });
+        // admin functions
+        foreach( config('permission') as $permissions => $lable )
+        {
+            Gate::define($permissions , function($user) use($permissions){
+                    return $user->permissions($permissions);
+            });
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +14,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('index');
-})->middleware(['auth']);
-
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['auth'],
+    ], function () {
+        Route::get('/',function () {
+            return view('index');
+        });
+    });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 require __DIR__.'/admin.php';
 require __DIR__.'/client.php';
@@ -32,3 +37,5 @@ require __DIR__.'/coupon.php';
 require __DIR__.'/ads.php';
 require __DIR__.'/app_user.php';
 require __DIR__.'/contact.php';
+require __DIR__.'/payment.php';
+require __DIR__.'/governorat.php';

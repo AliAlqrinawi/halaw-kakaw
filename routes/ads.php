@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdsController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => "admin",
+        'prefix' => LaravelLocalization::setLocale()."/admin",
+        // 'prefix' => "admin",
         'middleware' => ['auth']
 ] , function (){
     Route::controller(AdsController::class)->group(function () {

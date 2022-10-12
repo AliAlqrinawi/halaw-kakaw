@@ -16,8 +16,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 
-Route::group([
-    'prefix' => "dashbord",
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale()."/admin",
+    // 'prefix' => "dashbord",
     'middleware' => ['auth']
 ],  function () {
         Route::resource( 'roles' , RolesController::class);

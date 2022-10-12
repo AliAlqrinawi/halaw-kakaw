@@ -141,18 +141,18 @@
                                 <option value="1">Fixed Amount</option>
                                 <option value="0">Percent</option>
                             </select> -->
-                            <label class="col-sm-5"> Fixed Amount : <input type="radio" class="type" name="type" id="type1" value="1"
-                                    required></label>
+                            <label class="col-sm-5"> Fixed Amount : <input type="radio" class="type" name="type"
+                                    id="type1" value="1" required></label>
 
-                            <label class="col-sm-5"> Percent : <input type="radio" class="type" name="type" id="type2" value="0"
-                                    required></label>
+                            <label class="col-sm-5"> Percent : <input type="radio" class="type" name="type" id="type2"
+                                    value="0" required></label>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-sm-5"> Active : <input type="radio" class="status" name="status" id="status1" value="1"
-                                    required></label>
+                            <label class="col-sm-5"> Active : <input type="radio" class="status" name="status"
+                                    id="status1" value="1" required></label>
 
-                            <label class="col-sm-5"> Not Active : <input type="radio" class="status" name="status" id="status2"
-                                    value="0" required></label>
+                            <label class="col-sm-5"> Not Active : <input type="radio" class="status" name="status"
+                                    id="status2" value="0" required></label>
 
                             <!-- <label > Not Active :</label>
                             <input type="radio" name="status" value="0" required> -->
@@ -215,244 +215,242 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
+</div>
+@endsection
 
-    @endsection
+@section('js')
 
-    @section('js')
-
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <!-- Internal Select2.min js -->
-    <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-    <script src="{{URL::asset('assets/js/select2.js')}}"></script>
-    <!-- Internal Nice-select js-->
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
-    <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
-    <script>
-    var local = "{{ App::getLocale() }}";
-    var table = $('#get_Coupons').DataTable({
-        // processing: true,
-        ajax: '{!! route("get_coupons") !!}',
-        columns: [{
-                'data': 'id',
-                'className': 'text-center text-lg text-medium'
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<!-- Internal Nice-select js-->
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
+<script>
+var local = "{{ App::getLocale() }}";
+var table = $('#get_Coupons').DataTable({
+    // processing: true,
+    ajax: '{!! route("get_coupons") !!}',
+    columns: [{
+            'data': 'id',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'code',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'discount',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'percent',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'code_limit',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'code_max',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'count_number',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'use_number',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': 'end_at',
+            'className': 'text-center text-lg text-medium',
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                var phone;
+                if (data.status == '1') {
+                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                } else {
+                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                }
             },
-            {
-                'data': 'code',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'discount',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'percent',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'code_limit',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'code_max',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'count_number',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'use_number',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': 'end_at',
-                'className': 'text-center text-lg text-medium',
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    var phone;
-                    if (data.status == '1') {
-                        return `<button class="btn btn-success-gradient btn-block">Active</button>`;
-                    } else {
-                        return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
-                    }
-                },
-            },
-            {
-                'data': null,
-                render: function(data, row, type) {
-                    return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCoupon" data-id="${data.id}"><i class="las la-pen"></i></button>
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCoupon" data-id="${data.id}"><i class="las la-pen"></i></button>
                                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCoupon" data-id="${data.id}"><i class="las la-trash"></i></button>`;
-                },
-                orderable: false,
-                searchable: false
             },
-        ],
+            orderable: false,
+            searchable: false
+        },
+    ],
+});
+//  view modal Coupon
+$(document).on('click', '#ShowModalAddCoupon', function(e) {
+    e.preventDefault();
+    $('#modalAddCoupon').modal('show');
+});
+// Coupon admin
+$(document).on('click', '.AddCoupon', function(e) {
+    e.preventDefault();
+    let formdata = new FormData($('#formCoupon')[0]);
+    // console.log(formdata);
+    // console.log("formdata");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-    //  view modal Coupon
-    $(document).on('click', '#ShowModalAddCoupon', function(e) {
-        e.preventDefault();
-        $('#modalAddCoupon').modal('show');
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("add_coupons") }}',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // console.log("Done");
+            $('#AddCoupon').text('Saving');
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-info");
+            $('#error_message').text(response.message);
+            $('#modalAddCoupon').modal('hide');
+            $('#formCoupon')[0].reset();
+            table.ajax.reload();
+        }
     });
-    // Coupon admin
-    $(document).on('click', '.AddCoupon', function(e) {
-        e.preventDefault();
-        let formdata = new FormData($('#formCoupon')[0]);
-        // console.log(formdata);
-        // console.log("formdata");
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("add_coupons") }}',
-            data: formdata,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                // console.log("Done");
-                $('#AddCoupon').text('Saving');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
-                $('#error_message').text(response.message);
-                $('#modalAddCoupon').modal('hide');
-                $('#formCoupon')[0].reset();
-                table.ajax.reload();
-            }
-        });
-    });
-    // view modification data
-    $(document).on('click', '#ShowModalEditCoupon', function(e) {
-        e.preventDefault();
-        var id_Coupon = $(this).data('id');
-        $('#modalEditCoupon').modal('show');
-        $.ajax({
-            type: 'GET',
-            url: '{{ url("admin/coupons/edit") }}/' + id_Coupon,
-            data: "",
-            success: function(response) {
-                console.log(response);
-                if (response.status == 404) {
-                    console.log('error');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#id_Coupon').val(id_Coupon);
-                    $('#code').val(response.data.code);
-                    $('#count_number').val(response.data.count_number);
-                    $('#percent').val(response.data.percent);
-                    $('#code_limit').val(response.data.code_limit);
-                    $('#code_max').val(response.data.code_max);
-                    $('#end_at').val(response.data.end_at);
-                    if (response.data.type == '1') {
-                        $("#type1").attr("checked", "checked");
-                        $('#discount').val(response.data.discount);
-                    } else {
-                        $("#type2").attr("checked", "checked");
-                        $('#discount').val(response.data.percent);
-                    }
-                    if (response.data.status == '1') {
-                        $("#status1").attr("checked", "checked");
-                    } else {
-                        $("#status2").attr("checked", "checked");
-                    }
-                }
-            }
-        });
-    });
-    $(document).on('click', '#EditClient', function(e) {
-        e.preventDefault();
-        var data = {
-            code: $('#code').val(),
-            count_number: $('#count_number').val(),
-            percent: $('#percent').val(),
-            code_limit: $('#code_limit').val(),
-            code_max: $('#code_max').val(),
-            end_at: $('#end_at').val(),
-            status: $('.status').val(),
-            status: $('.type').val(),
-            discount:  $('#discount').val()
-        };
-        // let formdata = new FormData($('#formeditadmin')[0]);
-        var id_Coupon = $('#id_Coupon').val();
-        console.log(data);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '{{ url("admin/coupons/update") }}/' + id_Coupon,
-            data: data,
-            dataType: false,
-            success: function(response) {
-                console.log(response);
-                if (response.status == 400) {
-                    // errors
-                    $('#list_error_messagee').html("");
-                    $('#list_error_messagee').addClass("alert alert-danger");
-                    $.each(response.errors, function(key, error_value) {
-                        $('#list_error_messagee').append('<li>' + error_value + '</li>');
-                    });
-                } else if (response.status == 404) {
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
-                } else {
-                    $('#EditClient').text('Saving');
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-info");
-                    $('#error_message').text(response.message);
-                    $('#modalEditCoupon').modal('hide');
-                    table.ajax.reload();
-                }
-            }
-        });
-    });
-    $(document).on('click', '#DeleteCoupon', function(e) {
-        e.preventDefault();
-        var id_Coupon = $(this).data('id');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'DELETE',
-            url: '{{ url("dashbord/Coupon/delete") }}/' + id_Coupon,
-            data: '',
-            contentType: false,
-            processData: false,
-            success: function(response) {
+});
+// view modification data
+$(document).on('click', '#ShowModalEditCoupon', function(e) {
+    e.preventDefault();
+    var id_Coupon = $(this).data('id');
+    $('#modalEditCoupon').modal('show');
+    $.ajax({
+        type: 'GET',
+        url: '{{ url("admin/coupons/edit") }}/' + id_Coupon,
+        data: "",
+        success: function(response) {
+            console.log(response);
+            if (response.status == 404) {
+                console.log('error');
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-danger");
                 $('#error_message').text(response.message);
+            } else {
+                $('#id_Coupon').val(id_Coupon);
+                $('#code').val(response.data.code);
+                $('#count_number').val(response.data.count_number);
+                $('#percent').val(response.data.percent);
+                $('#code_limit').val(response.data.code_limit);
+                $('#code_max').val(response.data.code_max);
+                $('#end_at').val(response.data.end_at);
+                if (response.data.type == '1') {
+                    $("#type1").attr("checked", "checked");
+                    $('#discount').val(response.data.discount);
+                } else {
+                    $("#type2").attr("checked", "checked");
+                    $('#discount').val(response.data.percent);
+                }
+                if (response.data.status == '1') {
+                    $("#status1").attr("checked", "checked");
+                } else {
+                    $("#status2").attr("checked", "checked");
+                }
+            }
+        }
+    });
+});
+$(document).on('click', '#EditClient', function(e) {
+    e.preventDefault();
+    var data = {
+        code: $('#code').val(),
+        count_number: $('#count_number').val(),
+        percent: $('#percent').val(),
+        code_limit: $('#code_limit').val(),
+        code_max: $('#code_max').val(),
+        end_at: $('#end_at').val(),
+        status: $('.status').val(),
+        status: $('.type').val(),
+        discount: $('#discount').val()
+    };
+    // let formdata = new FormData($('#formeditadmin')[0]);
+    var id_Coupon = $('#id_Coupon').val();
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("admin/coupons/update") }}/' + id_Coupon,
+        data: data,
+        dataType: false,
+        success: function(response) {
+            console.log(response);
+            if (response.status == 400) {
+                // errors
+                $('#list_error_messagee').html("");
+                $('#list_error_messagee').addClass("alert alert-danger");
+                $.each(response.errors, function(key, error_value) {
+                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                });
+            } else if (response.status == 404) {
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-danger");
+                $('#error_message').text(response.message);
+            } else {
+                $('#EditClient').text('Saving');
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-info");
+                $('#error_message').text(response.message);
+                $('#modalEditCoupon').modal('hide');
                 table.ajax.reload();
             }
-        });
+        }
     });
-    </script>
-    @endsection
+});
+$(document).on('click', '#DeleteCoupon', function(e) {
+    e.preventDefault();
+    var id_Coupon = $(this).data('id');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        url: '{{ url("dashbord/Coupon/delete") }}/' + id_Coupon,
+        data: '',
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+</script>
+@endsection

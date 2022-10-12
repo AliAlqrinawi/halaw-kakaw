@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\UsersAndAdminController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\GovernoratesController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -19,21 +18,21 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale()."/admin",
-        // 'prefix' => "dashbord",
+        // 'prefix' => "admin",
         'middleware' => ['auth']
 ] , function (){
-    Route::controller(UsersAndAdminController::class)->group(function () {
-        Route::get('clients', 'client')->name('client');
+    Route::controller(GovernoratesController::class)->group(function () {
+        Route::get('countries', 'governorates')->name('countries');
 
-        Route::get('clients/get', 'get_clients')->name('get_clients');
+        Route::get('countries/get', 'get_governorates')->name('get_governorates');
 
-        Route::post('client/add' , 'add_client')->name('add_client');
+        Route::post('countries/add' , 'add_governorat')->name('add_governorat');
 
-        Route::get('client/edit/{id}' , 'client_edit')->name('client.edit');
+        Route::get('countries/edit/{id}' , 'edit')->name('governorat.edit');
 
-        Route::post('client/update/{id}' , 'client_update')->name('client.update');
+        Route::post('countries/update/{id}' , 'update')->name('governorat.update');
 
-        Route::delete('client/delete/{id}' , 'client_delete')->name('client.delete');
+        Route::delete('countries/delete/{id}' , 'delete')->name('governorat.delete');
     });
 });
 
