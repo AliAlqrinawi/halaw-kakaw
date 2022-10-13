@@ -54,3 +54,4 @@ require __DIR__.'/contact.php';
 require __DIR__.'/payment.php';
 require __DIR__.'/governorat.php';
 require __DIR__.'/city.php';
+require __DIR__.'/deliverytype.php';
