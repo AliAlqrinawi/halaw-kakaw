@@ -79,7 +79,6 @@
                                         <div class="main-toggle main-toggle-success" id="m" data-v="{{ $q }}">
                                             <span></span>
                                         </div>
-
                                     </div>
                                 </td>
                                 @endforeach

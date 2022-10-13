@@ -76,7 +76,7 @@
 $(document).ready(function() {
     var table = $('#get_roles').DataTable({
         processing: false,
-        ajax: '{!! url("dashbord/get_roles") !!}',
+        ajax: '{!! url("admin/get_roles") !!}',
         columns: [{
                 'data': 'id',
                 'className': 'text-center text-lg text-medium'
@@ -191,7 +191,7 @@ $(document).ready(function() {
         $('#EditeRolesModal').modal('show');
         $.ajax({
         type: 'GET',
-        url: 'http://127.0.0.1:8000/dashbord/show/' + id + "/" + user_id,
+        url: 'http://127.0.0.1:8000/admin/show/' + id + "/" + user_id,
         data: "",
         success: function(response) {
             console.log(response);
@@ -235,7 +235,7 @@ $(document).ready(function() {
             });
             $.ajax({
                 type: 'DELETE',
-                url: 'http://127.0.0.1:8000/dashbord/roles/' + id_admin,
+                url: 'http://127.0.0.1:8000/admin/roles/' + id_admin,
                 data: '',
                 contentType: false,
                 processData: false,
