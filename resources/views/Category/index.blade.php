@@ -164,6 +164,8 @@
                     </table>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
@@ -225,9 +227,7 @@ var table = $('#get_categories').DataTable({
             'data': null,
             render: function(data, row, type) {
                 if (data.image) {
-                    return `<img 
-                        src="${data.image}"
-                                        style="width: 40px;height: 40px">`;
+                    return `<img src="${data.image}" style="width: 40px;height: 40px">`;
                 } else {
                     return "No Image";
                 }
@@ -238,17 +238,21 @@ var table = $('#get_categories').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
                 }
             },
         },
         {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                <a href="{{ url('admin/clothes') }}/${data.id}" class="btn btn-success btn-sm" title="الاصناف"><i class="fa fa-clipboard"></i> Prodects</a>
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                                
+                                `;
             },
             orderable: false,
             searchable: false
@@ -389,5 +393,70 @@ $(document).on('click', '#DeleteCategory', function(e) {
         }
     });
 });
+$(document).on('click', '#status', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("update.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#statusoff', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("update.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
 </script>
+
 @endsection

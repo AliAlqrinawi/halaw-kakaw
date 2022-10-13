@@ -126,4 +126,17 @@ class CouponsController extends Controller
     }
 
 
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $Coupons = Coupons::find($id);
+        $Coupons->status = request('status');
+        $Coupons->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
+    }
+
+
 }

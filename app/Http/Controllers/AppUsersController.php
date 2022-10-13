@@ -42,4 +42,28 @@ class AppUsersController extends Controller
             ]);
         }
     }
+
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $categories = App_users::find($id);
+        $categories->status = request('status');
+        $categories->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
+    }
+
+    public function add100(Request $request)
+    {
+        $id = $request->id;
+        $Product = App_users::find($id);
+        $Product->credit = $request->credit;
+        $Product->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
+    }
 }

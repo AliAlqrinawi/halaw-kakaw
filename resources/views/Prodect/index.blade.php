@@ -32,6 +32,46 @@
 
 @section('content')
 <div id="error_message"></div>
+<div class="modal" id="modaldemo15" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Products Management</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Are sure to Add 100 ?</p><br>
+                <input type="hidden" name="id" id="user_id">
+                <input class="form-control" name="username" id="username" type="text" readonly>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning" id="add100">Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="modaldemo16" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Products Management</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Are sure to Minas 100 ?</p><br>
+                <input type="hidden" name="id" id="user_id">
+                <input class="form-control" name="username" id="username1" type="text" readonly>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning" id="minas100">Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 <div class="modal" id="modalAddCategory">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
@@ -274,17 +314,26 @@ var table = $('#get_Prodects').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
                 }
             },
         },
         {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
+                </form>
+                <form action="{{ url('admin/minas100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
+                </form>
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
             },
             orderable: false,
             searchable: false
@@ -433,6 +482,73 @@ $(document).on('click', '#DeleteCategory', function(e) {
         }
     });
 });
+
+$(document).on('click', '#status', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if (status == 1) {
+        status = 0;
+    } else {
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("prodect.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#statusoff', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if (status == 1) {
+        status = 0;
+    } else {
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("prodect.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+
+
 </script>
 
 

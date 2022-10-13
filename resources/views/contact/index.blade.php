@@ -36,8 +36,8 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-body">
-                <div class="table-responsive hoverable-table">
-                    <table class="table table-hover" id="get_contact" style=" text-align: center;">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="get_contact" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
@@ -99,15 +99,19 @@ var table = $('#get_contact').DataTable({
             'className': 'text-center text-lg text-medium',
         },
         {
-            'data': 'message',
+            'data': 'mobile',
         },
         {
             'data': 'email',
             'className': 'text-center text-lg text-medium',
         },
         {
-            'data': 'mobile',
+            'data': null,
+            render: function(data, row, type) {
+                return `<textarea class="form-control" disabled style="width:200px; display:inline;">${data.message}</textarea>`;
+            },
         },
+        
         {
             'data': 'created_at',
         },

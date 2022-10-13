@@ -13,8 +13,14 @@ class Governorates extends Model
 
     protected $fillable = ['title_en' , 'title_ar' , 'status'];
 
-    public function governorates()
+    public function app_users()
     {
-        return $this->hasMany(App_users::class , 'region_id ' , 'id');
+        return $this->hasMany(App_users::class , 'region_id' , 'id');
     }
+
+    public function cities()
+    {
+        return $this->hasMany(Cities::class , 'governorat_id' , 'id');
+    }
+
 }

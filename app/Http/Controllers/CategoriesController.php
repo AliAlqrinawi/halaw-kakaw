@@ -51,6 +51,8 @@ class CategoriesController extends Controller
         ]);
     }
 
+
+
     public function edit ($id){
         $category = Category::find($id);
         if ($category) {
@@ -111,5 +113,18 @@ class CategoriesController extends Controller
                 'status' => 404,
             ]);
         }
+    }
+
+
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $categories = Category::find($id);
+        $categories->status = request('status');
+        $categories->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
     }
 }

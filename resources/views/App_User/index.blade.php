@@ -32,6 +32,37 @@
 
 @section('content')
 <div id="error_message"></div>
+<div class="modal" id="modalAddcredit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                    type="button"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="formcategory" enctype="multipart/form-data">
+                    <div class="row">
+                        <input type="hidden" name="id" id="idid">
+                        <div class="form-group col-md-12">
+                            <label for="credit">charged balance</label>
+                            <input type="number" class="form-control" id="credit" name="credit">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="note">Notes on the shipment</label>
+                            <textarea class="form-control" id="note" name="note" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success AddCategory" id="Addcredit1">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xl-12">
         <div class="card mg-b-20">
@@ -96,7 +127,7 @@ var table = $('#get_appUser').DataTable({
             'data': null,
             'className': 'text-center text-lg text-medium',
             render: function(data, row, type) {
-                return data.first_name + " " + last_name;
+                return data.first_name + " " + data.last_name;
             },
         },
         {
@@ -110,28 +141,28 @@ var table = $('#get_appUser').DataTable({
             'data': 'credit',
         },
         {
-            'data': 'address',
-        },
-        {
             'data': null,
             render: function(data, row, type) {
                 var phone;
                 if (data.status == 'active') {
-
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="active" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
 
                 } else if (data.status == 'inactive') {
-                    return `<button class="btn btn-warning-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="inactive" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-warning-gradient btn-block" id="pending_activation" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
                 }
             },
         },
         {
+            'data': 'activation_code',
+        },
+        {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditappUser" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                <button class="modal-effect btn btn-sm btn-info" id="Addcredit" data-id="${data.id}"><i class="fa fa-cogs"></i> All Balance</button>
+                    <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
             },
             orderable: false,
             searchable: false
@@ -158,6 +189,133 @@ $(document).on('click', '#DeleteappUser', function(e) {
             $('#error_message').text(response.message);
             table.ajax.reload();
         }
+    });
+});
+$(document).on('click', '#active', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if (status == "active") {
+        status = "inactive";
+    } else {
+        status = "pending_activation";
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("appuser.status") }}',
+        data: data,
+        success: function(response) {
+            // $('#error_message').html("");
+            // $('#error_message').addClass("alert alert-danger");
+            // $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#pending_activation', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if (status == "pending_activation") {
+        status = "active";
+    } else {
+        status = "inactive";
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("appuser.status") }}',
+        data: data,
+        success: function(response) {
+            // $('#error_message').html("");
+            // $('#error_message').addClass("alert alert-danger");
+            // $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#inactive', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if (status == "inactive") {
+        status = "pending_activation";
+    } else {
+        status = "active";
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("appuser.status") }}',
+        data: data,
+        success: function(response) {
+            // $('#error_message').html("");
+            // $('#error_message').addClass("alert alert-danger");
+            // $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#Addcredit', function(e) {
+    e.preventDefault();
+    console.log("dsadsadsa");
+    $('#modalAddcredit').modal('show');
+    var id = $(this).data('id');
+    $('#Addcredit1').click(function(e) {
+        e.preventDefault();
+        var data = {
+            id: id,
+            credit: $('#credit').val(),
+            // note:$('#note').val(), 
+        };
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("ds") }}',
+            data: data,
+            success: function(response) {
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-danger");
+                $('#error_message').text(response.message);
+                $('#modalAddcredit').modal('hide');
+                table.ajax.reload();
+            }
+        });
     });
 });
 </script>

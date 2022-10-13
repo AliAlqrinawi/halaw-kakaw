@@ -63,10 +63,6 @@
                             <input type="number" class="form-control" name="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads Image :</label>
-                            <input type="file" class="form-control" name="image" required>
-                        </div>
-                        <div class="form-group col-md-12">
                             <label class="form-label"> Ads Category :</label>
                             <select name="cat_id" class="form-control">
                                 @foreach($category as $cat)
@@ -81,6 +77,10 @@
                                 <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Ads Image :</label>
+                            <input type="file" class="form-control" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="form-label"> Ads Status :</label>
@@ -132,10 +132,6 @@
                             <input type="number" class="form-control" name="cost" id="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads Image :</label>
-                            <input type="file" class="form-control" name="image" id="image" required>
-                        </div>
-                        <div class="form-group col-md-12">
                             <label class="form-label"> Ads Category :</label>
                             <select name="cat_id" id="cat_id" class="form-control">
                                 @foreach($category as $cat)
@@ -152,12 +148,16 @@
                             </select>
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Ads Image :</label>
+                            <input type="file" class="form-control" name="image" id="image" required>
+                        </div>
+                        <!-- <div class="form-group col-md-12">
                             <label class="form-label"> Ads Status :</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Not Active</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success" id="EditClient">Save</button>
@@ -259,11 +259,10 @@ var table = $('#get_Ads').DataTable({
         {
             'data': null,
             render: function(data, row, type) {
-                var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
                 }
             },
         },
@@ -408,6 +407,70 @@ $(document).on('click', '#DeleteAds', function(e) {
         data: '',
         contentType: false,
         processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#status', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("ads.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#statusoff', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("ads.status") }}',
+        data: data,
         success: function(response) {
             $('#error_message').html("");
             $('#error_message').addClass("alert alert-danger");

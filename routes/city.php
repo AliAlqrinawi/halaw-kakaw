@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AppUsersController;
+use App\Http\Controllers\CitiesController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -21,19 +21,22 @@ Route::group(
         // 'prefix' => "admin",
         'middleware' => ['auth']
 ] , function (){
-    Route::controller(AppUsersController::class)->group(function () {
-        Route::get('appUser', 'app_user')->name('app_user');
+    Route::controller(CitiesController::class)->group(function () {
+        Route::get('cities', 'cities')->name('cities');
 
-        Route::get('appUser/get', 'get_appUser')->name('get_appUser');
+        Route::get('cities/get', 'get_cities')->name('get_cities');
 
-        // Route::post('category/add' , 'add_category')->name('add_category');
+        Route::post('cities/add' , 'add_Cities')->name('add_cities');
 
-        // Route::get('category/edit/{id}' , 'edit')->name('category.edit');
+        Route::get('city/edit/{id}' , 'edit')->name('city.edit');
 
-        // Route::post('category/update/{id}' , 'update')->name('category.update');
+        Route::post('city/update/{id}' , 'update')->name('city.update');
 
-        Route::delete('appUser/delete/{id}' , 'delete')->name('category.delete');
-        Route::post('add/appUser' , 'add100')->name('ds');
+        Route::delete('city/delete/{id}' , 'delete')->name('city.delete');
+
+        Route::get('city/{id}', 'index_show')->name('city.show');
+
+        Route::get('city/show/{id}', 'show')->name('get_show_city');
     });
 });
 

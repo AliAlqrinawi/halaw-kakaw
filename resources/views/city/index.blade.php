@@ -22,7 +22,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Governorates</span>
+            cities</span>
         </div>
 
     </div>
@@ -32,27 +32,43 @@
 
 @section('content')
 <div id="error_message"></div>
-<div class="modal" id="modalAddGovernorat">
+<div class="modal" id="modalAddcity">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Governorates</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">cities</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form id="formGovernorat" enctype="multipart/form-data">
+                <form id="formcity" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Einglish :</label>
+                            <label for="exampleInputEmail1">city Title Einglish :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Arabic :</label>
+                            <label for="exampleInputEmail1">city Title Arabic :</label>
                             <input type="text" class="form-control" name="title_ar" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">city Title Einglish :</label>
+                            <input type="number" class="form-control" name="delivery_cost" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">city Title Arabic :</label>
+                            <input type="number" class="form-control" name="order_limit" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Prodect Status :</label>
+                            <select name="governorat_id" class="form-control">
+                                @foreach($Gov as $c)
+                                <option value="{{ $c->id }}">{{ $c->title_en }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddGovernorat" id="AddGovernorat">Save</button>
+                        <button type="submit" class="btn btn-success Addcity" id="Addcity">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -61,24 +77,40 @@
     </div>
 </div>
 <!-- End Basic modal -->
-<div class="modal" id="modalEditGovernorat">
+<div class="modal" id="modalEditcity">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Governorates</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">cityes</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formeditadmin" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="id_Governorat">
+                    <input type="hidden" class="form-control" id="id_city">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Einglish :</label>
-                            <input type="text" class="form-control" id="title_en" name="title_en" required>
+                            <label for="exampleInputEmail1">city Title Einglish :</label>
+                            <input type="text" class="form-control" name="title_en" id="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Arabic :</label>
-                            <input type="text" class="form-control" id="title_ar" name="title_ar" required>
+                            <label for="exampleInputEmail1">city Title Arabic :</label>
+                            <input type="text" class="form-control" name="title_ar" id="title_ar" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">city Title Einglish :</label>
+                            <input type="number" class="form-control" name="delivery_cost" id="delivery_cost" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">city Title Arabic :</label>
+                            <input type="number" class="form-control" name="order_limit" id="order_limit" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> Prodect Status : <span id="governora"></span></label>
+                            <select name="governorat_id" class="form-control">
+                                @foreach($Gov as $c)
+                                <option value="{{ $c->id }}">{{ $c->title_en }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -100,19 +132,22 @@
             <div class="card-header pb-0">
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
-                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddGovernorat">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Governorat</a>
+                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddcity">
+                            <a href="#" style="font-weight: bold; color: beige;">Add city</a>
                         </button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
-                    <table class="table table-hover" id="get_Governorates" style=" text-align: center;">
+                    <table class="table table-hover" id="get_cities" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Name</th>
+                                <th class="border-bottom-0">Area Name</th>
+                                <th class="border-bottom-0">Delivery Cost</th>
+                                <th class="border-bottom-0">Minimum order</th>
+                                <th class="border-bottom-0">Added date</th>
                                 <th class="border-bottom-0">Status</th>
                                 <th class="border-bottom-0">Processes</th>
                             </tr>
@@ -152,9 +187,9 @@
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
 <script>
 var local = "{{ App::getLocale() }}";
-var table = $('#get_Governorates').DataTable({
+var table = $('#get_cities').DataTable({
     // processing: true,
-    ajax: '{!! route("get_governorates") !!}',
+    ajax: '{!! route("get_cities") !!}',
     columns: [{
             'data': 'id',
             'className': 'text-center text-lg text-medium'
@@ -171,39 +206,48 @@ var table = $('#get_Governorates').DataTable({
             },
         },
         {
+            'data': 'delivery_cost',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'order_limit',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
+            'data': 'created_at',
+            'className': 'text-center text-lg text-medium'
+        },
+        {
             'data': null,
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
                 }
             },
         },
         {
             'data': null,
             render: function(data, row, type) {
-                return `
-                <a class="btn btn-sm btn-success" href="{{ url('admin/city') }}/${data.id}"><i class="fa fa-bars"></i> Cities</a>
-                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditGovernorat" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteGovernorat" data-id="${data.id}"><i class="las la-trash"></i></button>
-                        `;
+                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditcity" data-id="${data.id}"><i class="las la-pen"></i></button>
+                        <button class="modal-effect btn btn-sm btn-danger" id="Deletecity" data-id="${data.id}"><i class="las la-trash"></i></button>`;
             },
             orderable: false,
             searchable: false
         },
     ],
 });
-//  view modal Governorat
-$(document).on('click', '#ShowModalAddGovernorat', function(e) {
+//  view modal city
+$(document).on('click', '#ShowModalAddcity', function(e) {
     e.preventDefault();
-    $('#modalAddGovernorat').modal('show');
+    $('#modalAddcity').modal('show');
 });
-// Governorat admin
-$(document).on('click', '.AddGovernorat', function(e) {
+// city admin
+$(document).on('click', '.Addcity', function(e) {
     e.preventDefault();
-    let formdata = new FormData($('#formGovernorat')[0]);
+    let formdata = new FormData($('#formcity')[0]);
     // console.log(formdata);
     // console.log("formdata");
     $.ajaxSetup({
@@ -213,30 +257,30 @@ $(document).on('click', '.AddGovernorat', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ route("add_governorat") }}',
+        url: '{{ route("add_cities") }}',
         data: formdata,
         contentType: false,
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddGovernorat').text('Saving');
+            $('#Addcity').text('Saving');
             $('#error_message').html("");
             $('#error_message').addClass("alert alert-info");
             $('#error_message').text(response.message);
-            $('#modalAddGovernorat').modal('hide');
-            $('#formGovernorat')[0].reset();
+            $('#modalAddcity').modal('hide');
+            $('#formcity')[0].reset();
             table.ajax.reload();
         }
     });
 });
 // view modification data
-$(document).on('click', '#ShowModalEditGovernorat', function(e) {
+$(document).on('click', '#ShowModalEditcity', function(e) {
     e.preventDefault();
-    var id_Governorat = $(this).data('id');
-    $('#modalEditGovernorat').modal('show');
+    var id_city = $(this).data('id');
+    $('#modalEditcity').modal('show');
     $.ajax({
         type: 'GET',
-        url: '{{ url("admin/countries/edit") }}/' + id_Governorat,
+        url: '{{ url("admin/city/edit") }}/' + id_city,
         data: "",
         success: function(response) {
             console.log(response);
@@ -246,9 +290,12 @@ $(document).on('click', '#ShowModalEditGovernorat', function(e) {
                 $('#error_message').addClass("alert alert-danger");
                 $('#error_message').text(response.message);
             } else {
-                $('#id_Governorat').val(id_Governorat);
+                $('#id_city').val(id_city);
                 $('#title_en').val(response.data.title_en);
                 $('#title_ar').val(response.data.title_ar);
+                $('#delivery_cost').val(response.data.delivery_cost);
+                $('#order_limit').val(response.data.order_limit);
+                $('#governora').text(response.data.cityes.title_en);
             }
         }
     });
@@ -258,9 +305,12 @@ $(document).on('click', '#EditClient', function(e) {
     var data = {
         title_en: $('#title_en').val(),
         title_ar: $('#title_ar').val(),
+        delivery_cost: $('#delivery_cost').val(),
+        order_limit: $('#order_limit').val(),
+        city_id: $('#city_id').val(),
     };
     // let formdata = new FormData($('#formeditadmin')[0]);
-    var id_Governorat = $('#id_Governorat').val();
+    var id_city = $('#id_city').val();
     console.log(data);
     $.ajaxSetup({
         headers: {
@@ -269,7 +319,7 @@ $(document).on('click', '#EditClient', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ url("admin/countries/update") }}/' + id_Governorat,
+        url: '{{ url("admin/city/update") }}/' + id_city,
         data: data,
         dataType: false,
         success: function(response) {
@@ -290,15 +340,15 @@ $(document).on('click', '#EditClient', function(e) {
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-info");
                 $('#error_message').text(response.message);
-                $('#modalEditGovernorat').modal('hide');
+                $('#modalEditcity').modal('hide');
                 table.ajax.reload();
             }
         }
     });
 });
-$(document).on('click', '#DeleteGovernorat', function(e) {
+$(document).on('click', '#Deletecity', function(e) {
     e.preventDefault();
-    var id_Governorat = $(this).data('id');
+    var id_city = $(this).data('id');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -306,10 +356,74 @@ $(document).on('click', '#DeleteGovernorat', function(e) {
     });
     $.ajax({
         type: 'DELETE',
-        url: '{{ url("admin/countries/delete") }}/' + id_Governorat,
+        url: '{{ url("admin/city/delete") }}/' + id_city,
         data: '',
         contentType: false,
         processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#status', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("city.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#statusoff', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("city.status") }}',
+        data: data,
         success: function(response) {
             $('#error_message').html("");
             $('#error_message').addClass("alert alert-danger");

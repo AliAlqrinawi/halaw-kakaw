@@ -147,21 +147,21 @@
                             <label class="col-sm-5"> Percent : <input type="radio" class="type" name="type" id="type2"
                                     value="0" required></label>
                         </div>
-                        <div class="form-group col-md-12">
+                        <!-- <div class="form-group col-md-12">
                             <label class="col-sm-5"> Active : <input type="radio" class="status" name="status"
                                     id="status1" value="1" required></label>
 
                             <label class="col-sm-5"> Not Active : <input type="radio" class="status" name="status"
                                     id="status2" value="0" required></label>
 
-                            <!-- <label > Not Active :</label>
-                            <input type="radio" name="status" value="0" required> -->
+                            <label > Not Active :</label>
+                            <input type="radio" name="status" value="0" required>
 
-                            <!-- <select name="status" class="form-control">
+                            <select name="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Not Active</option>
-                            </select> -->
-                        </div>
+                            </select>
+                        </div> -->
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">Discount :</label>
                             <input type="text" class="form-control" name="discount" id="discount" required>
@@ -289,9 +289,9 @@ var table = $('#get_Coupons').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
                 }
             },
         },
@@ -444,6 +444,70 @@ $(document).on('click', '#DeleteCoupon', function(e) {
         data: '',
         contentType: false,
         processData: false,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#status', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("coupon.status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#statusoff', function(e) {
+    e.preventDefault();
+    // console.log("Alliiiii");
+    var edit_id = $(this).data('id');
+    var status = $(this).data('viewing_status');
+    if(status == 1){
+        status = 0;
+    }else{
+        status = 1;
+    }
+    var data = {
+        id: edit_id,
+        status: status
+    };
+    // console.log(status);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("coupon.status") }}',
+        data: data,
         success: function(response) {
             $('#error_message').html("");
             $('#error_message').addClass("alert alert-danger");

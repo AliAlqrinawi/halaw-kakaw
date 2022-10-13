@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ContactsController extends Controller
 {
     public function contact (){
+        // return view('Dashboard.table-basic');
         return view('contact.index');
     }
 

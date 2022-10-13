@@ -77,6 +77,18 @@ class Payment_methodsController extends Controller
         }
     }
 
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $categories = Payment::find($id);
+        $categories->status = request('status');
+        $categories->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
+    }
+
     public function delete ($id){
         $payment = Payment::find($id);
         if ($payment) {

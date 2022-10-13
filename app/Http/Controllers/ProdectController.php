@@ -108,7 +108,7 @@ class ProdectController extends Controller
                 'data' => $product
             ]);
             }
-          else {
+        else {
             return response()->json([
                 'message' => 'Data Not Found',
                 'status' => 404,
@@ -130,5 +130,34 @@ class ProdectController extends Controller
                 'status' => 404,
             ]);
         }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $id = $request->id;
+        $Product = Product::find($id);
+        $Product->status = request('status');
+        $Product->update();
+        return response()->json([
+            'message' => 'Update Success',
+            'status' => 200,
+        ]);
+    }
+
+    public function add100($id)
+    {
+        $Product = Product::find($id);
+        $Product->quntaty +=  100;
+        $Product->update();
+        return redirect()->back();
+    }
+
+    public function minas100($id)
+    {
+        $minas = 100;
+        $Product = Product::find($id);
+        $Product->quntaty -=  100;
+        $Product->update();
+        return redirect()->back();
     }
 }

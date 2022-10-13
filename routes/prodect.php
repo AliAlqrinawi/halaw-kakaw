@@ -36,7 +36,10 @@ Route::group(
 
         Route::post('clothes/update/{id}' , 'update')->name('prodect.update');
 
-        Route::delete('clothes/delete/{id}' , 'delete')->name('prodect.delete');   
+        Route::delete('clothes/delete/{id}' , 'delete')->name('prodect.delete');
+        
+        Route::POST('add100/clothes/{id}' , 'add100')->name('prodect.add100');    
+
+        Route::POST('minas100/clothes/{id}' , 'minas100')->name('prodect.minas100');         
     });
 });
-
