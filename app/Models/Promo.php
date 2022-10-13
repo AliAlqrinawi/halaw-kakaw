@@ -5,7 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sms_gates extends Model
+class Promo extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+    protected $connection = 'mysql';
+    protected $table = 'app_users_promotion';
+
 }

@@ -34,7 +34,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\App_users::count() }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\AppUsers::count() }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -53,7 +53,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Orders::count() }}</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Order::count() }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 

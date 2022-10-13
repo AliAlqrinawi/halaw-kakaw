@@ -6,7 +6,9 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProdectController;
 use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\DeliveryTypesController;
 use App\Http\Controllers\Payment_methodsController;
+use App\Http\Controllers\timesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -40,6 +42,9 @@ Route::post('ads/update/status', [AdsController::class , 'updateStatus'])->name(
 Route::post('city/update/status', [CitiesController::class , 'updateStatus'])->name('city.status');
 Route::post('appuser/update/status', [AppUsersController::class , 'updateStatus'])->name('appuser.status');
 Route::post('payment/update/status', [Payment_methodsController::class , 'updateStatus'])->name('payments.status');
+Route::post('deliveryTypes/update/status', [DeliveryTypesController::class , 'updateStatus'])->name('deliveryTypes.status');
+Route::post('deliveryTypes/update/status', [timesController::class , 'updateStatus'])->name('deliveryTypes.status');
+
 
 require __DIR__.'/admin.php';
 require __DIR__.'/client.php';
@@ -55,3 +60,4 @@ require __DIR__.'/payment.php';
 require __DIR__.'/governorat.php';
 require __DIR__.'/city.php';
 require __DIR__.'/deliverytype.php';
+require __DIR__.'/time.php';

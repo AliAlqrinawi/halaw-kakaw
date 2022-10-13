@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Times extends Model
 {
     use HasFactory;
+
+    protected $table = "times";
+
+    protected $fillable = ['title_en' , 'title_ar' , 'status'];
 }

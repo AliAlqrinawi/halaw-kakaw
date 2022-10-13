@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Orders_status extends Model
+class Status extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+    protected $connection = 'mysql';
+    protected $table = 'orders_status';
 }

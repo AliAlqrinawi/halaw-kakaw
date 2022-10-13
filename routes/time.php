@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DeliveryTypesController;
+use App\Http\Controllers\timesController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -21,17 +21,17 @@ Route::group(
         // 'prefix' => "admin",
         'middleware' => ['auth']
 ] , function (){
-    Route::controller(DeliveryTypesController::class)->group(function () {
-        Route::get('deliveryTypes', 'deliveryTypes')->name('deliveryTypes');
+    Route::controller(timesController::class)->group(function () {
+        Route::get('times', 'Times')->name('times');
 
-        Route::get('deliveryTypes/get', 'get_deliveryTypes')->name('get_deliveryTypes');
+        Route::get('times/get', 'get_times')->name('get_times');
 
-        Route::post('deliveryTypes/add' , 'add_deliveryTypes')->name('add_deliveryTypes');
+        Route::post('times/add' , 'add_times')->name('add_times');
 
-        Route::get('deliveryTypes/edit/{id}' , 'edit')->name('deliveryTypes.edit');
+        Route::get('times/edit/{id}' , 'edit')->name('times.edit');
 
-        Route::post('deliveryTypes/update/{id}' , 'update')->name('deliveryTypes.update');
+        Route::post('times/update/{id}' , 'update')->name('times.update');
 
-        Route::delete('deliveryTypes/delete/{id}' , 'delete')->name('deliveryTypes.delete');
+        Route::delete('times/delete/{id}' , 'delete')->name('times.delete');
     });
 });

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Categories as Category;
+use App\Models\Clothes as Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 

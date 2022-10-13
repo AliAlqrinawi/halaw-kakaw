@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delivery_types extends Model
+class DeliveryTypes extends Model
 {
     use HasFactory;
 

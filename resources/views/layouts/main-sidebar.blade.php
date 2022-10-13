@@ -121,6 +121,24 @@
             </li>
 
             <li class="slide">
+                <a class="side-menu__item" href="{{ route('times') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/external-itim2101-blue-itim2101/344/external-work-time-time-management-itim2101-blue-itim2101-1.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.times')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('deliveryTypes') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/ultraviolet/344/deliver-food.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.deliveryTypes')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
                 <a class="side-menu__item" href="{{ route('countries') }}">
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/nolan/344/region-code.png')}}"

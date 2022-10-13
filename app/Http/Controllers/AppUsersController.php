@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\App_users;
+use App\Models\AppUsers;
 use Illuminate\Http\Request;
 
 class AppUsersController extends Controller
@@ -12,7 +12,7 @@ class AppUsersController extends Controller
     }
 
     public function get_appUser (){
-        $app_users = App_users::get();
+        $app_users = AppUsers::get();
         if ($app_users) {
             return response()->json([
                 'message' => 'Data Found',
@@ -28,7 +28,7 @@ class AppUsersController extends Controller
     }
 
     public function delete ($id){
-        $app_user = App_users::find($id);
+        $app_user = AppUsers::find($id);
         if ($app_user) {
             $app_user->delete();
             return response()->json([
@@ -46,7 +46,7 @@ class AppUsersController extends Controller
     public function updateStatus(Request $request)
     {
         $id = $request->id;
-        $categories = App_users::find($id);
+        $categories = AppUsers::find($id);
         $categories->status = request('status');
         $categories->update();
         return response()->json([
@@ -58,7 +58,7 @@ class AppUsersController extends Controller
     public function add100(Request $request)
     {
         $id = $request->id;
-        $Product = App_users::find($id);
+        $Product = AppUsers::find($id);
         $Product->credit = $request->credit;
         $Product->update();
         return response()->json([

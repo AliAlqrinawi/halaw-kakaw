@@ -43,47 +43,12 @@
                 <form id="formDeliveryType" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Worktime :</label>
+                            <label for="exampleInputEmail1">Title E :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">English working hours :</label>
+                            <label for="exampleInputEmail1">Title A :</label>
                             <input type="text" class="form-control" name="title_ar" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_from :</label>
-                            <input type="time" class="form-control" name="time_from">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_to :</label>
-                            <input type="time" class="form-control" name="time_to">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <input type="checkbox" name="sat" value="1">
-                            <label for="sat">sat</label>
-
-                            <input type="checkbox" name="sun" value="1">
-                            <label for="sun">sun</label>
-
-
-                            <input type="checkbox" name="mon" value="1">
-                            <label for="mon">mon</label>
-
-
-                            <input type="checkbox" name="tue" value="1">
-                            <label for="tue">tue</label>
-
-
-                            <input type="checkbox" name="wed" value="1">
-                            <label for="wed">wed</label>
-
-
-                            <input type="checkbox" name="thu" value="1">
-                            <label for="thu">thu</label>
-
-
-                            <input type="checkbox" name="fri" value="1">
-                            <label for="fri">fri</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -108,47 +73,12 @@
                     <input type="hidden" class="form-control" id="id_DeliveryType">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Worktime :</label>
+                            <label for="exampleInputEmail1">Title E :</label>
                             <input type="text" class="form-control" name="title_en" id="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">English working hours :</label>
+                            <label for="exampleInputEmail1">Title A :</label>
                             <input type="text" class="form-control" name="title_ar" id="title_ar" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_from :</label>
-                            <input type="time" class="form-control" id="time_from" name="time_from">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_to :</label>
-                            <input type="time" class="form-control" id="time_to" name="time_to">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <input type="checkbox" id="sat" name="sat" value="1">
-                            <label for="sat">sat</label>
-
-                            <input type="checkbox" id="sun" name="sun" value="1">
-                            <label for="sun">sun</label>
-
-
-                            <input type="checkbox" id="mon" name="mon" value="1">
-                            <label for="mon">mon</label>
-
-
-                            <input type="checkbox" id="tue" name="tue" value="1">
-                            <label for="tue">tue</label>
-
-
-                            <input type="checkbox" id="wed" name="wed" value="1">
-                            <label for="wed">wed</label>
-
-
-                            <input type="checkbox" id="thu" name="thu" value="1">
-                            <label for="thu">thu</label>
-
-
-                            <input type="checkbox" id="fri" name="fri" value="1">
-                            <label for="fri">fri</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -163,8 +93,6 @@
 <!-- End Basic modal -->
 <!-- row -->
 <div class="row">
-
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
@@ -226,7 +154,7 @@ var local = "{{ App::getLocale() }}";
 var i = 1;
 var table = $('#get_DeliveryTypes').DataTable({
     // processing: true,
-    ajax: '{!! route("get_deliveryTypes") !!}',
+    ajax: '{!! route("get_times") !!}',
     columns: [{
             'data': 'id',
             'className': 'text-center text-lg text-medium'
@@ -284,7 +212,7 @@ $(document).on('click', '.AddDeliveryType', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ route("add_deliveryTypes") }}',
+        url: '{{ route("add_times") }}',
         data: formdata,
         contentType: false,
         processData: false,
@@ -307,7 +235,7 @@ $(document).on('click', '#ShowModalEditDeliveryType', function(e) {
     $('#modalEditDeliveryType').modal('show');
     $.ajax({
         type: 'GET',
-        url: '{{ url("admin/deliveryTypes/edit") }}/' + id_DeliveryType,
+        url: '{{ url("admin/times/edit") }}/' + id_DeliveryType,
         data: "",
         success: function(response) {
             console.log(response);
@@ -321,43 +249,6 @@ $(document).on('click', '#ShowModalEditDeliveryType', function(e) {
                 $('#id_DeliveryType').val(id_DeliveryType);
                 $('#title_en').val(response.data.title_en);
                 $('#title_ar').val(response.data.title_ar);
-                $('#time_from').val(response.data.time_from);
-                $('#time_to').val(response.data.time_to);
-                if (response.data.sat == 1) {
-                    $('#sat').attr('checked', 'checked');
-                } else {
-                    $('#sat').removeAttr('checked');
-                }
-                if (response.data.sun == 1) {
-                    $('#sun').attr('checked', 'checked');
-                } else {
-                    $('#sun').removeAttr('checked');
-                }
-                if (response.data.mon == 1) {
-                    $('#mon').attr('checked', 'checked');
-                } else {
-                    $('#mon').removeAttr('checked');
-                }
-                if (response.data.tue == 1) {
-                    $('#tue').attr('checked', 'checked');
-                } else {
-                    $('#tue').removeAttr('checked');
-                }
-                if (response.data.wed == 1) {
-                    $('#wed').attr('checked', 'checked');
-                } else {
-                    $('#wed').removeAttr('checked');
-                }
-                if (response.data.thu == 1) {
-                    $('#thu').attr('checked', 'checked');
-                } else {
-                    $('#thu').removeAttr('checked');
-                }
-                if (response.data.fri == 1) {
-                    $('#fri').attr('checked', 'checked');
-                } else {
-                    $('#fri').removeAttr('checked');
-                }
             }
         }
     });
@@ -374,7 +265,7 @@ $(document).on('click', '#EditClient', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ url("admin/deliveryTypes/update") }}/' + id_DeliveryType,
+        url: '{{ url("admin/times/update") }}/' + id_DeliveryType,
         data: formdata,
         contentType: false,
         processData: false,
@@ -412,7 +303,7 @@ $(document).on('click', '#DeleteDeliveryType', function(e) {
     });
     $.ajax({
         type: 'DELETE',
-        url: '{{ url("admin/deliveryTypes/delete") }}/' + id_DeliveryType,
+        url: '{{ url("admin/times/delete") }}/' + id_DeliveryType,
         data: '',
         contentType: false,
         processData: false,
