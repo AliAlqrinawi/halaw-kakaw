@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     public static function success($message,$status = 200)
     {
-        return response()->json(['status' => 'success','errors'=> 0 , 'data' => $message],$status)->header('Content-type','application/json');
+        return response()->json(['status' => 'success'  , 'data' => $message],$status)->header('Content-type','application/json');
     }
     public static function error($message , $status = 200)
     {
@@ -26,7 +26,7 @@ class Controller extends BaseController
         }
         if ($message instanceof MessageBag)
             $message= $message->first();
-        return response()->json(['status' => false,'code' => 201 ,'errors'=> $messageCount , 'message' => $message],$status)->header('Content-type','application/json');
+        return response()->json(['status' => false,'code' => 201   , 'message' => $message],$status)->header('Content-type','application/json');
 
     }
 }
