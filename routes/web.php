@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProdectController;
 use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeliveryTypesController;
 use App\Http\Controllers\Payment_methodsController;
 use App\Http\Controllers\timesController;
@@ -43,7 +44,8 @@ Route::post('city/update/status', [CitiesController::class , 'updateStatus'])->n
 Route::post('appuser/update/status', [AppUsersController::class , 'updateStatus'])->name('appuser.status');
 Route::post('payment/update/status', [Payment_methodsController::class , 'updateStatus'])->name('payments.status');
 Route::post('deliveryTypes/update/status', [DeliveryTypesController::class , 'updateStatus'])->name('deliveryTypes.status');
-Route::post('deliveryTypes/update/status', [timesController::class , 'updateStatus'])->name('deliveryTypes.status');
+Route::post('time/update/status', [timesController::class , 'updateStatus'])->name('time.status');
+Route::post('delivery/update/status', [DeliveryController::class , 'updateStatus'])->name('delivery.status');
 
 
 require __DIR__.'/admin.php';
@@ -59,5 +61,6 @@ require __DIR__.'/contact.php';
 require __DIR__.'/payment.php';
 require __DIR__.'/governorat.php';
 require __DIR__.'/city.php';
+require __DIR__.'/delivery.php';
 require __DIR__.'/deliverytype.php';
 require __DIR__.'/time.php';
