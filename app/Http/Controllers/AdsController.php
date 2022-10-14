@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ads;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Categories;
+use App\Models\Clothes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class AdsController extends Controller
 {
     public function ads (){
-        $category = Category::get();
-        $prodect = Product::get();
-        $prodec = Product::get();
+        $category = Categories::get();
+        $prodect = Clothes::get();
+        $prodec = Clothes::get();
         return view('Ads.index' , compact('category' , 'prodect' , 'prodec'));
     }
 

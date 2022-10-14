@@ -64,7 +64,6 @@
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @foreach ($settings as $key => $x)
-
                     <div class="form-group">
                         @if (App::getLocale() == 'en')
                         <label class="col-md-3 control-label" for="site_title">{{ $x->title_en }} : </label>
@@ -82,7 +81,7 @@
                         @elseif($x->key_id == 'force_update')
                         <div class="col-md-10">
                             <select name="force_update" class="form-control">
-                                    <option value="1" @if($x->key_id == 'force_update' && $x->key_id == 'force_update') >نعم</option>
+                                    <option value="1"></option>
                                     <option value="0">لا</option>
                             </select>
                         </div>
@@ -95,7 +94,7 @@
                         </div>
                         @else
                         <div class="col-md-10">
-                            <textarea id="site_title" name=" {{ $x->key_id }}"
+                            <textarea id="site_title" name="{{ $x->key_id }}"
                                 class="form-control">@if(isset($x->value)){{$x->value}}@endif</textarea>
                         </div>
                         @endif

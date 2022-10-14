@@ -16,11 +16,11 @@ class Ads extends Model
     
     public function categories()
     {
-        return $this->belongsTo(Category::class , 'cat_id'  , 'id');
+        return $this->belongsTo(Categories::class , 'cat_id'  , 'id');
     }
 
     public function Products()
     {
-        return $this->belongsTo(Product::class , 'product_id'  , 'id');
+        return $this->belongsTo(Clothes::class , 'product_id'  , 'id');
     }
 }

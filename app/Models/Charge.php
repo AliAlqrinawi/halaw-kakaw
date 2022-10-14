@@ -10,7 +10,7 @@ class Charge extends Model
 
     protected $guarded = ['id'];
     protected $connection = 'mysql';
-    protected $table = 'app_users_charge';
+    protected $table = 'app_users_charges';
 
     public function user()
     {
