@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppUser;
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class OedersController extends Controller
 {
     public function orders (){
-        // $categories = Order::with(['user' , 'payment' , 'address' , 'deliveryTypeTitle' , 'pieces'])->get();
-        // return $categories;
-        return view('order.index');
+        $payment = Payment::get();
+        return view('order.index' , compact('payment'));
     }
 
     public function get_orders (){
@@ -103,4 +104,54 @@ class OedersController extends Controller
             'status' => 200,
         ]);
     }
+
+    public function flters(Request $request)
+    {
+        $payment_status = $request->payment_status ;
+        $type_customer = $request->type_customer ;
+        $entry_status = $request->entry_status;
+        $cat_id = $request->cat_id;
+
+        $this->payment_status = $request->payment_status ;
+        $this->type_customer = $request->type_customer ;
+        $this->entry_status = $request->entry_status;
+        $this->cat_id = $request->cat_id;
+        $order = Order::with(['user' , 'payment' , 'address' , 'deliveryTypeTitle' , 'pieces']);
+        if (!empty($payment_status)) {
+            $order->where('status' , $payment_status);
+        }
+        if (!empty($type_customer)) {
+            $order->where('payment_id' , $type_customer);
+        }
+        if (!empty($entry_status)) {
+            $u = AppUser::where('mobile_number', $entry_status)->first();
+            if($u){
+                $order->where('user_id' , $u->id);
+            }else{
+                $order->where('user_id' , 00000000);
+            }
+           
+        }
+        if (!empty($cat_id)) {
+            $order->where('payment_status' , $cat_id);
+        }
+        else{
+            $order->get();
+        }
+        $order=$order->get();
+        if($order){
+            return response()->json([
+                'message' => 'Data Found',
+                'status' => 200,
+                'data' => $order
+            ]);
+        }
+        else{
+            return response()->json([
+                'message' => 'Data Not Found',
+                'status' => 404,
+            ]);
+        }
+    }
+
 }

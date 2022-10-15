@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Admins</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('admins.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('admins.content_title') }}</span>
         </div>
         
     </div>
@@ -36,26 +36,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('admins.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formadmin">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">User Name :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.user_name') }} :</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Email :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.email') }} :</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Phone :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.phone') }} :</label>
                             <input type="number" class="form-control" id="phone" name="phone" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Pasword :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.password') }} :</label>
                             <input type="text" class="form-control" id="password" name="password" required>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('admins.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -81,19 +81,19 @@
                     <input type="hidden" class="form-control" id="id_admin">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">User Name :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.user_name') }} :</label>
                             <input type="text" class="form-control" id="admin_name" name="name" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Email :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.email') }} :</label>
                             <input type="email" class="form-control" id="admin_email" name="email" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Phone :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.phone') }} :</label>
                             <input type="number" class="form-control" id="admin_phone" name="phone" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">USER Pasword :</label>
+                            <label for="exampleInputEmail1">{{ trans('admins.password') }} :</label>
                             <input type="text" class="form-control" id="admin_password" name="password" required>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddAdmin">
-                            <a href="#" style="font-weight: bold; color: beige;" id>Add User</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('admins.Add_User') }}</a>
                         </button>
                     </div>
                 </div>
@@ -126,10 +126,10 @@
                         <thead>
                             <tr>
                                 <th class="wd-10p border-bottom-0">#</th>
-                                <th class="wd-15p border-bottom-0">User Name</th>
-                                <th class="wd-20p border-bottom-0">user email</th>
-                                <th class="wd-15p border-bottom-0">Phone</th>
-                                <th class="wd-10p border-bottom-0">Processes</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admins.user_name') }}</th>
+                                <th class="wd-20p border-bottom-0">{{ trans('admins.email') }}</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admins.phone') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admins.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -223,7 +223,7 @@ $(document).on('click', '.AddAdmin', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8000/dashbord/admin/add',
+        url: 'http://127.0.0.1:8000/admin/admin/add',
         data: formdata,
         contentType: false,
         processData: false,
@@ -247,7 +247,7 @@ $(document).on('click', '#ShowModalEditAdmin', function(e) {
     $('#modalEditAdmin').modal('show');
     $.ajax({
         type: 'GET',
-        url: 'http://127.0.0.1:8000/dashbord/admin/edit/' + id_admin,
+        url: 'http://127.0.0.1:8000/admin/admin/edit/' + id_admin,
         data: "",
         success: function(response) {
             console.log(response);
@@ -284,7 +284,7 @@ $(document).on('click', '#EditAdmin', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8000/dashbord/admin/update/' + id_admin,
+        url: 'http://127.0.0.1:8000/admin/admin/update/' + id_admin,
         data: data,
         dataType: 'json',
         success: function(response) {
@@ -322,7 +322,7 @@ $(document).on('click', '#DeleteAdmin', function (e) {
             });
             $.ajax({
                 type: 'DELETE',
-                url: 'http://127.0.0.1:8000/dashbord/admin/delete/' + id_admin,
+                url: 'http://127.0.0.1:8000/admin/admin/delete/' + id_admin,
                 data: '',
                 contentType: false,
                 processData: false,

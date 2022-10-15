@@ -45,7 +45,7 @@ class CategoriesController extends Controller
         // $category->save();
         Category::create($data);
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.js_lang.success_add_property'),
             'status' => 200,
             // 'data' => $category
         ]);
@@ -86,7 +86,7 @@ class CategoriesController extends Controller
             }
             $category->update($data);
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.js_lang.success_update_property'),
                 'status' => 200,
                 'data' => $category
             ]);
@@ -104,7 +104,7 @@ class CategoriesController extends Controller
         if ($category) {
             $category->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.js_lang.property_delete_success'),
                 'status' => 200,
             ]);
         } else {

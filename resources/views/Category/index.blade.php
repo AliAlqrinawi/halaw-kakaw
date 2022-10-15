@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Categories</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('admins.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('category.content_title') }}</span>
         </div>
 
     </div>
@@ -36,43 +36,43 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('category.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formcategory" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Description_E') }} :</label>
                             <textarea class="form-control" name="description_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Description_A') }} :</label>
                             <textarea class="form-control" name="description_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Image') }} :</label>
                             <input type="file" class="form-control" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Category Status :</label>
+                            <label class="form-label">{{ trans('category.Status') }} :</label>
                             <select name="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                                <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -92,38 +92,38 @@
                     <input type="hidden" class="form-control" id="id_category">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" id="title_en" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" id="title_ar" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Description_E') }} :</label>
                             <textarea class="form-control" id="description_en" name="description_en" rows="3"
                                 required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Description Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Description_A') }} :</label>
                             <textarea class="form-control" id="description_ar" name="description_ar" rows="3"
                                 required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Category Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Image') }} :</label>
                             <input type="file" class="form-control" id="image" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Category Status :</label>
+                            <label class="form-label">{{ trans('category.Status') }} :</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                            <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -141,7 +141,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Category</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('category.Add_Category') }}</a>
                         </button>
                     </div>
                 </div>
@@ -152,11 +152,11 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Title</th>
-                                <th class="border-bottom-0">Description</th>
-                                <th class="border-bottom-0">Image</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('category.Title') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Description') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Image') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Status') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,7 +206,7 @@ var table = $('#get_categories').DataTable({
             'className': 'text-center text-lg text-medium',
             render: function(data, row, type) {
                 if (local == "en") {
-                    return `<a href ="{{ url('admin/clothes/') }}/${data.id}">${data.title_en}</a>`;
+                    return data.title_en;
                 } else {
                     return data.title_ar;
                 }
@@ -238,9 +238,9 @@ var table = $('#get_categories').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },
@@ -248,7 +248,7 @@ var table = $('#get_categories').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
-                <a href="{{ url('admin/clothes') }}/${data.id}" class="btn btn-success btn-sm" title="الاصناف"><i class="fa fa-clipboard"></i> Prodects</a>
+                <a href="{{ url('admin/clothes') }}/${data.id}" class="btn btn-success btn-sm" title="الاصناف"><i class="fa fa-clipboard"></i> {{ trans('category.Prodects') }}</a>
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
                                 
@@ -346,7 +346,7 @@ $(document).on('click', '#EditClient', function(e) {
         type: 'POST',
         url: '{{ url("admin/category/update") }}/' + id_category,
         data: data,
-        dataType: false,
+        // dataType: false,
         success: function(response) {
             console.log(response);
             if (response.status == 400) {
@@ -418,9 +418,9 @@ $(document).on('click', '#status', function(e) {
         url: '{{ route("update.status") }}',
         data: data,
         success: function(response) {
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-danger");
-            $('#error_message').text(response.message);
+            // $('#error_message').html("");
+            // $('#error_message').addClass("alert alert-danger");
+            // $('#error_message').text(response.message);
             table.ajax.reload();
         }
     });
@@ -450,9 +450,9 @@ $(document).on('click', '#statusoff', function(e) {
         url: '{{ route("update.status") }}',
         data: data,
         success: function(response) {
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-danger");
-            $('#error_message').text(response.message);
+            // $('#error_message').html("");
+            // $('#error_message').addClass("alert alert-danger");
+            // $('#error_message').text(response.message);
             table.ajax.reload();
         }
     });

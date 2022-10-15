@@ -143,7 +143,7 @@
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/ultraviolet/344/deliver-food.png')}}"
                         style=" width: 30px; height: 30px;" />
-                    <span class="side-menu__label" style=" font-weight: bold;">طرق التوصيل'</span>
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.delivery')}}</span>
                 </a>
             </li>
 

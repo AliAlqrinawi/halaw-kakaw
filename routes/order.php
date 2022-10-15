@@ -26,12 +26,14 @@ Route::group(
 
         Route::get('orders/get', 'get_orders')->name('get_orders');
 
+        Route::get('orders/flters', 'flters')->name('flters');
+
         // Route::post('category/add' , 'add_category')->name('add_category');
 
         // Route::get('category/edit/{id}' , 'edit')->name('category.edit');
 
         // Route::post('category/update/{id}' , 'update')->name('category.update');
 
-        // Route::delete('category/delete/{id}' , 'delete')->name('category.delete');
+        Route::delete('orders/delete/{id}' , 'delete')->name('orders.delete');
     });
 });

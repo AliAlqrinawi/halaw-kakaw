@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'home' => 'الرئيسية',
-    'content_title' => 'المدراء',
+    'home' => 'Home',
+    'content_title' => 'Admins',
     'page_title' => 'المدراء',
     'name' => 'الاسم',
-    'email' => 'البريد الاليكترونى',
-    'user_name' => 'أسم المستخدم ',
-    'phone' => 'رقم الهاتف',
+    'email' => 'Email',
+    'user_name' => 'User Name',
+    'phone' => 'Phone',
     'is_active' => 'الحالة',
     'disactivated' => 'غير مفعل',
     'activated' => 'مفعل',
@@ -15,12 +15,11 @@ return [
     'disactivate_selected' => 'إلغاء تفعيل المحدد',
     'balance' => 'الرصيد',
     'password_valid_help' => 'طول كلمة المرور من 6 إلى 25  أحرف انجليزية وأرقام ورموز',
-    'password' => 'كلمة المرور',
+    'password' => 'Password',
     'repassword' => 'تأكيد كلمة المرور',
     'content_search' => 'بحث متقدم فى المدراء',
-    'Add_User' => 'إضافة مدير',
-    'Processes' => 'العمليات',
-
+    'Add_User' => 'Add Admin',
+    'Processes' => 'Processes',
     'js_lang' => [
         'user_must_be_unique' => 'حقل البريد الالكترونى او اسم المستخدم موجود من قبل',
         'success_add_user' => 'تم اضافة مدير بنجاح',

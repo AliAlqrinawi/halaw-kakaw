@@ -13,7 +13,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="left-content">
         <div>
-            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{trans('dashboard.Welcome')}}!</h2>
+            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{trans('dashboard.Wellcome') . " " . Auth::user()->name}} !</h2>
             {{--						  <p class="mg-b-0">Sales monitoring dashboard template.</p>--}}
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="card overflow-hidden sales-card bg-primary-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">Custmer</h6>
+                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.Custmer')}}</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
@@ -48,7 +48,7 @@
         <div class="card overflow-hidden sales-card bg-danger-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">Orders</h6>
+                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.Orders')}}</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
@@ -68,7 +68,7 @@
         <div class="card overflow-hidden sales-card bg-success-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-24 text-white">total bills</h6>
+                    <h6 class="mb-3 tx-24 text-white">{{trans('dashboard.total_bills')}}</h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">

@@ -21,8 +21,9 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Categories</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('orders.home') }}</h4><span
+                class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('orders.page_title') }}</span>
         </div>
 
     </div>
@@ -111,16 +112,8 @@
                                 </tr>
                             </tbody>
                         </table>
-
-
-
                     </div>
-
-
-
-
                     <div class="modal-footer">
-
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -128,31 +121,69 @@
         </div>
     </div>
 </div>
+<div class="row row-sm">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="get">
+                    <div class="row mg-b-20">
+                        <div class="parsley-input col-md-3" id="fnWrapper">
+                            <label>{{trans('orders.status')}} :</label>
+                            <select class="form-control form-control-md mg-b-20" name="payment_status"
+                                id="payment_status">
+                                <option value="">{{ trans('orders.all') }}</option>
+                                <option value="new">{{ trans('orders.new') }}</option>
+                                <option value="pay_pending">{{ trans('orders.pay_pending') }}</option>
+                                <option value="shipping_complete">{{ trans('orders.shipping_complete') }}</option>
+                                <option value="shipping">{{ trans('orders.shipping') }}</option>
+                                <option value="complete">{{ trans('orders.complete') }}</option>
+                            </select>
+                        </div>
+                        <div class="parsley-input col-md-3 mg-t-20 mg-md-t-0" id="lnWrapper">
+                            <label>{{trans('orders.payment_method')}} :</label>
+                            <select class="form-control form-control-md mg-b-20" name="type_customer"
+                                id="type_customer">
+                                <option value="">{{ trans('orders.all') }}</option>
+                                @foreach($payment as $payment)
+                                <option value="{{ $payment->id }}">{{ $payment->title_ar }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="parsley-input col-md-3 mg-t-20 mg-md-t-0" id="lnWrapper">
+                            <label>{{trans('orders.phone')}} :</label>
+                            <input type="number" class="form-control form-control-md mg-b-20" name="entry_status"
+                                id="entry_status">
+                        </div>
+                        <div class="parsley-input col-md-3 mg-t-20 mg-md-t-0" id="lnWrapper">
+                            <label>{{trans('orders.payment_status')}} :</label>
+                            <select class="form-control form-control-md mg-b-20" id="cat_id" name="cat_id">
+                                <option value="">{{ trans('orders.all') }}</option>
+                                <option value="2">معلق للدفع</option>
+                                <option value="1">تم الدفع</option>
+                                <option value="3">فشل الدفع</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-primary" id="s">{{ trans('orders.Sarech') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
-
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
-            <div class="card-header pb-0">
-                <div class="row row-xs wd-xl-80p">
-                    <div class="col-sm-6 col-md-3 mg-t-10">
-                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Category</a>
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
                     <table class="table table-hover" id="get_categories" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Title</th>
-                                <th class="border-bottom-0">Description</th>
-                                <th class="border-bottom-0">Image</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('orders.name') }}</th>
+                                <th class="border-bottom-0">{{ trans('orders.status') }}</th>
+                                <th class="border-bottom-0">{{ trans('orders.payment') }}</th>
+                                <th class="border-bottom-0">{{ trans('orders.total') }}</th>
+                                <th class="border-bottom-0">{{ trans('orders.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,9 +221,82 @@
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
 <script>
 var local = "{{ App::getLocale() }}";
+$('#s').click(function(e) {
+    e.preventDefault();
+    console.log('asadlasd');
+    var payment_status = $('#payment_status').val();
+    var type_customer = $('#type_customer').val();
+    var entry_status = $('#entry_status').val();
+    var cat_id = $('#cat_id').val();
+
+    $('#get_categories').DataTable({
+        bDestroy: true,
+        ajax: {
+            url: '{{url("admin/orders/flters")}}/?payment_status=' + payment_status +
+                '&type_customer=' + type_customer + '&entry_status=' + entry_status + '&cat_id=' +
+                cat_id,
+            cache: true
+        },
+        columns: [{
+                'data': 'id',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': null,
+                'className': 'text-center text-lg text-medium',
+                render: function(data, row, type) {
+                    return data.user.first_name + " " + data.user.last_name;
+                },
+            },
+            {
+                'data': null,
+                'className': 'text-center text-lg text-medium',
+                render: function(row, data, type) {
+                    if (row.status == 'new') {
+                        return `<button class="btn btn-purple-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.new') }}</button>`;
+                    } else if (row.status == 'pay_pending') {
+                        return `<button class="btn btn-primary-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.pay_pending') }}</button>`;
+                    } else if (row.status == 'shipping') {
+                        return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping') }}</button>`;
+                    } else if (row.status == 'shipping_complete') {
+                        return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping_complete') }}</button>`;
+                    } else if (row.status == 'complete') {
+                        return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
+                    } else {
+                        return '';
+                    }
+                },
+            },
+            {
+                'data': 'payment.title_en',
+            },
+            {
+                'data': 'total_cost',
+            },
+            {
+                'data': null,
+                render: function(data, row, type) {
+                    return `
+                <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
+                data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
+                data-user_name="${data.user.first_name + " " + data.user.last_name}"
+                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> Details</button>
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                },
+                orderable: false,
+                searchable: false
+            },
+        ],
+    });
+    $('#get_categories').addClass('col-sm-12');
+});
 var table = $('#get_categories').DataTable({
     // processing: true,
-    ajax: '{!! route("get_orders") !!}',
+    ajax: {
+        url: '{{ url("admin/orders/flters") }}',
+        cache: true
+    },
     columns: [{
             'data': 'id',
             'className': 'text-center text-lg text-medium'
@@ -209,16 +313,15 @@ var table = $('#get_categories').DataTable({
             'className': 'text-center text-lg text-medium',
             render: function(row, data, type) {
                 if (row.status == 'new') {
-                    return `<button class="btn btn-purple-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">${row.status}</button>`;
+                    return `<button class="btn btn-purple-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.new') }}</button>`;
                 } else if (row.status == 'pay_pending') {
-                    return `<button class="btn btn-primary-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">${row.status}</button>`;
+                    return `<button class="btn btn-primary-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.pay_pending') }}</button>`;
                 } else if (row.status == 'shipping') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">${row.status}</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping') }}</button>`;
                 } else if (row.status == 'shipping_complete') {
-                    return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">${row.status}</button>`;
+                    return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping_complete') }}</button>`;
                 } else if (row.status == 'complete') {
-                    return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">${row.status}</button>`;
-                    return "<span class='btn btn-danger-gradient btn-block' >تم تاكيد الاستلام</span>";
+                    return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
                 } else {
                     return '';
                 }
@@ -237,8 +340,7 @@ var table = $('#get_categories').DataTable({
                 <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
                 data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
-                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> Details</button>
-                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
 `;
             },
@@ -246,118 +348,6 @@ var table = $('#get_categories').DataTable({
             searchable: false
         },
     ],
-});
-//  view modal Category
-$(document).on('click', '#ShowModalAddCategory', function(e) {
-    e.preventDefault();
-    $('#modalAddCategory').modal('show');
-});
-// Category admin
-$(document).on('click', '.AddCategory', function(e) {
-    e.preventDefault();
-    let formdata = new FormData($('#formcategory')[0]);
-    // console.log(formdata);
-    // console.log("formdata");
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        url: '{{ route("add_category") }}',
-        data: formdata,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            // console.log("Done");
-            $('#AddCategory').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCategory').modal('hide');
-            $('#formcategory')[0].reset();
-            table.ajax.reload();
-        }
-    });
-});
-// view modification data
-$(document).on('click', '#ShowModalEditCategory', function(e) {
-    e.preventDefault();
-    var id_category = $(this).data('id');
-    $('#modalEditCategory').modal('show');
-    $.ajax({
-        type: 'GET',
-        url: '{{ url("admin/category/edit") }}/' + id_category,
-        data: "",
-        success: function(response) {
-            console.log(response);
-            if (response.status == 404) {
-                console.log('error');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-danger");
-                $('#error_message').text(response.message);
-            } else {
-                $('#id_category').val(id_category);
-                $('#title_en').val(response.data.title_en);
-                $('#title_ar').val(response.data.title_ar);
-                $('#description_en').val(response.data.description_en);
-                $('#description_ar').val(response.data.description_ar);
-                if (response.data.status == '1') {
-                    $("select option[value='1']").attr("selected", "selected");
-                } else {
-                    $("select option[value='0']").attr("selected", "selected");
-                }
-            }
-        }
-    });
-});
-$(document).on('click', '#EditClient', function(e) {
-    e.preventDefault();
-    var data = {
-        title_en: $('#title_en').val(),
-        title_ar: $('#title_ar').val(),
-        description_en: $('#description_en').val(),
-        description_ar: $('#description_ar').val(),
-        image: $('#image').val(),
-        status: $('#status').val(),
-    };
-    // let formdata = new FormData($('#formeditadmin')[0]);
-    var id_category = $('#id_category').val();
-    console.log(data);
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        url: '{{ url("admin/category/update") }}/' + id_category,
-        data: data,
-        dataType: false,
-        success: function(response) {
-            console.log(response);
-            if (response.status == 400) {
-                // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
-                $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
-                });
-            } else if (response.status == 404) {
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-danger");
-                $('#error_message').text(response.message);
-            } else {
-                $('#EditClient').text('Saving');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
-                $('#error_message').text(response.message);
-                $('#modalEditCategory').modal('hide');
-                table.ajax.reload();
-            }
-        }
-    });
 });
 $(document).on('click', '#DeleteCategory', function(e) {
     e.preventDefault();
@@ -369,7 +359,7 @@ $(document).on('click', '#DeleteCategory', function(e) {
     });
     $.ajax({
         type: 'DELETE',
-        url: '{{ url("admin/category/delete") }}/' + id_category,
+        url: '{{ url("admin/orders/delete") }}/' + id_category,
         data: '',
         contentType: false,
         processData: false,
@@ -382,7 +372,7 @@ $(document).on('click', '#DeleteCategory', function(e) {
     });
 });
 $(document).on('click', '#status', function(e) {
-        e.preventDefault();
+    e.preventDefault();
     // console.log("Alliiiii");
     var edit_id = $(this).data('id');
     var status = $(this).data('viewing_status');
@@ -414,7 +404,7 @@ $(document).on('click', '#status', function(e) {
     });
 });
 
-$(document).on('click'  , '#Management' , function(e){
+$(document).on('click', '#Management', function(e) {
     e.preventDefault();
     $('#exampleModal2').modal('show');
     var id = $(this).data('id');
