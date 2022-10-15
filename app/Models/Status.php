@@ -12,4 +12,10 @@ class Status extends Model
     protected $guarded = ['id'];
     protected $connection = 'mysql';
     protected $table = 'orders_status';
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'order_id' , 'id');
+    }
+
 }

@@ -12,4 +12,10 @@ class Times extends Model
     protected $table = "times";
 
     protected $fillable = ['title_en' , 'title_ar' , 'status'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'time_id' , 'id');
+    }
+
 }

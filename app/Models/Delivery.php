@@ -11,4 +11,10 @@ class Delivery extends Model
     protected $table = "deliveries";
 
     protected $fillable = ['title_en' , 'title_ar' , 'cost'  , 'order_limit' , 'status'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'delivery_id' , 'id');
+    }
+
 }

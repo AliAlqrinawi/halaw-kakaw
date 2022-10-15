@@ -64,3 +64,4 @@ require __DIR__.'/city.php';
 require __DIR__.'/delivery.php';
 require __DIR__.'/deliverytype.php';
 require __DIR__.'/time.php';
+require __DIR__.'/order.php';

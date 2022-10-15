@@ -26,5 +26,11 @@ class Charge extends Model
         return $this->belongsTo(Cities::class,'region_id','id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'address_id' , 'id');
+    }
+
+
 
 }

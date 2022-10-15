@@ -14,4 +14,10 @@ class Coupons extends Model
     'end_at' , 'type' , 'percent' ,
     'use_number' , 'code_limit' , 'code_max'
     , 'status'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'promo_code' , 'id');
+    }
+
 }

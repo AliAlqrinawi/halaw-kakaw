@@ -11,4 +11,9 @@ class Pieces extends Model
 
     protected $table = 'orders_pices';
     
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'order_id' , 'id');
+    }
+
 }

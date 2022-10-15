@@ -14,4 +14,10 @@ class DeliveryTypes extends Model
     protected $fillable = ['title_en' , 'title_ar' , 'status' , 'time_from' , 'time_to' , 'sat'
     , 'sun' , 'mon' , 'tue' , 'wed' , 'thu' , 'fri'
 ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class , 'delivery_type','id');
+    }
+
 }
