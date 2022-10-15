@@ -17,8 +17,23 @@ class ProdectController extends Controller
         return view('Prodect.index' , compact('cat'));
     }
 
-    public function get_prodect (){
-        $prodects = Product::with(['categories' , 'user'])->get();
+    public function get_prodect (Request $request){
+        $payment_status = $request->payment_status;
+        
+        $prodects = Product::with(['categories' , 'user']);
+
+        if (!empty($payment_status)) {
+            if($payment_status == 1){
+                $prodects->where('status' , $payment_status);
+            }else{
+                $prodects->where('status' , 0);
+            }
+        }
+        else{
+            $prodects->get();
+        }
+        $prodects=$prodects->get();
+        
         if ($prodects) {
             return response()->json([
                 'message' => 'Data Found',

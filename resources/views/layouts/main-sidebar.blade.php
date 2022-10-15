@@ -103,6 +103,15 @@
             </li>
             
             <li class="slide">
+                <a class="side-menu__item" href="{{ route('orders') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/ultraviolet/344/deliver-food.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.order')}}</span>
+                </a>
+            </li>
+
+            <li class="slide">
                 <a class="side-menu__item" href="{{ route('contact') }}">
                     <img class="side-menu__icon"
                         src="{{url('https://img.icons8.com/nolan/344/email.png')}}"

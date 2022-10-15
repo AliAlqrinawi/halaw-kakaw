@@ -201,7 +201,7 @@
 
         </div>
     </div>
-
+</div>
     @endsection
 
     @section('js')
@@ -234,7 +234,7 @@
     var table = $('#get_Prodects').DataTable({
         processing: true,   
         ajax: {
-        url: '{!!"http://127.0.0.1:8000/admin/clothes/show/"!!}'+id,
+        url: '{!! url("admin/clothes/show")!!}/'+id,
         cache: true
         },
         columns: [

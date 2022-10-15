@@ -201,6 +201,29 @@
         </div>
     </div>
 </div>
+
+<div class="row row-sm">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="get">
+                    <div class="row mg-b-20">
+                        <div class="parsley-input col-md-3" id="fnWrapper">
+                            <label>{{trans('orders.status')}} :</label>
+                            <select class="form-control form-control-md mg-b-20" name="payment_status"
+                                id="payment_status">
+                                <option value="">{{ trans('orders.all') }}</option>
+                                <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-primary" id="s">{{ trans('orders.Sarech') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- End Basic modal -->
 <!-- row -->
 <div class="row">
@@ -267,6 +290,88 @@
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
 <script>
 var local = "{{ App::getLocale() }}";
+$('#s').click(function(e) {
+    e.preventDefault();
+    console.log('asadlasd');
+    var payment_status = $('#payment_status').val();
+    var table = $('#get_Prodects').DataTable({
+        // processing: true,
+        bDestroy: true,
+        ajax: {
+            url: '{!! url("admin/clothes/get") !!}/?&payment_status='+payment_status,
+            cache: true
+        },
+        columns: [{
+                'data': 'id',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': null,
+                render: function(data, row, type) {
+                    if (data.image) {
+                        return `<img 
+                        src="${data.image}"
+                                        style="width: 40px;height: 40px">`;
+                    } else {
+                        return "No Image";
+                    }
+                },
+            },
+            {
+                'data': 'categories.title_ar',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': null,
+                'className': 'text-center text-lg text-medium',
+                render: function(data, row, type) {
+                    if (local == "en") {
+                        return data.title_en;
+                    } else {
+                        return data.title_ar;
+                    }
+                },
+            },
+            {
+                'data': 'price',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': 'quntaty',
+                'className': 'text-center text-lg text-medium'
+            },
+            {
+                'data': null,
+                render: function(data, row, type) {
+                    var phone;
+                    if (data.status == '1') {
+                        return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    } else {
+                        return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    }
+                },
+            },
+            {
+                'data': null,
+                render: function(data, row, type) {
+                    return `
+                <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
+                </form>
+                <form action="{{ url('admin/minas100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
+                </form>
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                },
+                orderable: false,
+                searchable: false
+            },
+        ],
+    });
+});
 var table = $('#get_Prodects').DataTable({
     // processing: true,
     ajax: '{!! route("get_prodect") !!}',
@@ -547,8 +652,6 @@ $(document).on('click', '#statusoff', function(e) {
         }
     });
 });
-
-
 </script>
 
 
