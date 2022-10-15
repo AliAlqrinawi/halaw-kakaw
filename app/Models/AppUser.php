@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class AppUsers extends Model
+class AppUser extends Authenticatable
 {
-    use HasFactory;
+
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $guarded = ['id'];
     protected $connection = 'mysql';
     protected $table = 'app_users';
@@ -49,6 +54,6 @@ class AppUsers extends Model
 
     public function orders()
     {
-        return $this->hasMany(Orders::class , 'user_id' , 'id');
+        return $this->hasMany(Order::class , 'user_id' , 'id');
     }
 }

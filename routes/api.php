@@ -23,17 +23,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['api']], function () {
 
     Route::post('register', ['as' => 'api-user-register', 'uses' => 'App\Http\Controllers\Api\V1\UserController@register']);
 
-    Route::post('activateAccount', ['middleware' => 'api.auth', 'as' => 'api-user-activate', 'uses' => 'Api\V1\UserController@activateAccount']);
-    Route::post('resendActivation', ['middleware' => 'api.auth', 'as' => 'api-user-resend-code', 'uses' => 'Api\V1\UserController@resendActivation']);
-    Route::post('update', ['middleware' => 'api.auth', 'as' => 'api-user-resend-code', 'uses' => 'Api\V1\UserController@updateInfo']);
-    Route::post('profile', ['middleware' => 'api.auth', 'as' => 'api-user-profile', 'uses' => 'Api\V1\UserController@profile']);
-    Route::post('changePass', ['middleware' => 'api.auth', 'as' => 'api-user-change-pass', 'uses' => 'Api\V1\AuthController@changePass']);
-    Route::any('notification', ['middleware' => 'api.auth', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@getData']);
-    Route::get('read/{id}', ['middleware' => 'api.auth', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@read']);
-    Route::get('notification/delete/{id}', ['middleware' => 'api.auth', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@delete']);
-    Route::post('credit', ['middleware' => 'api.auth', 'as' => 'api-user-notification', 'uses' => 'Api\V1\UserController@credit']);
-    Route::post('add_promo', ['middleware' => 'api.auth', 'as' => 'api-user-notification', 'uses' => 'Api\V1\UserController@promoAccount']);
-    Route::any('logout', ['middleware' => 'api.auth', 'as' => 'api-user-logout', 'uses' => 'Api\V1\AuthController@logout']);
+    Route::post('activateAccount', ['middleware' => 'auth:api', 'as' => 'api-user-activate', 'uses' => 'App\Http\Controllers\Api\V1\UserController@activateAccount']);
+    Route::post('resendActivation', ['middleware' => 'auth:api', 'as' => 'api-user-resend-code', 'uses' => 'Api\V1\UserController@resendActivation']);
+    Route::post('update', ['middleware' => 'auth:api', 'as' => 'api-user-resend-code', 'uses' => 'Api\V1\UserController@updateInfo']);
+    Route::post('profile', ['middleware' => 'auth:api', 'as' => 'api-user-profile', 'uses' => 'Api\V1\UserController@profile']);
+    Route::post('changePass', ['middleware' => 'auth:api', 'as' => 'api-user-change-pass', 'uses' => 'Api\V1\AuthController@changePass']);
+    Route::any('notification', ['middleware' => 'auth:api', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@getData']);
+    Route::get('read/{id}', ['middleware' => 'auth:api', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@read']);
+    Route::get('notification/delete/{id}', ['middleware' => 'auth:api', 'as' => 'api-user-notification', 'uses' => 'Api\V1\NotificationController@delete']);
+    Route::post('credit', ['middleware' => 'auth:api', 'as' => 'api-user-notification', 'uses' => 'Api\V1\UserController@credit']);
+    Route::post('add_promo', ['middleware' => 'auth:api', 'as' => 'api-user-notification', 'uses' => 'Api\V1\UserController@promoAccount']);
+    Route::any('logout', ['middleware' => 'auth:api', 'as' => 'api-user-logout', 'uses' => 'Api\V1\AuthController@logout']);
 
 });
 

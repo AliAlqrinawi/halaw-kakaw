@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 
-class SmsLogRepository extends Repository
+class SmsLogRepository
 {
 
     public function model()

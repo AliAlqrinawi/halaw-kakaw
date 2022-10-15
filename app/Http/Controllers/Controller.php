@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     public static function success($message,$status = 200)
     {
-        return response()->json(['status' => 'success'  , 'data' => $message],$status)->header('Content-type','application/json');
+        return response()->json(['status' => 'true'  ,'code' => 200  ,'message'=>'Success', 'data' => $message],$status)->header('Content-type','application/json');
     }
     public static function error($message , $status = 200)
     {

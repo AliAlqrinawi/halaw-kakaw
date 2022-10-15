@@ -5,6 +5,8 @@ namespace App\Repositories;
 //use Bosnadev\Repositories\Contracts\RepositoryInterface;
 //use Bosnadev\Repositories\Eloquent\Repository;
 
+//use Illuminate\Config\Repository;
+
 class SmsGatesRepository
 {
 

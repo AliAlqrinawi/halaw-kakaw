@@ -11,7 +11,7 @@ class AppUsersRepository
 
     public function model()
     {
-        return 'App\Models\AppUser';
+        return 'App\Models\AppUsers';
     }
 
     public static function setType($type)
