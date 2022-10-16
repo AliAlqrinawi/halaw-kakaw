@@ -41,10 +41,17 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'passport',
-            'provider' => 'app_users',
+            'driver' => 'jwt',
+            'provider' => 'appUsers',
 
         ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+
+
     ],
 
     /*
@@ -69,10 +76,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'api' => [
+        'appUsers' => [
             'driver' => 'eloquent',
             'model' => App\Models\AppUser::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -102,6 +110,8 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+
     ],
 
     /*

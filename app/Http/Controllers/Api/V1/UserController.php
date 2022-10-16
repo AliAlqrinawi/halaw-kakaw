@@ -11,9 +11,8 @@ use App\Helpers\SmsGateways;
 use App\Helpers\Functions;
 use Illuminate\Support\Facades\Auth;
 use phpseclib3\Crypt\Hash;
-
-
-
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException as JWTException;
 
 class UserController extends Controller
 {
@@ -66,20 +65,27 @@ class UserController extends Controller
         $data['ip_address'] = request()->ip();
         try {
             $user = AppUser::where(['mobile_number' => $request->input('mobile_number')])->first();
-
+//            return $user;
             if (!$user) {
                 $user = AppUser::create($data);
             } else {
                  $user->update($data);
 
             }
-
+            $credentials=['mobile_number' => $request->input('mobile_number'), 'password' => $request->input('mobile_number')];
+            $token = auth('api')->attempt($credentials);
+//            $token = auth()->login($user);
+//            $token = auth()->login($user);
 //            $token = JWTAuth::attempt(['mobile_number' => $request->input('mobile_number'), 'password' => $request->input('mobile_number')]);
-            if (AppUser::where(['mobile_number' => $request->input('mobile_number'), 'password' => $request->input('password') ]) ) {
+//            if ( AppUser::where( $credentials )->first()){
+//
+////                $user = Auth::guard('app_users')->user();
+//                $token =  $user->createToken('mobile')->accessToken;
+////                $token = $user->createToken('mobile')->accessToken;
+//            }
+//            return $token;
 
-                $token = $user->createToken('mobile')->accessToken;
 
-            }
             // send activation code with sms
             $message = 'your activation code is ' . $activation_code;
 
@@ -103,7 +109,8 @@ class UserController extends Controller
 //            return parent::success( $userdata);
             return $this->outApiJson(true, 'success', $userdata);
 
-
+        } catch (JWTException $e) {
+            return $this->outApiJson(false, 'could_not_create_token');
         } catch (\PDOException $ex) {
 //            dd($ex);
             return $this->outApiJson(false, 'pdo_exception');

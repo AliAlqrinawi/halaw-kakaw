@@ -2,64 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+//use GeniusTS\Roles\Traits\HasRoleAndPermission;
+//use GeniusTS\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use Notifiable ;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'user_name','is_active','permissions','type',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    public function products()
+    public function getCreatedAtAttribute($date)
     {
-        return $this->hasMany(Product::class , 'user_id' , 'id');
+        $geoIp = \GeoIP::getLocation();
+        $dtz = new \DateTimeZone($geoIp['timezone']);
+        $time_in_sofia = new \DateTime('now', $dtz);
+        $offset = $dtz->getOffset( $time_in_sofia ) / 3600;
+        return $date.' (' . "GMT" . ($offset < 0 ? $offset : "+".$offset) . ')';
     }
 
-    public function roles(){
-        return $this->belongsToMany(Role::class , 'role_user');
-    }
-
-    public function permissions($permissions)
+    public function messages()
     {
-            foreach($this->roles as $role){
-                if(in_array($permissions ,  $role->permissions)){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
+        return $this->hasMany('\App\Models\Messages');
     }
 }
