@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Ads</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('ads.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('ads.content_title') }}</span>
         </div>
 
     </div>
@@ -36,63 +36,71 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Ads</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('ads.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formAds" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads url :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.url') }} :</label>
                             <input type="text" class="form-control" name="url" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads lauout title :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.lauout_title') }} :</label>
                             <input type="text" class="form-control" name="lauout_title" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads layout :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.layout') }} :</label>
                             <input type="number" class="form-control" name="layout" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads days :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.days') }} :</label>
                             <input type="number" class="form-control" name="days" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads cost :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.cost') }} :</label>
                             <input type="number" class="form-control" name="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Ads Category :</label>
+                            <label class="form-label"> {{ trans('ads.cat') }} :</label>
                             <select name="cat_id" class="form-control">
                                 @foreach($category as $cat)
+                                @if(App::getLocale() == 'en')
                                 <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                @else
+                                <option value="{{ $cat->id }}">{{ $cat->title_ar }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Ads prodect :</label>
+                            <label class="form-label">{{ trans('ads.prodect') }} :</label>
                             <select name="product_id" class="form-control">
                                 @foreach($prodect as $prodect)
+                                @if(App::getLocale() == 'en')
                                 <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
+                                @else
+                                <option value="{{ $prodect->id }}">{{ $prodect->title_ar }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.models') }} :</label>
                             <input type="file" class="form-control" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Ads Status :</label>
+                            <label class="form-label">{{ trans('ads.Status') }} :</label>
                             <select name="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                                <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddAds" id="AddAds">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddAds" id="AddAds">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -112,56 +120,57 @@
                     <input type="hidden" class="form-control" id="id_Ads">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads url :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.url') }} :</label>
                             <input type="text" class="form-control" name="url" id="url" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads lauout title :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.lauout_title') }} :</label>
                             <input type="text" class="form-control" name="lauout_title" id="lauout_title" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads layout :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.layout') }} :</label>
                             <input type="number" class="form-control" name="layout" id="layout" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads days :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.days') }} :</label>
                             <input type="number" class="form-control" name="days" id="days" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads cost :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.cost') }} :</label>
                             <input type="number" class="form-control" name="cost" id="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Ads Category :</label>
+                            <label class="form-label">{{ trans('ads.cat') }} :</label>
                             <select name="cat_id" id="cat_id" class="form-control">
                                 @foreach($category as $cat)
+                                @if(App::getLocale() == 'en')
                                 <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                @else
+                                <option value="{{ $cat->id }}">{{ $cat->title_ar }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Ads prodect :</label>
+                            <label class="form-label">{{ trans('ads.prodect') }} :</label>
                             <select name="product_id" id="product_id" class="form-control">
-                                @foreach($prodec as $prodect)
-                                <option value="{{ $prodect->id }}">{{ $prodect->title_en  }}</option>
+                            @foreach($prodec as $prodect)
+                                @if(App::getLocale() == 'en')
+                                <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
+                                @else
+                                <option value="{{ $prodect->id }}">{{ $prodect->title_ar }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Ads Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('ads.models') }}  :</label>
                             <input type="file" class="form-control" name="image" id="image" required>
                         </div>
-                        <!-- <div class="form-group col-md-12">
-                            <label class="form-label"> Ads Status :</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
-                            </select>
-                        </div> -->
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -179,7 +188,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddAds">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Ads</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('ads.add') }}</a>
                         </button>
                     </div>
                 </div>
@@ -190,13 +199,13 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Url</th>
-                                <th class="border-bottom-0">Place of Ads</th>
-                                <th class="border-bottom-0">number of days</th>
-                                <th class="border-bottom-0">Today's cost</th>
-                                <th class="border-bottom-0">status</th>
-                                <th class="border-bottom-0">Created_at</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('ads.url') }}</th>
+                                <th class="border-bottom-0">{{ trans('ads.lauout_title') }}</th>
+                                <th class="border-bottom-0">{{ trans('ads.days') }}</th>
+                                <th class="border-bottom-0">{{ trans('ads.cost') }}</th>
+                                <th class="border-bottom-0">{{ trans('ads.Status') }}</th>
+                                <th class="border-bottom-0">{{ trans('ads.Created_at') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -260,9 +269,9 @@ var table = $('#get_Ads').DataTable({
             'data': null,
             render: function(data, row, type) {
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },

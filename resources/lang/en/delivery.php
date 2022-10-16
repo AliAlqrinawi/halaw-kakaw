@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page_title' => 'طرق التوصيل',
+    'page_title' => 'Delivery Methods',
     'content_title' => 'طرق التوصيل',
     'ip' => 'IP',
     'status' => 'الحالة',
@@ -9,9 +9,9 @@ return [
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التعديل',
     'is_active' => 'مفعل',
-    'add' => 'إضافة طريقة توصيل',
-    'Minimum_order' => 'الحد الأدنى للطلب',
-    'Delivery_cost' => 'تكلفة التوصيل',
+    'add' => 'Add Delivery Method',
+    'Minimum_order' => 'Minimum Order',
+    'Delivery_cost' => 'Delivery Cost',
     'js_lang' => [
         'activated' => 'مفعل',
         'disactivated' => 'غير مفعل',

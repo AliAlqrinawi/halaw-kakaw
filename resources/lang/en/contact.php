@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'content_title' => 'رسائل اتصل بنا',
-    'Created_at' => 'تاريخ الإنشاء',
-    'Message' => 'الرسالة',
-    'Title_Message' => 'عنوان الرسالة',
+    'content_title' => 'Contact',
+    'Created_at' => 'Created At',
+    'Message' => 'Message',
+    'Title_Message' => 'Title_Message',
     'page_title' => 'رسائل اتصل بنا',
     'name' => 'الاسم',
     'mobile' => 'رقم الجوال',

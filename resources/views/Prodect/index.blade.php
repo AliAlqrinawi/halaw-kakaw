@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Prodects</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('clothes.page_title') }}</span>
         </div>
 
     </div>
@@ -32,51 +32,11 @@
 
 @section('content')
 <div id="error_message"></div>
-<div class="modal" id="modaldemo15" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modal-content-demo">
-            <div class="modal-header">
-                <h6 class="modal-title">Products Management</h6><button aria-label="Close" class="close"
-                    data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <p>Are sure to Add 100 ?</p><br>
-                <input type="hidden" name="id" id="user_id">
-                <input class="form-control" name="username" id="username" type="text" readonly>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-warning" id="add100">Add</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="modal" id="modaldemo16" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modal-content-demo">
-            <div class="modal-header">
-                <h6 class="modal-title">Products Management</h6><button aria-label="Close" class="close"
-                    data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <p>Are sure to Minas 100 ?</p><br>
-                <input type="hidden" name="id" id="user_id">
-                <input class="form-control" name="username" id="username1" type="text" readonly>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-warning" id="minas100">Add</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 <div class="modal" id="modalAddCategory">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Prodects</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -84,52 +44,56 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Description Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
                             <textarea class="form-control" name="nota_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Description Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
                             <textarea class="form-control" name="nota_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Price :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
                             <input type="number" class="form-control" name="price" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Quntaty :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Quntaty') }} :</label>
                             <input type="number" class="form-control" name="quntaty" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Image') }} :</label>
                             <input type="file" class="form-control" id="image" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Prodect Status :</label>
+                            <label class="form-label"> {{ trans('clothes.cat') }} :</label>
                             <select name="cat_id" class="form-control">
                                 @foreach($cat as $c)
+                                @if(App::getLocale() == 'en')
                                 <option value="{{ $c->id }}">{{ $c->title_en }}</option>
+                                @else
+                                <option value="{{ $c->id }}">{{ $c->title_ar }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Prodect Status :</label>
+                            <label class="form-label"> {{ trans('clothes.Status') }} :</label>
                             <select name="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                                <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -141,7 +105,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Prodects</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -149,52 +113,45 @@
                     <input type="hidden" class="form-control" id="id_prodect">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_E') }} :</label>
                             <input type="text" class="form-control" id="title_en" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_A') }} :</label>
                             <input type="text" class="form-control" id="title_ar" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Description Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
                             <textarea class="form-control" id="nota_en" name="nota_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Description Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
                             <textarea class="form-control" id="nota_ar" name="nota_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Price :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
                             <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Quntaty :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Quntaty') }} :</label>
                             <input type="number" class="form-control" id="quntaty" name="quntaty" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Prodect Image :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Image') }} :</label>
                             <input type="file" class="form-control" id="image" name="image" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> Prodect Status :</label>
+                            <label class="form-label"> {{ trans('clothes.cat') }} :</label>
                             <select name="cat_id" class="form-control">
                                 @foreach($cat as $c)
                                 <option value="{{ $c->id }}" id="cat_id">{{ $c->title_en }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label class="form-label"> Prodect Status :</label>
-                            <select name="status" class="form-control">
-                                <option value="1" id="status">Active</option>
-                                <option value="0">Not Active</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -235,7 +192,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Prodect</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('clothes.Add') }}</a>
                         </button>
                     </div>
                 </div>
@@ -246,13 +203,13 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Image</th>
-                                <th class="border-bottom-0">cat</th>
-                                <th class="border-bottom-0">Prodect</th>
-                                <th class="border-bottom-0">Price</th>
-                                <th class="border-bottom-0">q</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Image') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.cat') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Prodect') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Price') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Quntaty') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Status') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -318,7 +275,14 @@ $('#s').click(function(e) {
                 },
             },
             {
-                'data': 'categories.title_ar',
+                'data': null,
+                render: function(data, row, type) {
+                    if (local == "en") {
+                        return data.categories.title_en;
+                    } else {
+                        return data.categories.title_ar;
+                    }
+                },
                 'className': 'text-center text-lg text-medium'
             },
             {
@@ -345,9 +309,9 @@ $('#s').click(function(e) {
                 render: function(data, row, type) {
                     var phone;
                     if (data.status == '1') {
-                        return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                        return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                     } else {
-                        return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                        return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                     }
                 },
             },
@@ -419,9 +383,9 @@ var table = $('#get_Prodects').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },

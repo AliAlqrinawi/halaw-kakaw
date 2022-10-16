@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Coupons</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('coupons.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('coupons.page_title') }}</span>
         </div>
 
     </div>
@@ -36,67 +36,53 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Coupons</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formCoupon" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code') }} :</label>
                             <input type="text" class="form-control" name="code" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Count Number :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Count_Number') }} :</label>
                             <input type="text" class="form-control" name="count_number" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code Limit :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code_Limit') }} :</label>
                             <input type="text" class="form-control" name="code_limit" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code Max :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code_Max') }} :</label>
                             <input type="text" class="form-control" name="code_max" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">End At :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.End_At') }} :</label>
                             <input type="datetime-local" class="form-control" name="end_at" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <!-- <label class="form-label"> Coupon Status :</label>
-                            <select name="type" class="form-control">
-                                <option value="1">Fixed Amount</option>
-                                <option value="0">Percent</option>
-                            </select> -->
-                            <label class="col-sm-5"> Fixed Amount : <input type="radio" name="type" value="1"
+                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio" name="type" value="1"
                                     required></label>
 
-                            <label class="col-sm-5"> Percent : <input type="radio" name="type" value="0"
+                            <label class="col-sm-5">{{ trans('coupons.Percent') }} : <input type="radio" name="type" value="0"
                                     required></label>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-sm-5"> Active : <input type="radio" name="status" value="1"
+                            <label class="col-sm-5"> {{ trans('coupons.Active') }} : <input type="radio" name="status" value="1"
                                     required></label>
-
-                            <label class="col-sm-5"> Not Active : <input type="radio" name="status" value="0"
+                            <label class="col-sm-5">{{ trans('coupons.Not_Active') }} : <input type="radio" name="status" value="0"
                                     required></label>
-
-                            <!-- <label > Not Active :</label>
-                            <input type="radio" name="status" value="0" required> -->
-
-                            <!-- <select name="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
-                            </select> -->
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Discount :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Discount') }} :</label>
                             <input type="text" class="form-control" name="discount" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCoupon" id="AddCoupon">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddCoupon" id="AddCoupon">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -108,7 +94,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Coupons</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -116,60 +102,40 @@
                     <input type="hidden" class="form-control" id="id_Coupon">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code') }} :</label>
                             <input type="text" class="form-control" name="code" id="code" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Count Number :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Count_Number') }} :</label>
                             <input type="text" class="form-control" name="count_number" id="count_number" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code Limit :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code_Limit') }} :</label>
                             <input type="text" class="form-control" name="code_limit" id="code_limit" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Code Max :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Code_Max') }} :</label>
                             <input type="text" class="form-control" name="code_max" id="code_max" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">End At :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.End_At') }} :</label>
                             <input type="datetime-local" class="form-control" name="end_at" id="end_at" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <!-- <label class="form-label"> Coupon Status :</label>
-                            <select name="type" class="form-control">
-                                <option value="1">Fixed Amount</option>
-                                <option value="0">Percent</option>
-                            </select> -->
-                            <label class="col-sm-5"> Fixed Amount : <input type="radio" class="type" name="type"
+                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio" class="type" name="type"
                                     id="type1" value="1" required></label>
 
-                            <label class="col-sm-5"> Percent : <input type="radio" class="type" name="type" id="type2"
+                            <label class="col-sm-5"> {{ trans('coupons.Percent') }} : <input type="radio" class="type" name="type" id="type2"
                                     value="0" required></label>
                         </div>
-                        <!-- <div class="form-group col-md-12">
-                            <label class="col-sm-5"> Active : <input type="radio" class="status" name="status"
-                                    id="status1" value="1" required></label>
-
-                            <label class="col-sm-5"> Not Active : <input type="radio" class="status" name="status"
-                                    id="status2" value="0" required></label>
-
-                            <label > Not Active :</label>
-                            <input type="radio" name="status" value="0" required>
-
-                            <select name="status" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
-                            </select>
-                        </div> -->
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Discount :</label>
+                            <label for="exampleInputEmail1">{{ trans('coupons.Discount') }} :</label>
                             <input type="text" class="form-control" name="discount" id="discount" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -187,7 +153,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCoupon">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Coupon</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('coupons.add') }}</a>
                         </button>
                     </div>
                 </div>
@@ -198,16 +164,16 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Code</th>
-                                <th class="border-bottom-0">Discount</th>
-                                <th class="border-bottom-0">Percent</th>
-                                <th class="border-bottom-0">Limit</th>
-                                <th class="border-bottom-0">Max</th>
-                                <th class="border-bottom-0">Use Number</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Code') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Discount') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Percent') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Code_Limit') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Code_Max') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.Count_Number') }}</th>
                                 <th class="border-bottom-0">Was Use Number</th>
-                                <th class="border-bottom-0">Date</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Prosess</th>
+                                <th class="border-bottom-0">{{ trans('coupons.End_At') }}</th>
+                                <th class="border-bottom-0">{{ trans('coupons.status') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>

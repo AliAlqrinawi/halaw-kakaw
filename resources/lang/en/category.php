@@ -6,7 +6,7 @@ return [
     'page_title' => 'ادارة الاقسام',
     'title' => 'اسم القسم',
     'models' => 'صورة القسم',
-    'Title_E' => 'Title Description',
+    'Title_E' => 'Title English',
     'Title_A' => 'Title Arabic',
     'Description_E' => 'Description Description',
     'Description_A' => 'Description Arabic',

@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                DeliveryTypes</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('coupons.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('deliveryTypes.page_title') }}</span>
         </div>
 
     </div>
@@ -36,59 +36,48 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">DeliveryTypes</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('deliveryTypes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formDeliveryType" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Worktime :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.Worktime_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">English working hours :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.Worktime_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_from :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.time_from') }} :</label>
                             <input type="time" class="form-control" name="time_from">
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_to :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.time_to') }} :</label>
                             <input type="time" class="form-control" name="time_to">
                         </div>
                         <div class="form-group col-md-12">
                             <input type="checkbox" name="sat" value="1">
-                            <label for="sat">sat</label>
-
+                            <label for="sat">{{ trans('deliveryTypes.sat') }}</label>
                             <input type="checkbox" name="sun" value="1">
-                            <label for="sun">sun</label>
-
-
+                            <label for="sun">{{ trans('deliveryTypes.sun') }}</label>
                             <input type="checkbox" name="mon" value="1">
-                            <label for="mon">mon</label>
-
-
+                            <label for="mon">{{ trans('deliveryTypes.mon') }}</label>
                             <input type="checkbox" name="tue" value="1">
-                            <label for="tue">tue</label>
-
-
+                            <label for="tue">{{ trans('deliveryTypes.tue') }}</label>
                             <input type="checkbox" name="wed" value="1">
-                            <label for="wed">wed</label>
-
-
+                            <label for="wed">{{ trans('deliveryTypes.wed') }}</label>
                             <input type="checkbox" name="thu" value="1">
-                            <label for="thu">thu</label>
-
-
+                            <label for="thu">{{ trans('deliveryTypes.thu') }}</label>
                             <input type="checkbox" name="fri" value="1">
-                            <label for="fri">fri</label>
+                            <label for="fri">{{ trans('deliveryTypes.fri') }}</label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddDeliveryType" id="AddDeliveryType">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddDeliveryType" id="AddDeliveryType">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -100,7 +89,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">DeliveryTypes</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('deliveryTypes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -108,52 +97,52 @@
                     <input type="hidden" class="form-control" id="id_DeliveryType">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Worktime :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.Worktime_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" id="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">English working hours :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.Worktime_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" id="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_from :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.time_from') }} :</label>
                             <input type="time" class="form-control" id="time_from" name="time_from">
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">time_to :</label>
+                            <label for="exampleInputEmail1">{{ trans('deliveryTypes.time_to') }} :</label>
                             <input type="time" class="form-control" id="time_to" name="time_to">
                         </div>
                         <div class="form-group col-md-12">
                             <input type="checkbox" id="sat" name="sat" value="1">
-                            <label for="sat">sat</label>
+                            <label for="sat">{{ trans('deliveryTypes.sat') }}</label>
 
                             <input type="checkbox" id="sun" name="sun" value="1">
-                            <label for="sun">sun</label>
+                            <label for="sun">{{ trans('deliveryTypes.sun') }}</label>
 
 
                             <input type="checkbox" id="mon" name="mon" value="1">
-                            <label for="mon">mon</label>
+                            <label for="mon">{{ trans('deliveryTypes.mon') }}</label>
 
 
                             <input type="checkbox" id="tue" name="tue" value="1">
-                            <label for="tue">tue</label>
+                            <label for="tue">{{ trans('deliveryTypes.tue') }}</label>
 
 
                             <input type="checkbox" id="wed" name="wed" value="1">
-                            <label for="wed">wed</label>
+                            <label for="wed">{{ trans('deliveryTypes.wed') }}</label>
 
 
                             <input type="checkbox" id="thu" name="thu" value="1">
-                            <label for="thu">thu</label>
+                            <label for="thu">{{ trans('deliveryTypes.thu') }}</label>
 
 
                             <input type="checkbox" id="fri" name="fri" value="1">
-                            <label for="fri">fri</label>
+                            <label for="fri">{{ trans('deliveryTypes.fri') }}</label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -171,7 +160,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddDeliveryType">
-                            <a href="#" style="font-weight: bold; color: beige;">Add DeliveryType</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('deliveryTypes.add') }}</a>
                         </button>
                     </div>
                 </div>
@@ -182,9 +171,9 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Name</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('app_users.name') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -247,9 +236,9 @@ var table = $('#get_DeliveryTypes').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },

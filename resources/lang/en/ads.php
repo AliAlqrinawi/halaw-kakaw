@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'home' => 'الرئيسية',
-    'content_title' => 'اعلانات مصورة',
+    'home' => 'Home',
+    'content_title' => 'Ads',
     'add_user' => 'اعلانات مصورة',
     'page_title' => 'اعلانات مصورة',
     'title' => 'العنوان ',
@@ -10,17 +10,16 @@ return [
     'url' => 'الرابط ',
     'second_ar' => 'العنوان الثانى',
     'second_en' => 'العنوان الثانى (انجليزى)',
-    'models' => 'صورة ',
-    'lauout_title' => 'مكان الاعلان ',
-    'layout' => 'رقم الواجهة ',
-    'days' => 'عدد الأيام ',
-    'cost' => 'التكلفة',
-    'cat' => 'الفئة',
-    'prodect' => 'المنتج',
-    'Status' => 'الحالة',
-    'add' => 'إضافة إعلان',
-    'Created_at' => 'تاريخ الإنشاء',
-
+    'models' => 'Image ',
+    'lauout_title' => 'Lauout Title',
+    'layout' => 'Layout ',
+    'days' => 'Days',
+    'cost' => 'Cost',
+    'cat' => 'Category',
+    'prodect' => 'Prodect',
+    'Status' => 'Status',
+    'add' => 'Add Ads',
+    'Created_at' => 'Created_at',
     'js_lang' => [
         'success_add_property' => 'تم اضافة بنر بنجاح',
         'success_update_property' => 'تم تحديث بنر بنجاح',

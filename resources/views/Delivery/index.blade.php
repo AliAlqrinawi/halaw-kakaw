@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                deliveries</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('admins.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('delivery.page_title') }}</span>
         </div>
 
     </div>
@@ -36,32 +36,32 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">deliveries</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('delivery.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formdelivery" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery method Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery method Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery cost :</label>
+                            <label for="exampleInputEmail1">{{ trans('delivery.Delivery_cost') }} :</label>
                             <input type="number" class="form-control" name="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Minimum order :</label>
+                            <label for="exampleInputEmail1">{{ trans('delivery.Minimum_order') }} :</label>
                             <input type="number" class="form-control" name="order_limit" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success Adddelivery" id="Adddelivery">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success Adddelivery" id="Adddelivery">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -73,7 +73,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">deliveries</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('delivery.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -81,25 +81,25 @@
                     <input type="hidden" class="form-control" id="id_delivery">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery method Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" id="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery method Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" id="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Delivery cost :</label>
+                            <label for="exampleInputEmail1">{{ trans('delivery.Delivery_cost') }} :</label>
                             <input type="number" class="form-control" name="cost" id="cost" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Minimum order :</label>
+                            <label for="exampleInputEmail1">{{ trans('delivery.Minimum_order') }} :</label>
                             <input type="number" class="form-control" name="order_limit" id="order_limit" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -117,7 +117,7 @@
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAdddelivery">
-                            <a href="#" style="font-weight: bold; color: beige;">Add delivery</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('delivery.add') }}</a>
                         </button>
                     </div>
                 </div>
@@ -128,11 +128,11 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Delivery method</th>
-                                <th class="border-bottom-0">Delivery cost</th>
-                                <th class="border-bottom-0">Minimum order</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('category.Title') }}</th>
+                                <th class="border-bottom-0">{{ trans('delivery.Delivery_cost') }}</th>
+                                <th class="border-bottom-0">{{ trans('delivery.Minimum_order') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Status') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>

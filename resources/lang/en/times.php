@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page_title' => ' اوقات العمل',
+    'page_title' => 'Worktime',
     'content_title' => 'اوقات العمل',
     'ip' => 'IP',
     'status' => 'الحالة',
@@ -9,7 +9,7 @@ return [
     'created_at' => 'تاريخ الإنشاء',
     'updated_at' => 'تاريخ التعديل',
     'is_active' => 'مفعل',
-    'add' => 'إضافة أوقات عمل',
+    'add' => 'Add Worktime',
     'js_lang' => [
         'activated' => 'مفعل',
         'disactivated' => 'غير مفعل',

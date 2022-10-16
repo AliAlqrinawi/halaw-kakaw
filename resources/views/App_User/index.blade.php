@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                appUsers</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('app_users.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('app_users.app') }}</span>
         </div>
 
     </div>
@@ -36,7 +36,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Categories</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('app_users.app') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -44,18 +44,18 @@
                     <div class="row">
                         <input type="hidden" name="id" id="idid">
                         <div class="form-group col-md-12">
-                            <label for="credit">charged balance</label>
+                            <label for="credit">{{ trans('app_users.charged_balance') }}</label>
                             <input type="number" class="form-control" id="credit" name="credit">
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="note">Notes on the shipment</label>
+                            <label for="note">{{ trans('app_users.Notes') }}</label>
                             <textarea class="form-control" id="note" name="note" rows="2"></textarea>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="Addcredit1">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddCategory" id="Addcredit1">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -72,13 +72,13 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Name</th>
-                                <th class="border-bottom-0">Email</th>
-                                <th class="border-bottom-0">Phone</th>
-                                <th class="border-bottom-0">Current Balance</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">User Name</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('app_users.name') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.email') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.mobile') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.charged_balance') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.activation_code') }}</th>
+                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,12 +145,12 @@ var table = $('#get_appUser').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == 'active') {
-                    return `<button class="btn btn-success-gradient btn-block" id="active" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="active" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
 
                 } else if (data.status == 'inactive') {
-                    return `<button class="btn btn-danger-gradient btn-block" id="inactive" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="inactive" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 } else {
-                    return `<button class="btn btn-warning-gradient btn-block" id="pending_activation" data-id="${data.id}" data-viewing_status="${data.status}">${data.status}</button>`;
+                    return `<button class="btn btn-warning-gradient btn-block" id="pending_activation" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('app_users.pActive') }}</button>`;
                 }
             },
         },
@@ -161,7 +161,7 @@ var table = $('#get_appUser').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
-                <button class="modal-effect btn btn-sm btn-info" id="Addcredit" data-id="${data.id}"><i class="fa fa-cogs"></i> All Balance</button>
+                <button class="modal-effect btn btn-sm btn-info" id="Addcredit" data-id="${data.id}"><i class="fa fa-cogs"></i> {{ trans('app_users.Add_Credit') }}</button>
                     <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
             },
             orderable: false,
