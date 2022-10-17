@@ -53,7 +53,7 @@ class UsersAndAdminController extends Controller
         $role_user->user_id = $admin->id;
         $role_user->save();
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             'data' => $admin
         ]);
@@ -84,7 +84,7 @@ class UsersAndAdminController extends Controller
             $admin->password = Hash::make($request->password);
             $admin->update();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $admin
             ]);
@@ -101,7 +101,7 @@ class UsersAndAdminController extends Controller
         if ($admin) {
             $admin->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

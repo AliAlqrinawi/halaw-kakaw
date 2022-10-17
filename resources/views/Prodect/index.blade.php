@@ -41,6 +41,7 @@
                     data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message"></ul>
                 <form id="formcategory" enctype="multipart/form-data">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row">
@@ -54,11 +55,11 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
-                            <textarea class="form-control" name="nota_en" rows="3" required></textarea>
+                            <textarea class="form-control" name="note_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
-                            <textarea class="form-control" name="nota_ar" rows="3" required></textarea>
+                            <textarea class="form-control" name="note_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
@@ -112,6 +113,7 @@
                     data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message2"></ul>
                 <form id="formeditadmin" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id_prodect">
                     <div class="row">
@@ -125,11 +127,11 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
-                            <textarea class="form-control" id="nota_en" name="nota_en" rows="3" required></textarea>
+                            <textarea class="form-control" id="nota_en" name="note_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
-                            <textarea class="form-control" id="nota_ar" name="nota_ar" rows="3" required></textarea>
+                            <textarea class="form-control" id="nota_ar" name="note_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
@@ -458,13 +460,22 @@ $(document).on('click', '.AddCategory', function(e) {
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddCategory').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCategory').modal('hide');
-            $('#formcategory')[0].reset();
-            table.ajax.reload();
+            if (response.status == 400) {
+                    // errors
+                    $('#list_error_message').html("");
+                    $('#list_error_message').addClass("alert alert-danger");
+                    $.each(response.errors, function (key, error_value) {
+                        $('#list_error_message').append('<li>' + error_value + '</li>');
+                    });
+                } else {
+                    $('#AddCategory').text('Saving');
+                    $('#error_message').html("");
+                    $('#error_message').addClass("alert alert-info");
+                    $('#error_message').text(response.message);
+                    $('#modalAddCategory').modal('hide');
+                    $('#formcategory')[0].reset();
+                    table.ajax.reload();
+                }
         }
     });
 });
@@ -488,8 +499,8 @@ $(document).on('click', '#ShowModalEditCategory', function(e) {
                 $('#id_prodect').val(id_prodect);
                 $('#title_en').val(response.data.title_en);
                 $('#title_ar').val(response.data.title_ar);
-                $('#nota_en').val(response.data.nota_en);
-                $('#nota_ar').val(response.data.nota_ar);
+                $('#nota_en').val(response.data.note_en);
+                $('#nota_ar').val(response.data.note_ar);
                 $('#price').val(response.data.price);
                 $('#quntaty').val(response.data.quntaty);
                 // if(response.data.cat_id == $('#cat_id').value){
@@ -516,7 +527,7 @@ $(document).on('click', '#EditClient', function(e) {
         image: $('#image').val(),
         status: $('#status').val(),
     };
-    // let formdata = new FormData($('#formeditadmin')[0]);
+    let formdata = new FormData($('#formeditadmin')[0]);
     var id_prodect = $('#id_prodect').val();
     console.log(data);
     $.ajaxSetup({
@@ -527,16 +538,17 @@ $(document).on('click', '#EditClient', function(e) {
     $.ajax({
         type: 'POST',
         url: '{{ url("admin/clothes/update/") }}/' + id_prodect,
-        data: data,
-        dataType: false,
+        data: formdata,
+        contentType: false,
+        processData: false,
         success: function(response) {
             console.log(response);
             if (response.status == 400) {
                 // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
+                $('#list_error_message2').html("");
+                $('#list_error_message2').addClass("alert alert-danger");
                 $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                    $('#list_error_message2').append('<li>' + error_value + '</li>');
                 });
             } else if (response.status == 404) {
                 $('#error_message').html("");

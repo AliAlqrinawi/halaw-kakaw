@@ -46,11 +46,12 @@ class AdsController extends Controller
         }
         Ads::create($data);
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property')
+            ,
             'status' => 200,
         ]);
     }
-
+    
     public function edit ($id){
         $Ads = Ads::find($id);
         if ($Ads) {
@@ -84,7 +85,7 @@ class AdsController extends Controller
             }
             $Ads->update($data);
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Ads
             ]);
@@ -102,7 +103,7 @@ class AdsController extends Controller
         if ($Ads) {
             $Ads->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

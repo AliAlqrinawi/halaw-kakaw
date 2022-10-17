@@ -74,7 +74,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">0</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Order::sum('total_cost') }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 

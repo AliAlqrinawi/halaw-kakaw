@@ -32,7 +32,7 @@ Route::group(
 
         Route::post('category/update/{id}' , 'update')->name('category.update');
 
-//        Route::delete('category/delete/{id}' , 'delete')->name('category.delete');
+       Route::delete('category/delete/{id}' , 'delete')->name('category.delete');
     });
 });
 

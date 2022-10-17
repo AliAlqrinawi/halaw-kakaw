@@ -33,7 +33,7 @@ class ContactsController extends Controller
         if ($contact) {
             $contact->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

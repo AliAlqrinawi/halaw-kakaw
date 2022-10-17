@@ -40,6 +40,7 @@
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message"></ul>
                 <form id="formcategory" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -88,6 +89,7 @@
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+                <ul id="list_error_message2"></ul>
                 <form id="formeditadmin" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id_category">
                     <div class="row">
@@ -296,13 +298,23 @@ $(document).on('click', '.AddCategory', function(e) {
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddCategory').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCategory').modal('hide');
-            $('#formcategory')[0].reset();
-            table.ajax.reload();
+            if (response.status == 400) {
+                    // errors
+                    $('#list_error_message').html("");
+                    $('#list_error_message').addClass("alert alert-danger");
+                    $.each(response.errors, function (key, error_value) {
+                        $('#list_error_message').append('<li>' + error_value + '</li>');
+                    });
+                } else {
+                    $('#AddCategory').text('Saving');
+                    $('#error_message').html("");
+                    $('#error_message').addClass("alert alert-success");
+                    $('#error_message').text(response.message);
+                    $('#modalAddCategory').modal('hide');
+                    $('#formcategory')[0].reset();
+                    table.ajax.reload();
+                }
+
         }
     });
 });
@@ -365,10 +377,10 @@ $(document).on('click', '#EditClient', function(e) {
             console.log(response);
             if (response.status == 400) {
                 // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
+                $('#list_error_message2').html("");
+                $('#list_error_message2').addClass("alert alert-danger");
                 $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                    $('#list_error_message2').append('<li>' + error_value + '</li>');
                 });
             } else if (response.status == 404) {
                 $('#error_message').html("");
@@ -377,7 +389,7 @@ $(document).on('click', '#EditClient', function(e) {
             } else {
                 $('#EditClient').text('Saving');
                 $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
+                $('#error_message').addClass("alert alert-success");
                 $('#error_message').text(response.message);
                 $('#modalEditCategory').modal('hide');
                 table.ajax.reload();

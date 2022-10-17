@@ -28,6 +28,9 @@ return [
     'all' => 'الكل',
     'Details' => 'التفاصيل',
     'Sarech' => 'بحث',
+    'Request_Accept' => 'قبول الطلب',
+    'Charged' => 'شحن',
+    'Receipt confirmed' => 'إكتمل الشحن',
     'js_lang' => [
         'activated' => 'مفعل',
         'disactivated' => 'غير مفعل',

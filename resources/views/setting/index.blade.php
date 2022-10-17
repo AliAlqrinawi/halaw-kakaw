@@ -80,7 +80,7 @@
                         @elseif($x->key_id == 'force_update')
                         <div class="col-md-10">
                             <select name="force_update" class="form-control">
-                                    <option value="1"></option>
+                                    <option value="1">نعم</option>
                                     <option value="0">لا</option>
                             </select>
                         </div>

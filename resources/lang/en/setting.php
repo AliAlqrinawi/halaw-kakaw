@@ -19,6 +19,7 @@ return [
     'mail_smtp_username' => 'Smtp اسم مستخدم',
     'mail_smtp_encryption' => 'SMTP تشفير',
     'site_title' => 'عنوان الموقع',
+    'edit' => 'Edit',
     'site_meta_tag' => 'الكلمات الدلالية',
     'site_meta_desc' => 'وصف الموقع',
     'site_copyrights' => 'حقوق الملكية',

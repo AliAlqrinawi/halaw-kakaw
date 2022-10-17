@@ -37,6 +37,7 @@ return [
     'twitter' => 'Twitter',
     'youtube' => 'Youtube',
     'facebook' => 'Facebook',
+    'edit' => 'تعديل',
     'updated-successfully' => 'تم التحديث بنجاح',
     'googleplus' => 'Googleplus',
     'default_day_from' => 'بداية اليوم',

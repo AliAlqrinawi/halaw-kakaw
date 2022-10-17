@@ -21,8 +21,9 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('coupons.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-            {{ trans('coupons.page_title') }}</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('coupons.home') }}</h4><span
+                class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('coupons.page_title') }}</span>
         </div>
 
     </div>
@@ -36,10 +37,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message"></ul>
                 <form id="formCoupon" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -48,41 +50,43 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Count_Number') }} :</label>
-                            <input type="text" class="form-control" name="count_number" required>
+                            <input type="number" class="form-control" name="count_number" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Code_Limit') }} :</label>
-                            <input type="text" class="form-control" name="code_limit" required>
+                            <input type="number" class="form-control" name="code_limit" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Code_Max') }} :</label>
-                            <input type="text" class="form-control" name="code_max" required>
+                            <input type="number" class="form-control" name="code_max" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.End_At') }} :</label>
                             <input type="datetime-local" class="form-control" name="end_at" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio" name="type" value="1"
-                                    required></label>
+                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio"
+                                    name="type" value="1" required></label>
 
-                            <label class="col-sm-5">{{ trans('coupons.Percent') }} : <input type="radio" name="type" value="0"
-                                    required></label>
+                            <label class="col-sm-5">{{ trans('coupons.Percent') }} : <input type="radio" name="type"
+                                    value="0" required></label>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-sm-5"> {{ trans('coupons.Active') }} : <input type="radio" name="status" value="1"
-                                    required></label>
-                            <label class="col-sm-5">{{ trans('coupons.Not_Active') }} : <input type="radio" name="status" value="0"
-                                    required></label>
+                            <label class="col-sm-5"> {{ trans('coupons.Active') }} : <input type="radio" name="status"
+                                    value="1" required></label>
+                            <label class="col-sm-5">{{ trans('coupons.Not_Active') }} : <input type="radio"
+                                    name="status" value="0" required></label>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Discount') }} :</label>
-                            <input type="text" class="form-control" name="discount" required>
+                            <input type="number" class="form-control" name="discount" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCoupon" id="AddCoupon">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success AddCoupon"
+                            id="AddCoupon">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -94,10 +98,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('coupons.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message2"></ul>
                 <form id="formeditadmin" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id_Coupon">
                     <div class="row">
@@ -107,35 +112,37 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Count_Number') }} :</label>
-                            <input type="text" class="form-control" name="count_number" id="count_number" required>
+                            <input type="number" class="form-control" name="count_number" id="count_number" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Code_Limit') }} :</label>
-                            <input type="text" class="form-control" name="code_limit" id="code_limit" required>
+                            <input type="number" class="form-control" name="code_limit" id="code_limit" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Code_Max') }} :</label>
-                            <input type="text" class="form-control" name="code_max" id="code_max" required>
+                            <input type="number" class="form-control" name="code_max" id="code_max" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.End_At') }} :</label>
                             <input type="datetime-local" class="form-control" name="end_at" id="end_at" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio" class="type" name="type"
-                                    id="type1" value="1" required></label>
+                            <label class="col-sm-5">{{ trans('coupons.Fixed_Amount') }} : <input type="radio"
+                                    class="type" name="type" id="type1" value="1" required></label>
 
-                            <label class="col-sm-5"> {{ trans('coupons.Percent') }} : <input type="radio" class="type" name="type" id="type2"
-                                    value="0" required></label>
+                            <label class="col-sm-5"> {{ trans('coupons.Percent') }} : <input type="radio" class="type"
+                                    name="type" id="type2" value="0" required></label>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('coupons.Discount') }} :</label>
-                            <input type="text" class="form-control" name="discount" id="discount" required>
+                            <input type="number" class="form-control" name="discount" id="discount" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success"
+                            id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -148,7 +155,7 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-            @can('discountCodes-create')
+                @can('discountCodes-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCoupon">
@@ -156,11 +163,11 @@
                         </button>
                     </div>
                 </div>
-            @endcan
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
-                @can('discountCodes-view')
+                    @can('discountCodes-view')
                     <table class="table table-hover" id="get_Coupons" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -175,9 +182,9 @@
                                 <th class="border-bottom-0">{{ trans('coupons.End_At') }}</th>
                                 <th class="border-bottom-0">{{ trans('coupons.status') }}</th>
                                 <th class="border-bottom-0">
-                                @canany([ 'discountCodes-update' , 'discountCodes-delete' ])
-                                {{ trans('category.Processes') }}
-                                @endcanany
+                                    @canany([ 'discountCodes-update' , 'discountCodes-delete' ])
+                                    {{ trans('category.Processes') }}
+                                    @endcanany
                                 </th>
                             </tr>
                         </thead>
@@ -261,9 +268,9 @@ var table = $('#get_Coupons').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block" id="statusoff" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },
@@ -308,13 +315,23 @@ $(document).on('click', '.AddCoupon', function(e) {
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddCoupon').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCoupon').modal('hide');
-            $('#formCoupon')[0].reset();
-            table.ajax.reload();
+            if (response.status == 400) {
+                // errors
+                $('#list_error_message').html("");
+                $('#list_error_message').addClass("alert alert-danger");
+                $.each(response.errors, function(key, error_value) {
+                    $('#list_error_message').append('<li>' + error_value + '</li>');
+                });
+            } else {
+                $('#AddCoupon').text('Saving');
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-info");
+                $('#error_message').text(response.message);
+                $('#modalAddCoupon').modal('hide');
+                $('#formCoupon')[0].reset();
+                table.ajax.reload();
+            }
+
         }
     });
 });
@@ -388,10 +405,10 @@ $(document).on('click', '#EditClient', function(e) {
             console.log(response);
             if (response.status == 400) {
                 // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
+                $('#list_error_message2').html("");
+                $('#list_error_message2').addClass("alert alert-danger");
                 $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                    $('#list_error_message2').append('<li>' + error_value + '</li>');
                 });
             } else if (response.status == 404) {
                 $('#error_message').html("");
@@ -418,7 +435,7 @@ $(document).on('click', '#DeleteCoupon', function(e) {
     });
     $.ajax({
         type: 'DELETE',
-        url: '{{ url("dashbord/Coupon/delete") }}/' + id_Coupon,
+        url: '{{ url("admin/coupons/delete") }}/' + id_Coupon,
         data: '',
         contentType: false,
         processData: false,
@@ -435,9 +452,9 @@ $(document).on('click', '#status', function(e) {
     // console.log("Alliiiii");
     var edit_id = $(this).data('id');
     var status = $(this).data('viewing_status');
-    if(status == 1){
+    if (status == 1) {
         status = 0;
-    }else{
+    } else {
         status = 1;
     }
     var data = {
@@ -467,9 +484,9 @@ $(document).on('click', '#statusoff', function(e) {
     // console.log("Alliiiii");
     var edit_id = $(this).data('id');
     var status = $(this).data('viewing_status');
-    if(status == 1){
+    if (status == 1) {
         status = 0;
-    }else{
+    } else {
         status = 1;
     }
     var data = {

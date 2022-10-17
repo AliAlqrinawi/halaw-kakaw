@@ -11,7 +11,14 @@ class Categories extends Model
     protected $table = "categories";
 
     protected $fillable = ['title_en' , 'title_ar' , 'description_en'  , 'description_ar' , 'image' , 'status'];
-
+    
+    public static $rules = [
+        'title_ar' => 'required|min:3',
+        'title_en' => 'required|min:3',
+        'description_en' => 'required|min:3',
+        'description_ar' => 'required|min:3',
+        'image' => 'required',
+    ];
     public function products()
     {
         return $this->hasMany(Product::class , 'id_cat' , 'id');

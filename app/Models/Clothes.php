@@ -16,6 +16,16 @@ class Clothes extends Model
     'quntaty' , 'cat_id' , 'user_id'
     , 'status'];
     
+    public static $rules = [
+        'title_ar' => 'required|min:3',
+        'title_en' => 'required|min:3',
+        'note_ar' => 'required|min:3',
+        'note_en' => 'required|min:3',
+        'price' => 'required|numeric',
+        'quntaty' => 'required|numeric',
+        'image' => 'required',
+    ];
+
     public function categories()
     {
         return $this->belongsTo(Categories::class , 'cat_id'  , 'id');

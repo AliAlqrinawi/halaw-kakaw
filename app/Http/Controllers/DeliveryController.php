@@ -30,7 +30,7 @@ class DeliveryController extends Controller
     public function add_delivery (Request $request){
         Delivery::create($request->all());
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Delivery
         ]);
@@ -59,7 +59,7 @@ class DeliveryController extends Controller
         if ($Delivery) {
             $Delivery->update($request->all());
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Delivery
             ]);
@@ -77,7 +77,7 @@ class DeliveryController extends Controller
         if ($Delivery) {
             $Delivery->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {
@@ -96,7 +96,7 @@ class DeliveryController extends Controller
         $categories->status = request('status');
         $categories->update();
         return response()->json([
-            'message' => 'Update Success',
+            // 'message' => 'Update Success',
             'status' => 200,
         ]);
     }
