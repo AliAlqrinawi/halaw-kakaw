@@ -112,6 +112,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
+                @can('member-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddAdmin">
@@ -119,9 +120,11 @@
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('member-view')
                     <table class="table table-hover" id="get_admins" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -129,13 +132,17 @@
                                 <th class="wd-15p border-bottom-0">{{ trans('admins.user_name') }}</th>
                                 <th class="wd-20p border-bottom-0">{{ trans('admins.email') }}</th>
                                 <th class="wd-15p border-bottom-0">{{ trans('admins.phone') }}</th>
-                                <th class="wd-10p border-bottom-0">{{ trans('admins.Processes') }}</th>
+                                <th class="wd-10p border-bottom-0">
+                                @canany([ 'member-update' , 'member-delete' ])
+                                {{ trans('admins.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -167,7 +174,9 @@
 <!-- Internal Nice-select js-->
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
+@can('member-view')
 <script>
+    
 var table = $('#get_admins').DataTable({
     // processing: true,
     ajax: '{!! route("get_admins") !!}',
@@ -199,14 +208,24 @@ var table = $('#get_admins').DataTable({
         {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAdmin" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAdmin" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                @can('member-update')
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAdmin" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('member-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAdmin" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
+            
             },
             orderable: false,
             searchable: false
         },
     ],
 });
+</script>
+@endcan
+<script>
 //  view modal admin
 $(document).on('click', '#ShowModalAddAdmin', function(e) {
     e.preventDefault();

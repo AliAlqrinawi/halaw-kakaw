@@ -18,7 +18,9 @@ return [
     'archive'=>'Archive',
     'contact'=>'Contact',
     'notify'=>'Notify',
-    'notifyuser'=>'قوائم المنتجات الرئيسية ',
+    'notifyuser'=>'Product Lists ',
+    'better'=>'Lists of best-selling products ',
+    'modern'=>'Recent Product Lists ',
     'payment'=>'Payment',
     'delivery'=>'Delivery',
     'reports'=>'التقارير ',
@@ -26,4 +28,5 @@ return [
     'deliveryTypes'=>'Worktime',
     'times'=>'Delivery hours',
     'regions'=>'Regions',
+    'cities'=>'City neighborhood ',
 ];

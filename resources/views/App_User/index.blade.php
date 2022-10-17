@@ -68,6 +68,7 @@
         <div class="card mg-b-20">
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('customer-view')
                     <table class="table table-hover" id="get_appUser" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -78,12 +79,17 @@
                                 <th class="border-bottom-0">{{ trans('app_users.charged_balance') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.activation_code') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -161,8 +167,14 @@ var table = $('#get_appUser').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('customer-update')
                 <button class="modal-effect btn btn-sm btn-info" id="Addcredit" data-id="${data.id}"><i class="fa fa-cogs"></i> {{ trans('app_users.Add_Credit') }}</button>
-                    <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('customer-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                
+                `;
             },
             orderable: false,
             searchable: false

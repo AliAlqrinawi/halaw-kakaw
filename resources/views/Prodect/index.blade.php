@@ -21,7 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span
+                class="text-muted mt-1 tx-13 mr-2 mb-0"> /
                 {{ trans('clothes.page_title') }}</span>
         </div>
 
@@ -36,8 +37,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formcategory" enctype="multipart/form-data">
@@ -92,8 +93,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success AddCategory"
+                            id="AddCategory">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -105,8 +108,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formeditadmin" enctype="multipart/form-data">
@@ -150,15 +153,17 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success"
+                            id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+@can('product-view')
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -181,14 +186,14 @@
         </div>
     </div>
 </div>
-<!-- End Basic modal -->
-<!-- row -->
+@endcan
 <div class="row">
 
 
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+                @can('product-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
@@ -196,9 +201,11 @@
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                    @can('product-view')
                     <table class="table table-hover" id="get_Prodects" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -209,12 +216,17 @@
                                 <th class="border-bottom-0">{{ trans('clothes.Price') }}</th>
                                 <th class="border-bottom-0">{{ trans('clothes.Quntaty') }}</th>
                                 <th class="border-bottom-0">{{ trans('clothes.Status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                    @canany([ 'product-update' , 'product-delete' ])
+                                    {{ trans('category.Processes') }}
+                                    @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -255,7 +267,7 @@ $('#s').click(function(e) {
         // processing: true,
         bDestroy: true,
         ajax: {
-            url: '{!! url("admin/clothes/get") !!}/?&payment_status='+payment_status,
+            url: '{!! url("admin/clothes/get") !!}/?&payment_status=' + payment_status,
             cache: true
         },
         columns: [{
@@ -319,6 +331,7 @@ $('#s').click(function(e) {
                 'data': null,
                 render: function(data, row, type) {
                     return `
+                    @can('product-update')
                 <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
                 @csrf
                 <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
@@ -328,7 +341,12 @@ $('#s').click(function(e) {
                 <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
                 </form>
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('product-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
+
                 },
                 orderable: false,
                 searchable: false
@@ -393,6 +411,7 @@ var table = $('#get_Prodects').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('product-update')
                 <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
                 @csrf
                 <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
@@ -402,7 +421,12 @@ var table = $('#get_Prodects').DataTable({
                 <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
                 </form>
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('product-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                
+                `;
             },
             orderable: false,
             searchable: false

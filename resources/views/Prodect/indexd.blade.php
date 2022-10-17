@@ -21,9 +21,10 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('ads.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-            {{ trans('ads.content_title') }}</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('clothes.page_title') }}</span>
         </div>
+
     </div>
 </div>
 <!-- breadcrumb -->
@@ -31,66 +32,59 @@
 
 @section('content')
 <div id="error_message"></div>
-<div class="modal" id="modalAddAds">
+<!-- <div class="modal" id="modalAddCategory">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('ads.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form id="formAds" enctype="multipart/form-data">
+                <form id="formcategory" enctype="multipart/form-data">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.url') }} :</label>
-                            <input type="text" class="form-control" name="url" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_E') }} :</label>
+                            <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.lauout_title') }} :</label>
-                            <input type="text" class="form-control" name="lauout_title" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_A') }} :</label>
+                            <input type="text" class="form-control" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.layout') }} :</label>
-                            <input type="number" class="form-control" name="layout" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
+                            <textarea class="form-control" name="nota_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.days') }} :</label>
-                            <input type="number" class="form-control" name="days" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
+                            <textarea class="form-control" name="nota_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.cost') }} :</label>
-                            <input type="number" class="form-control" name="cost" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
+                            <input type="number" class="form-control" name="price" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label"> {{ trans('ads.cat') }} :</label>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Quntaty') }} :</label>
+                            <input type="number" class="form-control" name="quntaty" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">{{ trans('clothes.Image') }} :</label>
+                            <input type="file" class="form-control" id="image" name="image" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> {{ trans('clothes.cat') }} :</label>
                             <select name="cat_id" class="form-control">
-                                @foreach($category as $cat)
+                                @foreach($cat as $c)
                                 @if(App::getLocale() == 'en')
-                                <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
+                                <option value="{{ $c->id }}">{{ $c->title_en }}</option>
                                 @else
-                                <option value="{{ $cat->id }}">{{ $cat->title_ar }}</option>
+                                <option value="{{ $c->id }}">{{ $c->title_ar }}</option>
                                 @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label">{{ trans('ads.prodect') }} :</label>
-                            <select name="product_id" class="form-control">
-                                @foreach($prodect as $prodect)
-                                @if(App::getLocale() == 'en')
-                                <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
-                                @else
-                                <option value="{{ $prodect->id }}">{{ $prodect->title_ar }}</option>
-                                @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.models') }} :</label>
-                            <input type="file" class="form-control" name="image" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label class="form-label">{{ trans('ads.Status') }} :</label>
+                            <label class="form-label"> {{ trans('clothes.Status') }} :</label>
                             <select name="status" class="form-control">
                                 <option value="1">{{ trans('category.Active') }}</option>
                                 <option value="0">{{ trans('category.iActive') }}</option>
@@ -98,73 +92,61 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddAds" id="AddAds">{{ trans('category.Save') }}</button>
+                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">{{ trans('category.Save') }}</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- End Basic modal -->
-<div class="modal" id="modalEditAds">
+<!-- <div class="modal" id="modalEditCategory">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Ads</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formeditadmin" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="id_Ads">
+                    <input type="hidden" class="form-control" id="id_prodect">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.url') }} :</label>
-                            <input type="text" class="form-control" name="url" id="url" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_E') }} :</label>
+                            <input type="text" class="form-control" id="title_en" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.lauout_title') }} :</label>
-                            <input type="text" class="form-control" name="lauout_title" id="lauout_title" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Title_A') }} :</label>
+                            <input type="text" class="form-control" id="title_ar" name="title_ar" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.layout') }} :</label>
-                            <input type="number" class="form-control" name="layout" id="layout" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
+                            <textarea class="form-control" id="nota_en" name="nota_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.days') }} :</label>
-                            <input type="number" class="form-control" name="days" id="days" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
+                            <textarea class="form-control" id="nota_ar" name="nota_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.cost') }} :</label>
-                            <input type="number" class="form-control" name="cost" id="cost" required>
+                            <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="form-label">{{ trans('ads.cat') }} :</label>
-                            <select name="cat_id" id="cat_id" class="form-control">
-                                @foreach($category as $cat)
-                                @if(App::getLocale() == 'en')
-                                <option value="{{ $cat->id }}">{{ $cat->title_en }}</option>
-                                @else
-                                <option value="{{ $cat->id }}">{{ $cat->title_ar }}</option>
-                                @endif
+                            <label for="exampleInputEmail1">{{ trans('clothes.Quntaty') }} :</label>
+                            <input type="number" class="form-control" id="quntaty" name="quntaty" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">{{ trans('clothes.Image') }} :</label>
+                            <input type="file" class="form-control" id="image" name="image" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label"> {{ trans('clothes.cat') }} :</label>
+                            <select name="cat_id" class="form-control">
+                                @foreach($cat as $c)
+                                <option value="{{ $c->id }}" id="cat_id">{{ $c->title_en }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label class="form-label">{{ trans('ads.prodect') }} :</label>
-                            <select name="product_id" id="product_id" class="form-control">
-                            @foreach($prodec as $prodect)
-                                @if(App::getLocale() == 'en')
-                                <option value="{{ $prodect->id }}">{{ $prodect->title_en }}</option>
-                                @else
-                                <option value="{{ $prodect->id }}">{{ $prodect->title_ar }}</option>
-                                @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">{{ trans('ads.models') }}  :</label>
-                            <input type="file" class="form-control" name="image" id="image" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -175,55 +157,75 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<!-- <div class="row row-sm">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="get">
+                    <div class="row mg-b-20">
+                        <div class="parsley-input col-md-3" id="fnWrapper">
+                            <label>{{trans('orders.status')}} :</label>
+                            <select class="form-control form-control-md mg-b-20" name="payment_status"
+                                id="payment_status">
+                                <option value="">{{ trans('orders.all') }}</option>
+                                <option value="1">{{ trans('category.Active') }}</option>
+                                <option value="0">{{ trans('category.iActive') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-primary" id="s">{{ trans('orders.Sarech') }}</button>
+            </div>
+        </div>
+    </div>
+</div> -->
 <!-- End Basic modal -->
-<!-- row -->
 <div class="row">
-
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-            @can('ads-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
-                        <button class="btn btn-info-gradient btn-block" id="ShowModalAddAds">
-                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('ads.add') }}</a>
-                        </button>
+                        <!-- <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('clothes.Add') }}</a>
+                        </button> -->
                     </div>
                 </div>
-                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
-                @can('ads-view')
-                    <table class="table table-hover" id="get_Ads" style=" text-align: center;">
+                @can('productList-view')
+                    <table class="table table-hover" id="get_Prodects" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">{{ trans('ads.url') }}</th>
-                                <th class="border-bottom-0">{{ trans('ads.lauout_title') }}</th>
-                                <th class="border-bottom-0">{{ trans('ads.days') }}</th>
-                                <th class="border-bottom-0">{{ trans('ads.cost') }}</th>
-                                <th class="border-bottom-0">{{ trans('ads.Status') }}</th>
-                                <th class="border-bottom-0">{{ trans('ads.Created_at') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Image') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.cat') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Prodect') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Price') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Quntaty') }}</th>
+                                <th class="border-bottom-0">{{ trans('clothes.Status') }}</th>
                                 <th class="border-bottom-0">
-                                @canany([ 'ads-update' , 'ads-delete' ])
+                                @canany([ 'productList-update' , 'productList-delete' ])    
                                 {{ trans('category.Processes') }}
                                 @endcanany
-                                </th>
+                            </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                @endcan
+                    @endcan
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button> -->
 @endsection
+
 @section('js')
 
 <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -249,32 +251,57 @@
 <script src="{{URL::asset('assets/plugins/jquery-nice-select/js/nice-select.js')}}"></script>
 <script>
 var local = "{{ App::getLocale() }}";
-var table = $('#get_Ads').DataTable({
+var i = 1;
+var table = $('#get_Prodects').DataTable({
     // processing: true,
-    ajax: '{!! route("get_ads") !!}',
-    columns: [{
-            'data': 'id',
+    ajax: '{{ url("admin/clothes/gettt") }}',
+    columns: [
+        {
+            'data': null,
+            render: function(data, row, type) {
+                return i++;
+            },
+            'className':'text-center text-lg text-medium'
+        },
+        {
+            'data': null,
+            render: function(data, row, type) {
+                if (data.image) {
+                    return `<img 
+                        src="${data.image}"
+                                        style="width: 40px;height: 40px">`;
+                } else {
+                    return "No Image";
+                }
+            },
+        },
+        {
+            'data': 'categories.title_ar',
             'className': 'text-center text-lg text-medium'
         },
         {
-            'data': 'url',
+            'data': null,
+            'className': 'text-center text-lg text-medium',
+            render: function(data, row, type) {
+                if (local == "en") {
+                    return data.title_en;
+                } else {
+                    return data.title_ar;
+                }
+            },
+        },
+        {
+            'data': 'price',
             'className': 'text-center text-lg text-medium'
         },
         {
-            'data': 'lauout_title',
-            'className': 'text-center text-lg text-medium'
-        },
-        {
-            'data': 'days',
-            'className': 'text-center text-lg text-medium'
-        },
-        {
-            'data': 'cost',
+            'data': 'quntaty',
             'className': 'text-center text-lg text-medium'
         },
         {
             'data': null,
             render: function(data, row, type) {
+                var phone;
                 if (data.status == '1') {
                     return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${data.id}" data-viewing_status="${data.status}">{{ trans('category.Active') }}</button>`;
                 } else {
@@ -283,35 +310,39 @@ var table = $('#get_Ads').DataTable({
             },
         },
         {
-            'data': 'created_at',
-            'className': 'text-center text-lg text-medium'
-        },
-        {
             'data': null,
             render: function(data, row, type) {
                 return `
-                @can('ads-update')
-                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @can('productList-update')
+                <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
+                </form>
+                <form action="{{ url('admin/minas100/clothes') }}/${data.id}" method="post" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
+                </form>
                 @endcan
-                @can('ads-delete')
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAds" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @can('productList-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
                 @endcan
                 `;
+            
             },
             orderable: false,
             searchable: false
         },
     ],
 });
-//  view modal Ads
-$(document).on('click', '#ShowModalAddAds', function(e) {
+//  view modal Category
+$(document).on('click', '#ShowModalAddCategory', function(e) {
     e.preventDefault();
-    $('#modalAddAds').modal('show');
+    $('#modalAddCategory').modal('show');
 });
-// // Ads admin
-$(document).on('click', '.AddAds', function(e) {
+// Category admin
+$(document).on('click', '.AddCategory', function(e) {
     e.preventDefault();
-    let formdata = new FormData($('#formAds')[0]);
+    let formdata = new FormData($('#formcategory')[0]);
     // console.log(formdata);
     // console.log("formdata");
     $.ajaxSetup({
@@ -321,30 +352,31 @@ $(document).on('click', '.AddAds', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ route("add_ads") }}',
+        enctype: "multipart/form-data",
+        url: '{{ route("add_prodect") }}',
         data: formdata,
         contentType: false,
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddAds').text('Saving');
+            $('#AddCategory').text('Saving');
             $('#error_message').html("");
             $('#error_message').addClass("alert alert-info");
             $('#error_message').text(response.message);
-            $('#modalAddAds').modal('hide');
-            $('#formAds')[0].reset();
+            $('#modalAddCategory').modal('hide');
+            $('#formcategory')[0].reset();
             table.ajax.reload();
         }
     });
 });
-// // view modification data
-$(document).on('click', '#ShowModalEditAds', function(e) {
+// view modification data
+$(document).on('click', '#ShowModalEditCategory', function(e) {
     e.preventDefault();
-    var id_Ads = $(this).data('id');
-    $('#modalEditAds').modal('show');
+    var id_prodect = $(this).data('id');
+    $('#modalEditCategory').modal('show');
     $.ajax({
         type: 'GET',
-        url: '{{ url("admin/ads/edit") }}/' + id_Ads,
+        url: '{{ url("admin/clothes/edit") }}/' + id_prodect,
         data: "",
         success: function(response) {
             console.log(response);
@@ -354,13 +386,21 @@ $(document).on('click', '#ShowModalEditAds', function(e) {
                 $('#error_message').addClass("alert alert-danger");
                 $('#error_message').text(response.message);
             } else {
-                $('#id_Ads').val(id_Ads);
-                $('#url').val(response.data.url);
-                $('#layout').val(response.data.layout);
-                $('#lauout_title').val(response.data.lauout_title);
-                $('#days').val(response.data.days);
-                $('#cost').val(response.data.cost);
-                $('#image').val(response.data.image);
+                $('#id_prodect').val(id_prodect);
+                $('#title_en').val(response.data.title_en);
+                $('#title_ar').val(response.data.title_ar);
+                $('#nota_en').val(response.data.nota_en);
+                $('#nota_ar').val(response.data.nota_ar);
+                $('#price').val(response.data.price);
+                $('#quntaty').val(response.data.quntaty);
+                // if(response.data.cat_id == $('#cat_id').value){
+                //     $('#cat_id').attr('selected' , 'selected');
+                // }
+                if (response.data.status == '1') {
+                    $("select option[value='1']").attr("selected", "selected");
+                } else {
+                    $("select option[value='0']").attr("selected", "selected");
+                }
             }
         }
     });
@@ -368,18 +408,17 @@ $(document).on('click', '#ShowModalEditAds', function(e) {
 $(document).on('click', '#EditClient', function(e) {
     e.preventDefault();
     var data = {
-        url: $('#url').val(),
-        layout: $('#layout').val(),
-        lauout_title: $('#lauout_title').val(),
-        days: $('#days').val(),
-        cost: $('#cost').val(),
+        title_en: $('#title_en').val(),
+        title_ar: $('#title_ar').val(),
+        nota_en: $('#nota_en').val(),
+        nota_ar: $('#nota_ar').val(),
+        price: $('#price').val(),
+        quntaty: $('#quntaty').val(),
         image: $('#image').val(),
         status: $('#status').val(),
-        cat_id: $('#cat_id ').val(),
-        product_id: $('#product_id  ').val(),
     };
     // let formdata = new FormData($('#formeditadmin')[0]);
-    var id_Ads = $('#id_Ads').val();
+    var id_prodect = $('#id_prodect').val();
     console.log(data);
     $.ajaxSetup({
         headers: {
@@ -388,7 +427,7 @@ $(document).on('click', '#EditClient', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ url("admin/ads/update") }}/' + id_Ads,
+        url: '{{ url("admin/clothes/update/") }}/' + id_prodect,
         data: data,
         dataType: false,
         success: function(response) {
@@ -409,15 +448,15 @@ $(document).on('click', '#EditClient', function(e) {
                 $('#error_message').html("");
                 $('#error_message').addClass("alert alert-info");
                 $('#error_message').text(response.message);
-                $('#modalEditAds').modal('hide');
+                $('#modalEditCategory').modal('hide');
                 table.ajax.reload();
             }
         }
     });
 });
-$(document).on('click', '#DeleteAds', function(e) {
+$(document).on('click', '#DeleteCategory', function(e) {
     e.preventDefault();
-    var id_Ads = $(this).data('id');
+    var id_prodect = $(this).data('id');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -425,7 +464,7 @@ $(document).on('click', '#DeleteAds', function(e) {
     });
     $.ajax({
         type: 'DELETE',
-        url: '{{ url("admin/ads/delete") }}/' + id_Ads,
+        url: '{{ url("admin/clothes/delete") }}/' + id_prodect,
         data: '',
         contentType: false,
         processData: false,
@@ -437,14 +476,15 @@ $(document).on('click', '#DeleteAds', function(e) {
         }
     });
 });
+
 $(document).on('click', '#status', function(e) {
     e.preventDefault();
     // console.log("Alliiiii");
     var edit_id = $(this).data('id');
     var status = $(this).data('viewing_status');
-    if(status == 1){
+    if (status == 1) {
         status = 0;
-    }else{
+    } else {
         status = 1;
     }
     var data = {
@@ -459,7 +499,7 @@ $(document).on('click', '#status', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ route("ads.status") }}',
+        url: '{{ route("prodect.status") }}',
         data: data,
         success: function(response) {
             $('#error_message').html("");
@@ -474,9 +514,9 @@ $(document).on('click', '#statusoff', function(e) {
     // console.log("Alliiiii");
     var edit_id = $(this).data('id');
     var status = $(this).data('viewing_status');
-    if(status == 1){
+    if (status == 1) {
         status = 0;
-    }else{
+    } else {
         status = 1;
     }
     var data = {
@@ -491,7 +531,7 @@ $(document).on('click', '#statusoff', function(e) {
     });
     $.ajax({
         type: 'POST',
-        url: '{{ route("ads.status") }}',
+        url: '{{ route("prodect.status") }}',
         data: data,
         success: function(response) {
             $('#error_message').html("");
@@ -502,4 +542,6 @@ $(document).on('click', '#statusoff', function(e) {
     });
 });
 </script>
+
+
 @endsection

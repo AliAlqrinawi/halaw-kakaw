@@ -26,20 +26,36 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+            'remember_token',
     ];
 
-    public function getCreatedAtAttribute($date)
-    {
-        $geoIp = \GeoIP::getLocation();
-        $dtz = new \DateTimeZone($geoIp['timezone']);
-        $time_in_sofia = new \DateTime('now', $dtz);
-        $offset = $dtz->getOffset( $time_in_sofia ) / 3600;
-        return $date.' (' . "GMT" . ($offset < 0 ? $offset : "+".$offset) . ')';
-    }
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     $geoIp = \GeoIP::getLocation();
+    //     $dtz = new \DateTimeZone($geoIp['timezone']);
+    //     $time_in_sofia = new \DateTime('now', $dtz);
+    //     $offset = $dtz->getOffset( $time_in_sofia ) / 3600;
+    //     return $date.' (' . "GMT" . ($offset < 0 ? $offset : "+".$offset) . ')';
+    // }
 
     public function messages()
     {
         return $this->hasMany('\App\Models\Messages');
+    }
+    
+    public function roles(){
+        return $this->belongsToMany(Role::class , 'role_user');
+    }
+
+    public function permissions($permissions)
+    {
+            foreach($this->roles as $role){
+                if(in_array($permissions ,  $role->permissions)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
     }
 }

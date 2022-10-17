@@ -31,4 +31,9 @@ class Clothes extends Model
     {
         return $this->hasMany(Ads::class , 'product_id ' , 'id');
     }
+
+    public function Pieces()
+    {
+        return $this->hasMany(Pieces::class , 'clothe_id' , 'id');
+    }
 }

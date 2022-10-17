@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                Governorates</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('admins.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            {{ trans('country.content_title') }}</span>
         </div>
 
     </div>
@@ -36,24 +36,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Governorates</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('country.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formGovernorat" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" name="title_ar" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddGovernorat" id="AddGovernorat">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success AddGovernorat" id="AddGovernorat">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -65,7 +65,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Governorates</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">{{ trans('country.content_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -73,17 +73,17 @@
                     <input type="hidden" class="form-control" id="id_Governorat">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Einglish :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_E') }} :</label>
                             <input type="text" class="form-control" id="title_en" name="title_en" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Governorat Title Arabic :</label>
+                            <label for="exampleInputEmail1">{{ trans('category.Title_A') }} :</label>
                             <input type="text" class="form-control" id="title_ar" name="title_ar" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -98,28 +98,36 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+            @can('region-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddGovernorat">
-                            <a href="#" style="font-weight: bold; color: beige;">Add Governorat</a>
+                            <a href="#" style="font-weight: bold; color: beige;">{{ trans('country.add') }}</a>
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('region-view')
                     <table class="table table-hover" id="get_Governorates" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Name</th>
-                                <th class="border-bottom-0">Status</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">{{ trans('app_users.name') }}</th>
+                                <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -175,9 +183,9 @@ var table = $('#get_Governorates').DataTable({
             render: function(data, row, type) {
                 var phone;
                 if (data.status == '1') {
-                    return `<button class="btn btn-success-gradient btn-block">Active</button>`;
+                    return `<button class="btn btn-success-gradient btn-block">{{ trans('category.Active') }}</button>`;
                 } else {
-                    return `<button class="btn btn-danger-gradient btn-block">Not Active</button>`;
+                    return `<button class="btn btn-danger-gradient btn-block">{{ trans('category.iActive') }}</button>`;
                 }
             },
         },
@@ -185,10 +193,16 @@ var table = $('#get_Governorates').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
-                <a class="btn btn-sm btn-success" href="{{ url('admin/city') }}/${data.id}"><i class="fa fa-bars"></i> Cities</a>
+                @can('region-view')
+                <a class="btn btn-sm btn-success" href="{{ url('admin/city') }}/${data.id}"><i class="fa fa-bars"></i> {{ trans('country.Cities') }}</a>
+                @endcan
+                @can('region-update')
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditGovernorat" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('region-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteGovernorat" data-id="${data.id}"><i class="las la-trash"></i></button>
-                        `;
+                @endcan        
+                `;
             },
             orderable: false,
             searchable: false

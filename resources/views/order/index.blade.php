@@ -121,6 +121,7 @@
         </div>
     </div>
 </div>
+@can('order-view')
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -170,11 +171,13 @@
         </div>
     </div>
 </div>
+@endcan
 <div class="row">
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('order-view')
                     <table class="table table-hover" id="get_categories" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -183,12 +186,17 @@
                                 <th class="border-bottom-0">{{ trans('orders.status') }}</th>
                                 <th class="border-bottom-0">{{ trans('orders.payment') }}</th>
                                 <th class="border-bottom-0">{{ trans('orders.total') }}</th>
-                                <th class="border-bottom-0">{{ trans('orders.Processes') }}</th>
+                                <th class="border-bottom-0">         
+                                @canany([ 'order-view' , 'order-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                            </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
 
@@ -277,12 +285,16 @@ $('#s').click(function(e) {
                 'data': null,
                 render: function(data, row, type) {
                     return `
+                @can('order-view')
                 <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
                 data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
-                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> Details</button>
-                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
+                @endcan
+                @can('order-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
                 },
                 orderable: false,
                 searchable: false
@@ -337,12 +349,16 @@ var table = $('#get_categories').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('order-view')
                 <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
                 data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
                 data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
+                @endcan
+                @can('order-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
-`;
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

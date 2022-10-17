@@ -37,6 +37,7 @@
         <div class="card mg-b-20">
             <div class="card-body">
                 <div class="table-responsive">
+                @can('contact-view')
                     <table class="table table-bordered" id="get_contact" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -46,12 +47,17 @@
                                 <th class="border-bottom-0">{{ trans('app_users.email') }}</th>
                                 <th class="border-bottom-0">{{ trans('contact.Message') }}</th>
                                 <th class="border-bottom-0">{{ trans('contact.Created_at') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @can('contact-delete')
+                                {{ trans('category.Processes') }}
+                                @endcan
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -118,7 +124,11 @@ var table = $('#get_contact').DataTable({
         {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-danger" id="Deletecontact" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                @can('contact-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="Deletecontact" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

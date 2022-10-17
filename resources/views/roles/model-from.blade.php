@@ -76,7 +76,7 @@
                                 @foreach($label as $q)
                                 <td>
                                     <div class="main-toggle-group-demo">
-                                        <div class="main-toggle main-toggle-success" id="m" data-v="{{ $q }}">
+                                        <div class="main-toggle main-toggle-success" data-v="{{ $q }}">
                                             <span></span>
                                         </div>
                                     </div>
@@ -108,22 +108,22 @@
                 <div class="col-sm-12">
                     <div class="row mg-t-10">
                         <div class="col-lg-3">
-                            <label class="rdiobox"><input name="rdio" value="Admin" type="radio">
+                            <label class="rdiobox"><input name="rdio" class="At" value="Admin" type="radio">
                                 <p class="btn btn-light A">Admin</p>
                             </label>
                         </div>
                         <div class="col-lg-3">
-                            <label class="rdiobox"><input name="rdio" value="Employee" type="radio">
+                            <label class="rdiobox"><input name="rdio" class="At" value="Employee" type="radio">
                                 <p class="btn btn-light B">Employee</p>
                             </label>
                         </div>
                         <div class="col-lg-3">
-                            <label class="rdiobox"><input name="rdio" value="Worker" type="radio">
+                            <label class="rdiobox"><input name="rdio" class="At" value="Worker" type="radio">
                                 <p class="btn btn-light C">Worker</p>
                             </label>
                         </div>
                         <div class="col-lg-3">
-                            <label class="rdiobox"><input name="rdio" value="Customer" type="radio">
+                            <label class="rdiobox"><input name="rdio" class="At" value="Customer" type="radio">
                                 <p class="btn btn-light D">Customer</p>
                             </label>
                         </div>
@@ -175,7 +175,7 @@
                                 @foreach($label as $q)
                                 <td>
                                     <div class="main-toggle-group-demo">
-                                        <div class="main-toggle main-toggle-success {{ $q }}" data-v="{{ $q }}">
+                                        <div class="main-toggle main-toggle-success {{ $q }}" id="alialialai" data-v="{{ $q }}">
                                             <span></span>
                                         </div>
 
@@ -190,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success CreateRolesBut">Create</button>
+                <button type="submit" class="btn btn-success ERolesBut">Create</button>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UsersAndAdminController extends Controller
@@ -14,6 +15,9 @@ class UsersAndAdminController extends Controller
 
     // Admins
     public function admin (){
+        if(Gate::denies('member-view')){
+            abort(403);
+        }
         return view('Admin/index');
     }
 

@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories as Category;
 use App\Models\Clothes as Product;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 
 class ProdectController extends Controller
 {
     public function index()
     {
+        if(Gate::denies('product-view')){
+            abort(403);
+        }
         $cat = Category::get();
         // $prodects = Product::with(['categories' , 'user'])->get();
         // dd($prodects);
@@ -18,6 +22,7 @@ class ProdectController extends Controller
     }
 
     public function get_prodect (Request $request){
+        
         $payment_status = $request->payment_status;
         
         $prodects = Product::with(['categories' , 'user']);

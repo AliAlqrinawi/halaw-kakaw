@@ -8,7 +8,9 @@ use App\Http\Controllers\ProdectController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeliveryTypesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Payment_methodsController;
+use App\Http\Controllers\ProductsDetailsController;
 use App\Http\Controllers\timesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +31,13 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['auth'],
     ], function () {
-        Route::get('/',function () {
-            return view('index');
-        });
+        Route::get('/',[HomeController::class , 'index']);
+        Route::get('admin/best/selling/clothes', [ProductsDetailsController::class , 'index'])->name('mmm');
+Route::get('admin/clothes/gettt', [ProductsDetailsController::class , 'get_d'])->name('get_d');
+Route::get('admin/clothes/getm', [ProductsDetailsController::class , 'get_m'])->name('get_m');
+Route::get('admin/modern/selling/clothes', [ProductsDetailsController::class , 'indexm'])->name('aaa');
     });
 Auth::routes();
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('category/update/status', [CategoriesController::class , 'updateStatus'])->name('update.status');
 Route::post('clothes/update/status', [ProdectController::class , 'updateStatus'])->name('prodect.status');

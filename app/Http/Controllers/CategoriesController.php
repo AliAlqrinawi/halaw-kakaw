@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Categories as Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 
 class CategoriesController extends Controller
 {
     public function category (){
+        if(Gate::denies('categories-view')){
+            abort(403);
+        }
         return view('Category/index');
     }
 
@@ -70,19 +74,16 @@ class CategoriesController extends Controller
     }
 
     public function update (Request $request , $id){
+        //  return $request->hasFile('image');
         $category = Category::find($id);
         if ($category) {
             $data = $request->except('image');
             if ($request->hasFile('image')){
-                if (File::exists($category->image)){
-                    File::delete($category->image);
-                }
                 $file = $request->file('image');
                 $filename = $file->getClientOriginalName();
                 $local =  request()->getSchemeAndHttpHost();
                 $path = $file->storeAs('category' , $filename ,  ['disk' => 'uploads']);
                 $data['image']  = $local .'/'.'uploads/'.$path;
-                return $data['image'];
             }
             $category->update($data);
             return response()->json([

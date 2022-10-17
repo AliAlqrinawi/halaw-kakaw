@@ -158,27 +158,35 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="row row-xs wd-xl-80p">
+                @can('deliveryHour-create')
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddDeliveryType">
                             <a href="#" style="font-weight: bold; color: beige;">{{ trans('deliveryTypes.add') }}</a>
                         </button>
                     </div>
+                @endcan
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('deliveryHour-view')
                     <table class="table table-hover" id="get_DeliveryTypes" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
                                 <th class="border-bottom-0">{{ trans('app_users.name') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                @endcan
                 </div>
             </div>
         </div>
@@ -246,9 +254,13 @@ var table = $('#get_DeliveryTypes').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('deliveryHour-update')
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditDeliveryType" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('deliveryHour-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteDeliveryType" data-id="${data.id}"><i class="las la-trash"></i></button>
-                        `;
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

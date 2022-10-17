@@ -21,8 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{trans('main_trans.Dashboard')}}</h4>
-            <span class="text-muted mt-1 tx-13 mr-2 mb-0"> / {{trans('setting.Social_media_settings')}}</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('app_users.Home') }}</h4>
+            <span class="text-muted mt-1 tx-13 mr-2 mb-0"> / {{trans('setting.page_title')}}</span>
 
         </div>
     </div>
@@ -47,24 +47,19 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
-
-                <h4> {{trans('setting.Social_media_settings')}}</h4>
+                <h4> {{trans('setting.social')}}</h4>
                 <hr>
             </div>
-
             <div class="card-body">
-
-
+            @can('setting-view')
                 <form action="{{route('setting.update')}}" method="post" autocomplete="off"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @foreach ($settings as $key => $x)
-
                     <div class="form-group">
                         @if (App::getLocale() == 'en')
                         <label class="col-md-3 control-label" for="site_title">{{ $x->title_en }} : </label>
                         @else
-
                         <label class="col-md-3 control-label" for="site_title">{{ $x->title_ar }} : </label>
                         @endif
                         <div class="col-md-10">
@@ -72,15 +67,15 @@
                                 class="form-control">@if(isset($x->value)){{$x->value}}@endif</textarea>
                         </div>
                     </div>
-
                     @endforeach
                     <hr>
+                    @can('setting-create')
                     <button type="submit" class="btn btn-info-gradient btn-block col-sm-2">
                         <a href="#" style="font-weight: bold; color: beige;">{{trans('setting.edit')}}</a>
                     </button>
-
+                    @endcan
                 </form>
-
+            @endcan
             </div>
         </div>
     </div>
