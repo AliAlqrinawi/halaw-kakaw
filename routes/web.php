@@ -9,6 +9,7 @@ use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\DeliveryTypesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OedersController;
 use App\Http\Controllers\Payment_methodsController;
 use App\Http\Controllers\ProductsDetailsController;
 use App\Http\Controllers\timesController;
@@ -49,6 +50,10 @@ Route::post('payment/update/status', [Payment_methodsController::class , 'update
 Route::post('deliveryTypes/update/status', [DeliveryTypesController::class , 'updateStatus'])->name('deliveryTypes.status');
 Route::post('time/update/status', [timesController::class , 'updateStatus'])->name('time.status');
 Route::post('delivery/update/status', [DeliveryController::class , 'updateStatus'])->name('delivery.status');
+
+Route::post('order/update/status', [OedersController::class , 'updateStatus'])->name('order.status');
+Route::post('order2/update/status', [OedersController::class , 'updateStatus'])->name('order2.status');
+Route::post('order3/update/status', [OedersController::class , 'updateStatus'])->name('order3.status');
 
 
 require __DIR__.'/admin.php';

@@ -95,9 +95,18 @@ class OedersController extends Controller
 
     public function updateStatus(Request $request)
     {
+        // return $request->all();
         $id = $request->id;
         $categories = Order::find($id);
-        $categories->status = request('status');
+        if($request->status == 'new'){
+            $categories->status = 'shipping';
+        }
+        if($request->status == 'shipping'){
+            $categories->status = 'shipping_complete';
+        }
+        if($request->status == 'shipping_complete'){
+            $categories->status = 'complete';
+        }
         $categories->update();
         return response()->json([
             'message' => 'Update Success',

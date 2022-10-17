@@ -291,6 +291,7 @@ $('#s').click(function(e) {
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
                 data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
                 @endcan
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
                 @can('order-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
                 @endcan
@@ -333,7 +334,7 @@ var table = $('#get_categories').DataTable({
                 } else if (row.status == 'shipping_complete') {
                     return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping_complete') }}</button>`;
                 } else if (row.status == 'complete') {
-                    return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
                 } else {
                     return '';
                 }
@@ -355,6 +356,9 @@ var table = $('#get_categories').DataTable({
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
                 data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
                 @endcan
+                <button class="btn btn-success btn-sm" id="Request_Accept" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> Request Accept </i></button>
+                <button class="btn btn-success btn-sm" id="charged" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> Charged </i></button>
+                <button class="btn btn-success btn-sm" id="Receipt_confirmed" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> Receipt confirmed </i></button>
                 @can('order-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
                 @endcan
@@ -442,6 +446,84 @@ $(document).on('click', '#Management', function(e) {
     $('#Mobile_number').text(mobile_number);
     $('#Device_type').text(user_agent);
 
+});
+$(document).on('click', '#Request_Accept', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#charged', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order2/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#Receipt_confirmed', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order3/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
 });
 </script>
 

@@ -167,35 +167,25 @@
 <!-- Internal Select2.full.min js -->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <!--Internal App calendar js -->
-{{--    <script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>--}}
+<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
 <script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
 <script>
-$('#modaldemo9').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var services_name = button.data('services_name')
-    var modal = $(this)
-    modal.find('.modal-body #id').val(id);
-    modal.find('.modal-body #services_name').val(services_name);
-})
-</script>
-<script>
+
 $(function(e) {
     'use strict'
     /*----Echart2----*/
     var chartdata = [{
-        name: '{{trans('home.products')}}',
+        name: 'TEST',
         type: 'bar',
         barMaxWidth: 20,
-        // data: [0,1,5,25,30,40,100]
-        data: @json($products)
-    }, {
-        name: '{{trans('
-        home.orders ')}}',
+        data: [0,1,5,25,30,40,100]
+
+    },  {
+        name: 'TEST1',
         type: 'bar',
         barMaxWidth: 20,
-        // data: [3,50,20,25,50,20,80]
-        data: @json($orders)
+        data: [3,50,20,25,50,20,80]
+    
     }];
     var chart = document.getElementById('echart1');
     var barChart = echarts.init(chart);
@@ -225,7 +215,7 @@ $(function(e) {
             left: '25',
         },
         xAxis: {
-            data: @json($date),
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
             axisLine: {
                 lineStyle: {
                     color: 'rgba(171, 167, 167,0.2)'
@@ -262,7 +252,7 @@ $(function(e) {
             }
         },
         series: chartdata,
-        color: ['#285cf7', '#f7557a']
+        color: ['#285cf7', '#f7557a' ]
     };
     barChart.setOption(option);
 
@@ -324,9 +314,7 @@ $(function(e) {
         calculable: false,
         xAxis: [{
             type: 'category',
-            data: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct',
-                'Nov', 'Dec'
-            ],
+            data: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             axisLine: {
                 lineStyle: {
                     color: 'rgba(171, 167, 167,0.2)'
@@ -357,7 +345,7 @@ $(function(e) {
         series: [{
             name: 'View Price',
             type: 'bar',
-            data: @json($date),
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
             markPoint: {
                 data: [{
                     type: 'max',
@@ -376,8 +364,8 @@ $(function(e) {
         }, {
             name: ' Purchased Price',
             type: 'bar',
-            data: @json($date),
-            // data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
             markPoint: {
                 data: [{
                     name: 'Purchased Price',
@@ -400,49 +388,7 @@ $(function(e) {
         }]
     });
 });
+
 </script>
-<script>
-$('#exampleModal2').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var store = button.data('store')
-    var payment_method = button.data('payment_method')
-    var address = button.data('address')
-    var Order_number = button.data('Order_number')
-    var number_pieces = button.data('number_pieces')
-    var date_application = button.data('date_application')
-    var customer_number = button.data('customer_number')
-
-    var name = button.data('name')
-    var phone = button.data('phone')
-    var total = button.data('total')
-    var delivery_cost = button.data('delivery_cost')
-    var delivery_time = button.data('delivery_time')
-    var notes = button.data('notes')
-
-
-
-
-    var modal = $(this)
-    modal.find('.modal-body #id').val(id);
-    modal.find('.modal-body #store').html(store);
-    modal.find('.modal-body #payment_method').html(payment_method);
-    modal.find('.modal-body #address').html(address);
-    modal.find('.modal-body #Order_number').html(Order_number);
-    modal.find('.modal-body #number_pieces').html(number_pieces);
-    modal.find('.modal-body #date_application').html(date_application);
-    modal.find('.modal-body #customer_number').html(customer_number);
-    modal.find('.modal-body #name').html(name);
-    modal.find('.modal-body #phone').html(phone);
-    modal.find('.modal-body #total').html(total);
-    modal.find('.modal-body #delivery_cost').html(delivery_cost);
-    modal.find('.modal-body #delivery_time').html(delivery_time);
-    modal.find('.modal-body #notes').html(notes);
-
-
-
-
-
-})
-</script>
+ 
 @endsection
