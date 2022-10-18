@@ -3,11 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\CharityImage;
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 
-class ClothesRepository extends Repository
+class ClothesRepository
 {
 
     public function model()

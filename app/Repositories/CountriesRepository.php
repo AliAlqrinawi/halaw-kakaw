@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 
-class CountriesRepository extends Repository
+class CountriesRepository
 {
 
     public function model()

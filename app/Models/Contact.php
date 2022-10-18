@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    use HasFactory;
+    protected $table = 'contacts';
+    protected $fillable = ['name','mobile','message','email'];
+    protected $dates = ['created_at','updated_at'];
 }

@@ -1,10 +1,10 @@
 <?php
 namespace App\Repositories\Criteria;
 
-use Bosnadev\Repositories\Criteria\Criteria;
-use Bosnadev\Repositories\Contracts\RepositoryInterface as Repository;
+//use Bosnadev\Repositories\Criteria\Criteria;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface as Repository;
 
-class AdvancedSearchCriteria extends Criteria
+class AdvancedSearchCriteria
 {
     protected static $where_object = null;
 

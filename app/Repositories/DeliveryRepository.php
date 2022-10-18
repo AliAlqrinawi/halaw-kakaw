@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 use App\Repositories\Criteria\AppUserCriteria;
 
-class DeliveryRepository extends Repository
+class DeliveryRepository
 {
 
     public function model()

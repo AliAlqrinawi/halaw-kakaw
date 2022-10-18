@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Eloquent\Repository;
 use DB;
 
 /**
  * Class UsersRepository
  * @package App\Core\Repositories
  */
-class CategoriesRepository extends Repository
+class CategoriesRepository
 {
 
     /**

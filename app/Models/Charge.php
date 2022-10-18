@@ -11,10 +11,11 @@ class Charge extends Model
     protected $guarded = ['id'];
     protected $connection = 'mysql';
     protected $table = 'app_users_charges';
+    protected $fillable = ['lat','lng','address','title','street','block','city','governate','floor','flat','building','avenue','city_id','region_id','type','notes','user_id'];
 
     public function user()
     {
-        return $this->belongsTo('\App\Models\AppUser');
+        return $this->belongsTo('\App\Models\AppUser','user_id','id');
     }
 
     public function cityData()

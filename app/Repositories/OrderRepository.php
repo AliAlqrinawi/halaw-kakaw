@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 use DB;
-class OrderRepository extends Repository
+class OrderRepository
 {
 
     public function model()

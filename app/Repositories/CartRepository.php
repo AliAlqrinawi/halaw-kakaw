@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
-use Bosnadev\Repositories\Eloquent\Repository;
+//use Bosnadev\Repositories\Contracts\RepositoryInterface;
+//use Bosnadev\Repositories\Eloquent\Repository;
 use Carbon\Carbon;
 use DB;
-class CartRepository extends Repository
+class CartRepository
 {
 
     public function model()
@@ -125,11 +125,11 @@ class CartRepository extends Repository
 
         return $query->sum('price');
     }
-    
+
     public function deleteAll(array $data ,$attribute="id") {
         return $this->model->whereIn($attribute,$data)->delete();
     }
-    
+
 public function clear($user_id) {
         return $this->model->where('user_id',$user_id)->delete();
     }
