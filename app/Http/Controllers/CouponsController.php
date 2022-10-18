@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Coupons;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CouponsController extends Controller
 {
@@ -30,37 +31,44 @@ class CouponsController extends Controller
 
     public function add_coupons (Request $request){
         //  return $request['use_number'];
-        if($request['type'] == 0){
-            $coupon = new Coupons();
-            $coupon->code = $request['code'];
-            $coupon->discount = 0.00;
-            $coupon->count_number = $request['count_number'];
-            $coupon->end_at = $request['end_at'];
-            $coupon->type = $request['type'];
-            $coupon->percent = $request['discount'];
-            $coupon->code_limit = $request['code_limit'];
-            $coupon->code_max = $request['code_max'];
-            $coupon->status = $request['status'];
-            $coupon->save();
-        }else{
-            $coupon = new Coupons();
-            $coupon->code = $request['code'];
-            $coupon->discount = $request['discount'];
-            $coupon->count_number = $request['count_number'];
-            $coupon->end_at = $request['end_at'];
-            $coupon->type = $request['type'];
-            $coupon->percent = 0;
-            $coupon->code_limit = $request['code_limit'];
-            $coupon->code_max = $request['code_max'];
-            $coupon->status = $request['status'];
-            $coupon->save();
+        $validator = Validator::make($request->all(), Coupons::$rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            if($request['type'] == 0){
+                $coupon = new Coupons();
+                $coupon->code = $request['code'];
+                $coupon->discount = 0.00;
+                $coupon->count_number = $request['count_number'];
+                $coupon->end_at = $request['end_at'];
+                $coupon->type = $request['type'];
+                $coupon->percent = $request['discount'];
+                $coupon->code_limit = $request['code_limit'];
+                $coupon->code_max = $request['code_max'];
+                $coupon->status = $request['status'];
+                $coupon->save();
+            }else{
+                $coupon = new Coupons();
+                $coupon->code = $request['code'];
+                $coupon->discount = $request['discount'];
+                $coupon->count_number = $request['count_number'];
+                $coupon->end_at = $request['end_at'];
+                $coupon->type = $request['type'];
+                $coupon->percent = 0;
+                $coupon->code_limit = $request['code_limit'];
+                $coupon->code_max = $request['code_max'];
+                $coupon->status = $request['status'];
+                $coupon->save();
+            }
+            return response()->json([
+                'message' => trans('category.success_add_property'),
+                'status' => 200,
+                // 'data' => $category
+            ]);
         }
-        
-        return response()->json([
-            'message' => 'Data Found',
-            'status' => 200,
-            // 'data' => $category
-        ]);
     }
 
     public function edit ($id){
@@ -81,8 +89,14 @@ class CouponsController extends Controller
 
 
     public function update (Request $request , $id){
+        $validator = Validator::make($request->all(), Coupons::$rules);
         $coupon = Coupons::find($id);
-        if ($coupon) {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }elseif($coupon){
             if($request['type'] == 0){
                 $coupon->code = $request['code'];
                 $coupon->discount = 0.00;
@@ -95,7 +109,7 @@ class CouponsController extends Controller
                 $coupon->status = $request['status'];
                 $coupon->update();
                 return response()->json([
-                    'message' => 'Data Found 1 ',
+                    'message' => trans('category.success_update_property'),
                     'status' => 200,
                     'data' => $coupon
                 ]);
@@ -111,13 +125,12 @@ class CouponsController extends Controller
                 $coupon->status = $request['status'];
                 $coupon->update();
                 return response()->json([
-                    'message' => 'Data Found 0 ',
+                    'message' => trans('category.success_update_property'),
                     'status' => 200,
                     'data' => $coupon
                 ]);
             }
-            }
-          else {
+        } else {
             return response()->json([
                 'message' => 'Data Not Found',
                 'status' => 404,
@@ -125,6 +138,21 @@ class CouponsController extends Controller
         }
     }
 
+    public function delete ($id){
+        $category = Coupons::find($id);
+        if ($category) {
+            $category->delete();
+            return response()->json([
+                'message' => trans('category.property_delete_success'),
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Data Not Found',
+                'status' => 404,
+            ]);
+        }
+    }
 
     public function updateStatus(Request $request)
     {

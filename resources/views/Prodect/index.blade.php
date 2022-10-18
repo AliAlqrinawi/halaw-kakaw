@@ -21,7 +21,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+            <h4 class="content-title mb-0 my-auto">{{ trans('clothes.Home') }}</h4><span
+                class="text-muted mt-1 tx-13 mr-2 mb-0"> /
                 {{ trans('clothes.page_title') }}</span>
         </div>
 
@@ -36,10 +37,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message"></ul>
                 <form id="formcategory" enctype="multipart/form-data">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="row">
@@ -53,11 +55,11 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
-                            <textarea class="form-control" name="nota_en" rows="3" required></textarea>
+                            <textarea class="form-control" name="note_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
-                            <textarea class="form-control" name="nota_ar" rows="3" required></textarea>
+                            <textarea class="form-control" name="note_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
@@ -92,8 +94,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="AddCategory">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success AddCategory"
+                            id="AddCategory">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -105,10 +109,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('clothes.page_title') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message2"></ul>
                 <form id="formeditadmin" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id_prodect">
                     <div class="row">
@@ -122,11 +127,11 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_E') }} :</label>
-                            <textarea class="form-control" id="nota_en" name="nota_en" rows="3" required></textarea>
+                            <textarea class="form-control" id="nota_en" name="note_en" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Description_A') }} :</label>
-                            <textarea class="form-control" id="nota_ar" name="nota_ar" rows="3" required></textarea>
+                            <textarea class="form-control" id="nota_ar" name="note_ar" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">{{ trans('clothes.Price') }} :</label>
@@ -150,15 +155,17 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="EditClient">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success"
+                            id="EditClient">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+@can('product-view')
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -181,14 +188,14 @@
         </div>
     </div>
 </div>
-<!-- End Basic modal -->
-<!-- row -->
+@endcan
 <div class="row">
 
 
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+                @can('product-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
@@ -196,9 +203,11 @@
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                    @can('product-view')
                     <table class="table table-hover" id="get_Prodects" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -209,12 +218,17 @@
                                 <th class="border-bottom-0">{{ trans('clothes.Price') }}</th>
                                 <th class="border-bottom-0">{{ trans('clothes.Quntaty') }}</th>
                                 <th class="border-bottom-0">{{ trans('clothes.Status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                    @canany([ 'product-update' , 'product-delete' ])
+                                    {{ trans('category.Processes') }}
+                                    @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -255,7 +269,7 @@ $('#s').click(function(e) {
         // processing: true,
         bDestroy: true,
         ajax: {
-            url: '{!! url("admin/clothes/get") !!}/?&payment_status='+payment_status,
+            url: '{!! url("admin/clothes/get") !!}/?&payment_status=' + payment_status,
             cache: true
         },
         columns: [{
@@ -319,6 +333,7 @@ $('#s').click(function(e) {
                 'data': null,
                 render: function(data, row, type) {
                     return `
+                    @can('product-update')
                 <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
                 @csrf
                 <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
@@ -328,7 +343,12 @@ $('#s').click(function(e) {
                 <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
                 </form>
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('product-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
+
                 },
                 orderable: false,
                 searchable: false
@@ -393,6 +413,7 @@ var table = $('#get_Prodects').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('product-update')
                 <form action="{{ url('admin/add100/clothes') }}/${data.id}" method="post" style="display:inline;">
                 @csrf
                 <button type="submit" class="btn btn-warning btn-sm"><i class="las la-plus"></i> 100</button>
@@ -402,7 +423,12 @@ var table = $('#get_Prodects').DataTable({
                 <button type="submit" class="btn btn-purple btn-sm"><i class="las la-s">-</i> 100</button>
                 </form>
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('product-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                
+                `;
             },
             orderable: false,
             searchable: false
@@ -434,13 +460,22 @@ $(document).on('click', '.AddCategory', function(e) {
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddCategory').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCategory').modal('hide');
-            $('#formcategory')[0].reset();
-            table.ajax.reload();
+            if (response.status == 400) {
+                    // errors
+                    $('#list_error_message').html("");
+                    $('#list_error_message').addClass("alert alert-danger");
+                    $.each(response.errors, function (key, error_value) {
+                        $('#list_error_message').append('<li>' + error_value + '</li>');
+                    });
+                } else {
+                    $('#AddCategory').text('Saving');
+                    $('#error_message').html("");
+                    $('#error_message').addClass("alert alert-info");
+                    $('#error_message').text(response.message);
+                    $('#modalAddCategory').modal('hide');
+                    $('#formcategory')[0].reset();
+                    table.ajax.reload();
+                }
         }
     });
 });
@@ -464,8 +499,8 @@ $(document).on('click', '#ShowModalEditCategory', function(e) {
                 $('#id_prodect').val(id_prodect);
                 $('#title_en').val(response.data.title_en);
                 $('#title_ar').val(response.data.title_ar);
-                $('#nota_en').val(response.data.nota_en);
-                $('#nota_ar').val(response.data.nota_ar);
+                $('#nota_en').val(response.data.note_en);
+                $('#nota_ar').val(response.data.note_ar);
                 $('#price').val(response.data.price);
                 $('#quntaty').val(response.data.quntaty);
                 // if(response.data.cat_id == $('#cat_id').value){
@@ -492,7 +527,7 @@ $(document).on('click', '#EditClient', function(e) {
         image: $('#image').val(),
         status: $('#status').val(),
     };
-    // let formdata = new FormData($('#formeditadmin')[0]);
+    let formdata = new FormData($('#formeditadmin')[0]);
     var id_prodect = $('#id_prodect').val();
     console.log(data);
     $.ajaxSetup({
@@ -503,16 +538,17 @@ $(document).on('click', '#EditClient', function(e) {
     $.ajax({
         type: 'POST',
         url: '{{ url("admin/clothes/update/") }}/' + id_prodect,
-        data: data,
-        dataType: false,
+        data: formdata,
+        contentType: false,
+        processData: false,
         success: function(response) {
             console.log(response);
             if (response.status == 400) {
                 // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
+                $('#list_error_message2').html("");
+                $('#list_error_message2').addClass("alert alert-danger");
                 $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                    $('#list_error_message2').append('<li>' + error_value + '</li>');
                 });
             } else if (response.status == 404) {
                 $('#error_message').html("");

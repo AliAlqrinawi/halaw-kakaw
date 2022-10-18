@@ -30,7 +30,7 @@ class DeliveryTypesController extends Controller
     public function add_deliveryTypes (Request $request){
         Delivery_types::create($request->all());
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Delivery_types
         ]);
@@ -97,7 +97,7 @@ class DeliveryTypesController extends Controller
             }
             $Delivery_types->update();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Delivery_types
             ]);
@@ -115,7 +115,7 @@ class DeliveryTypesController extends Controller
         if ($Delivery_types) {
             $Delivery_types->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

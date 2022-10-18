@@ -34,7 +34,7 @@ class Payment_methodsController extends Controller
         $payment->slug = Str::slug($request->title_ar);
         $payment->save();
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Payment
         ]);
@@ -64,7 +64,7 @@ class Payment_methodsController extends Controller
             $payment->slug = Str::slug($request->title_ar);
             $payment->update();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $payment
             ]);
@@ -94,7 +94,7 @@ class Payment_methodsController extends Controller
         if ($payment) {
             $payment->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

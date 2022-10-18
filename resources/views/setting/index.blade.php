@@ -26,8 +26,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{trans('main_trans.Dashboard')}}</h4>
-            <span class="text-muted mt-1 tx-13 mr-2 mb-0"> / {{trans('setting.Settings')}}</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('app_users.Home') }}</h4>
+            <span class="text-muted mt-1 tx-13 mr-2 mb-0"> / {{trans('setting.page_title')}}</span>
 
         </div>
     </div>
@@ -58,8 +58,7 @@
             </div>
 
             <div class="card-body">
-
-
+            @can('setting-view')
                 <form action="{{route('setting.update')}}" method="post" autocomplete="off"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -81,7 +80,7 @@
                         @elseif($x->key_id == 'force_update')
                         <div class="col-md-10">
                             <select name="force_update" class="form-control">
-                                    <option value="1"></option>
+                                    <option value="1">نعم</option>
                                     <option value="0">لا</option>
                             </select>
                         </div>
@@ -101,10 +100,13 @@
                     </div>
                     @endforeach
                     <hr>
+                @can('setting-create')
                     <button type="submit" class="btn btn-info-gradient btn-block col-sm-2">
                         <a href="#" style="font-weight: bold; color: beige;">{{trans('setting.edit')}}</a>
                     </button>
+                @endcan
                 </form>
+                @endcan
             </div>
         </div>
     </div>

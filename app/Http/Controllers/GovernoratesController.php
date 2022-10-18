@@ -30,7 +30,7 @@ class GovernoratesController extends Controller
     public function add_governorat (Request $request){
         Governorates::create($request->all());
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Governorates
         ]);
@@ -57,7 +57,7 @@ class GovernoratesController extends Controller
         if ($Governorates) {
             $Governorates->update($request->all());
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Governorates
             ]);
@@ -75,7 +75,7 @@ class GovernoratesController extends Controller
         if ($Governorates) {
             $Governorates->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

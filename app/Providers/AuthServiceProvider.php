@@ -27,16 +27,18 @@ class AuthServiceProvider extends ServiceProvider
 
         // master user Big Admin
         Gate::before(function ($user , $permissions){
-            if($user->id == 1){
+            if($user->id == 19){
                 return true;
             }
         });
         // admin functions
         foreach( config('permission') as $permissions => $lable )
         {
-            Gate::define($permissions , function($user) use($permissions){
-                    return $user->permissions($permissions);
+            foreach($lable as $q){
+                Gate::define($q , function($user) use($q){
+                    return $user->permissions($q);
             });
+            }
         }
     }
 }

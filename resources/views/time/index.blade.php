@@ -96,6 +96,7 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+            @can('workTime-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddDeliveryType">
@@ -103,21 +104,28 @@
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('workTime-create')
                     <table class="table table-hover" id="get_DeliveryTypes" style=" text-align: center;">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
                                 <th class="border-bottom-0">{{ trans('app_users.name') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -185,9 +193,13 @@ var table = $('#get_DeliveryTypes').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('workTime-update')
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditDeliveryType" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('workTime-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteDeliveryType" data-id="${data.id}"><i class="las la-trash"></i></button>
-                        `;
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

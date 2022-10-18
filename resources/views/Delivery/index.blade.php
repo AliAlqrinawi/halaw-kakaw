@@ -115,15 +115,18 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="row row-xs wd-xl-80p">
+                @can('paymentMethod-create')
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAdddelivery">
                             <a href="#" style="font-weight: bold; color: beige;">{{ trans('delivery.add') }}</a>
                         </button>
                     </div>
+                @endcan
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('paymentMethod-view')
                     <table class="table table-hover" id="get_deliveries" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -132,12 +135,17 @@
                                 <th class="border-bottom-0">{{ trans('delivery.Delivery_cost') }}</th>
                                 <th class="border-bottom-0">{{ trans('delivery.Minimum_order') }}</th>
                                 <th class="border-bottom-0">{{ trans('category.Status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
 
@@ -211,9 +219,13 @@ var table = $('#get_deliveries').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('paymentMethod-update')
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditdelivery" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('paymentMethod-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="Deletedelivery" data-id="${data.id}"><i class="las la-trash"></i></button>
-`;
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

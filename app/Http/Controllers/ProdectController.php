@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories as Category;
 use App\Models\Clothes as Product;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class ProdectController extends Controller
 {
     public function index()
     {
+        if(Gate::denies('product-view')){
+            abort(403);
+        }
         $cat = Category::get();
         // $prodects = Product::with(['categories' , 'user'])->get();
         // dd($prodects);
@@ -18,6 +23,7 @@ class ProdectController extends Controller
     }
 
     public function get_prodect (Request $request){
+        
         $payment_status = $request->payment_status;
         
         $prodects = Product::with(['categories' , 'user']);
@@ -70,6 +76,7 @@ class ProdectController extends Controller
     }
 
     public function add_prodect (Request $request){
+        $validator = Validator::make($request->all(), Product::$rules);
         $data = $request->except('image');
         if ($request->hasFile('image')){
             $file = $request->file('image');
@@ -78,11 +85,18 @@ class ProdectController extends Controller
             $path = $file->storeAs('prodect' , $filename ,  ['disk' => 'uploads']);
             $data['image']  = $local .'/'.'uploads/'.$path;
         }
-        Product::create($data);
-        return response()->json([
-            'message' => 'Data Found',
-            'status' => 200,
-        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
+            Product::create($data);
+            return response()->json([
+                'message' => trans('category.success_add_property'),
+                'status' => 200,
+            ]);
+        }
     }
 
     public function edit ($id){
@@ -102,8 +116,14 @@ class ProdectController extends Controller
     }
 
     public function update (Request $request , $id){
+        $validator = Validator::make($request->all(), Product::$rules);
         $product = Product::find($id);
-        if ($product) {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }elseif($product) {
             $data = $request->except('image');
             if ($request->hasFile('image')){
                 if (File::exists($product->image)){
@@ -114,11 +134,11 @@ class ProdectController extends Controller
                 $local =  request()->getSchemeAndHttpHost();
                 $path = $file->storeAs('category' , $filename ,  ['disk' => 'uploads']);
                 $data['image']  = $local .'/'.'uploads/'.$path;
-                return $data['image'];
+                // return $data['image'];
             }
             $product->update($data);
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $product
             ]);
@@ -136,7 +156,7 @@ class ProdectController extends Controller
         if ($product) {
             $product->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.property_delete_success'),
                 'status' => 200,
             ]);
         } else {

@@ -13,7 +13,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="left-content">
         <div>
-            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{trans('dashboard.Wellcome') . " " . Auth::user()->name}} !</h2>
+            <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">
+                {{trans('dashboard.Wellcome') . " " . Auth::user()->name}} !</h2>
             {{--						  <p class="mg-b-0">Sales monitoring dashboard template.</p>--}}
         </div>
     </div>
@@ -73,7 +74,7 @@
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">0</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ App\Models\Order::sum('total_cost') }}</h4>
                             <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                         </div>
 
@@ -81,6 +82,19 @@
                 </div>
             </div>
             <span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,18,20,15,8,12,22,5,10,12,22,15,16,10</span>
+        </div>
+    </div>
+</div>
+<div class="row row-sm">
+    <div class="col-lg-12 col-md-12">
+        <div class="card mg-b-20">
+            <div class="card-body">
+                <div class="main-content-label mg-b-5">
+                    {{trans('home.chart')}}
+                </div>
+                <p class="mg-b-20">{{trans('home.number_chart')}}</p>
+                <div id="echart1" class="ht-300"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -153,38 +167,228 @@
 <!-- Internal Select2.full.min js -->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <!--Internal App calendar js -->
-{{--    <script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>--}}
+<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
 <script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
-
 <script>
-// Birthday Events Source
-var azBirthdayEvents = {
-    id: 2,
-    backgroundColor: '#3bb001',
-    borderColor: '#3bb001',
-    textColor: '#fff',
-    events: [
 
-    ]
-};
-var azHolidayEvents = {
-    id: 3,
-    backgroundColor: '#f10075',
-    borderColor: '#f10075',
-    textColor: '#fff',
-    events: [
+$(function(e) {
+    'use strict'
+    /*----Echart2----*/
+    var chartdata = [{
+        name: 'TEST',
+        type: 'bar',
+        barMaxWidth: 20,
+        data: [0,1,5,25,30,40,100]
 
-    ]
-};
-var azOtherEvents = {
-    id: 4,
-    backgroundColor: '#ffb52b',
-    borderColor: '#ffb52b',
-    textColor: '#fff',
-    events: [
+    },  {
+        name: 'TEST1',
+        type: 'bar',
+        barMaxWidth: 20,
+        data: [3,50,20,25,50,20,80]
+    
+    }];
+    var chart = document.getElementById('echart1');
+    var barChart = echarts.init(chart);
+    var option = {
+        valueAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            splitArea: {
+                show: true,
+                areaStyle: {
+                    color: ['rgba(171, 167, 167,0.2)']
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: ['rgba(171, 167, 167,0.2)']
+                }
+            }
+        },
+        grid: {
+            top: '6',
+            right: '0',
+            bottom: '17',
+            left: '25',
+        },
+        xAxis: {
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#5f6d7a'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            position: ['35%', '32%'],
+        },
+        yAxis: {
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#5f6d7a'
+            }
+        },
+        series: chartdata,
+        color: ['#285cf7', '#f7557a' ]
+    };
+    barChart.setOption(option);
 
-    ]
-};
+
+
+
+
+    /*----BarChartEchart----*/
+    var echartBar = echarts.init(document.getElementById('index'), {
+        color: ['#285cf7', '#f7557a'],
+        categoryAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: '#888180'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: ['rgba(171, 167, 167,0.2)']
+                }
+            }
+        },
+        grid: {
+            x: 40,
+            y: 20,
+            x2: 40,
+            y2: 20
+        },
+        valueAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: '#888180'
+                }
+            },
+            splitArea: {
+                show: true,
+                areaStyle: {
+                    color: ['rgba(255,255,255,0.1)']
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: ['rgba(171, 167, 167,0.2)']
+                }
+            }
+        },
+    });
+    echartBar.setOption({
+        tooltip: {
+            trigger: 'axis',
+            position: ['35%', '32%'],
+        },
+        legend: {
+            data: ['New Account', 'Expansion Account']
+        },
+        toolbox: {
+            show: false
+        },
+        calculable: false,
+        xAxis: [{
+            type: 'category',
+            data: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#5f6d7a'
+            }
+        }],
+        yAxis: [{
+            type: 'value',
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(171, 167, 167,0.2)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#5f6d7a'
+            }
+        }],
+        series: [{
+            name: 'View Price',
+            type: 'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint: {
+                data: [{
+                    type: 'max',
+                    name: ''
+                }, {
+                    type: 'min',
+                    name: ''
+                }]
+            },
+            markLine: {
+                data: [{
+                    type: 'average',
+                    name: ''
+                }]
+            }
+        }, {
+            name: ' Purchased Price',
+            type: 'bar',
+            
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint: {
+                data: [{
+                    name: 'Purchased Price',
+                    value: 182.2,
+                    xAxis: 7,
+                    // yAxis: 183,
+                }, {
+                    name: 'Purchased Price',
+                    value: 2.3,
+                    xAxis: 11,
+                    // yAxis: 3
+                }]
+            },
+            markLine: {
+                data: [{
+                    type: 'average',
+                    name: ''
+                }]
+            }
+        }]
+    });
+});
+
 </script>
-
+ 
 @endsection

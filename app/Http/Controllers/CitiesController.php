@@ -56,7 +56,7 @@ class CitiesController extends Controller
     public function add_Cities (Request $request){
         Cities::create($request->all());
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Cities
         ]);
@@ -85,7 +85,7 @@ class CitiesController extends Controller
         if ($Cities) {
             $Cities->update($request->all());
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Cities
             ]);
@@ -103,7 +103,7 @@ class CitiesController extends Controller
         if ($Cities) {
             $Cities->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.property_delete_success'),
                 'status' => 200,
             ]);
         } else {
@@ -122,7 +122,7 @@ class CitiesController extends Controller
         $categories->status = request('status');
         $categories->update();
         return response()->json([
-            'message' => 'Update Success',
+            // 'message' => 'Update Success',
             'status' => 200,
         ]);
     }

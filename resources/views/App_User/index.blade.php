@@ -21,8 +21,9 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('app_users.Home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-            {{ trans('app_users.app') }}</span>
+            <h4 class="content-title mb-0 my-auto">{{ trans('app_users.Home') }}</h4><span
+                class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                {{ trans('app_users.app') }}</span>
         </div>
 
     </div>
@@ -36,8 +37,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ trans('app_users.app') }}</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                    type="button"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ trans('app_users.app') }}</h6><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="formcategory" enctype="multipart/form-data">
@@ -54,20 +55,110 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success AddCategory" id="Addcredit1">{{ trans('category.Save') }}</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('category.Close') }}</button>
+                        <button type="submit" class="btn btn-success AddCategory"
+                            id="Addcredit1">{{ trans('category.Save') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('category.Close') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Order Management</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="payment/update" method="post" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="_token" value="o2RMVxMUvjafmzNYvClExYr7nxek043oY40uUqoM">
+                    <input type="hidden" name="id" id="id" value="">
+                    <div class="row">
+                        <table class="table table-hover" id="example1" data-page-length="50"
+                            style=" text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>العنوان</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <td id="Numberorders"></td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans('app_users.activation_code') }}</th>
+                                    <td id="Totalinvoices"></td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans('app_users.mobile') }}</th>
+                                    <td id="pieces"></td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans('app_users.name') }}</th>
+                                    <td id="date"></td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans('app_users.charged_balance') }}</th>
+                                    <td id="Payment"></td>
+                                </tr>
+                                <!-- <tr>
+                                    <th>Governorate</th>
+                                    <td id="Governorate"></td>
+                                </tr>
+                                <tr>
+                                    <th>Delivery time</th>
+                                    <td id="Delivery_time"></td>
+                                </tr>
+                                <tr>
+                                    <th>Customer Number</th>
+                                    <td id="Customer_Number"></td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td id="Name"></td>
+                                </tr>
+                                <tr>
+                                    <th>Mobile number</th>
+                                    <td id="Mobile_number"></td>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <td id="Total"></td>
+                                </tr>
+                                <tr>
+                                    <th>Device type</th>
+                                    <td id="Device_type"></td>
+                                </tr>
+                                <tr>
+                                    <th>Notes</th>
+                                    <td id="Notes"></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                    @can('customer-view')
                     <table class="table table-hover" id="get_appUser" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -78,12 +169,17 @@
                                 <th class="border-bottom-0">{{ trans('app_users.charged_balance') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.status') }}</th>
                                 <th class="border-bottom-0">{{ trans('app_users.activation_code') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                    @canany([ 'categories-update' , 'categories-delete' ])
+                                    {{ trans('category.Processes') }}
+                                    @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -161,8 +257,16 @@ var table = $('#get_appUser').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.activation_code}" data-payment="${data.mobile_number}"
+                data-address="${data.first_name + " " + data.last_name}" data-delivery_type="${data.credit}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
+                @can('customer-update')
                 <button class="modal-effect btn btn-sm btn-info" id="Addcredit" data-id="${data.id}"><i class="fa fa-cogs"></i> {{ trans('app_users.Add_Credit') }}</button>
-                    <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                @endcan
+                @can('customer-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteappUser" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                
+                `;
             },
             orderable: false,
             searchable: false
@@ -317,6 +421,29 @@ $(document).on('click', '#Addcredit', function(e) {
             }
         });
     });
+});
+$(document).on('click', '#Management', function(e) {
+    e.preventDefault();
+    $('#exampleModal2').modal('show');
+    var id = $(this).data('id');
+    var created = $(this).data('created');
+    var payment = $(this).data('payment');
+    var address = $(this).data('address');
+    var delivery_type = $(this).data('delivery_type');
+    // var user_id = $(this).data('user_id');
+    // var user_name = $(this).data('user_name');
+    // var mobile_number = $(this).data('mobile_number');
+    // var user_agent = $(this).data('user_agent');
+    $('#Numberorders').text(id);
+    $('#Totalinvoices').text(created);
+    $('#pieces').text(payment);
+    $('#date').text(address);
+    $('#Payment').text(delivery_type);
+    // $('#Customer_Number').text(user_id);
+    // $('#Name').text(user_name);
+    // $('#Mobile_number').text(mobile_number);
+    // $('#Device_type').text(user_agent);
+   
 });
 </script>
 @endsection

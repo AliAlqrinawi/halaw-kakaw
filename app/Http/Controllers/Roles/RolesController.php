@@ -7,21 +7,33 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class RolesController extends Controller
 {
     public function index (){
+        if(Gate::denies('role-view')){
+            abort(403);
+        }
+        // $categories = implode(",",$p['categories']);
+        // $array = [$categories , $p['index']];
+        // return $array;
         return view('roles.index');
     }
     
     public function get_roles (){
+        if(Gate::denies('role-view')){
+            abort(403);
+        }
         $roles = Role::withCount('users')->with('users')->get();
+        $pop = config('permission');
         if ($roles) {
             return response()->json([
                 'message' => 'Data Found',
                 'status' => 200,
-                'data' => $roles
+                'data' => $roles,
+                // 'pop' => array_reverse($pop)
             ]);
         } else {
             return response()->json([
@@ -66,16 +78,26 @@ class RolesController extends Controller
         }
     }
 
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id , $user_id)
     {
-        $request->validate(['name' => 'required' , 'permissions' => 'required'] );
-        $role->update($request->all());
-        
-        return redirect()->route('roles.index')->with('success' , 'updated is success.');
+        $role = Role::find($id);
+        $role->name = $request->name;
+        $role->permissions = $request->permissions;
+        $role->update();
+        $user = User::find($user_id);
+        $user->name = $request->user_name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->update();
+        return response()->json([
+            'message' => 'Data Found',
+            'status' => 200,
+        ]);
     }
 
-    public function destroy($id)
+    public function destroy($id , $user_id)
     {
         Role::destroy($id);
+        User::destroy($user_id);
     }
 }

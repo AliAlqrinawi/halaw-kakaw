@@ -30,7 +30,7 @@ class timesController extends Controller
     public function add_times (Request $request){
         Times::create($request->all());
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $Times
         ]);
@@ -62,7 +62,7 @@ class timesController extends Controller
             // $Times->time_to = $request->time_to;
             $Times->update($request->all());
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $Times
             ]);
@@ -80,7 +80,7 @@ class timesController extends Controller
         if ($Times) {
             $Times->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

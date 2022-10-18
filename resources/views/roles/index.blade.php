@@ -20,13 +20,23 @@
     <div class="col-xl-12 col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3>roles
+                <div class="row row-xs wd-xl-80p">
+                    @can('role-create')
+                    <div class="col-sm-6 col-md-3 mg-t-10">
+                        <button class="btn btn-info-gradient btn-block ShowModel" id="ShowModalAddCategory">
+                            <a href="#" style="font-weight: bold; color: beige;">roles</a>
+                        </button>
+                    </div>
+                    @endcan
+                </div>
+                <!-- <h3>roles
                     <button class="btn btn-primary float-right ShowModel">Add
                         roles</button>
-                </h3>
+                </h3> -->
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('role-view')
                     <table class="table table-hover" id="get_roles">
                         <div class="alert alert-success message" style="display:none"></div>
                         <thead>
@@ -37,11 +47,16 @@
                                 <th class="border-bottom-0 s">Permissions</th>
                                 <th class="border-bottom-0">Count</th>
                                 <th class="border-bottom-0">Created</th>
-                                <th class="border-bottom-0">Processes</th>
+                                <th class="border-bottom-0">
+                                    @canany([ 'role-update' , 'role-delete' ])
+                                    Processes
+                                    @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -111,16 +126,23 @@ $(document).ready(function() {
             {
                 'data': null,
                 render: function(data, row, type) {
-                    return `<a class="modal-effect btn btn-sm btn-info ShowEditeModel" data-id="${data.id}" data-user="${data.users[0].id}" href="#"><i class="las la-pen"></i></a>
-                                <button class="modal-effect btn btn-sm btn-danger DeleteRole" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                    return `
+                    @can('role-update')
+                    <a class="modal-effect btn btn-sm btn-info ShowEditeModel" data-id="${data.id}" data-user="${data.users[0].id}" href="#"><i class="las la-pen"></i></a>
+                    @endcan
+                    @can('role-update')
+                    <button class="modal-effect btn btn-sm btn-danger DeleteRole" data-id="${data.id}" data-user="${data.users[0].id}"><i class="las la-trash"></i></button>
+                    @endcan
+                    `;
+
                 },
                 orderable: false,
                 searchable: false
             },
         ],
     });
-    $('#get_roles').addClass('col-sm-12');
 
+    $('#get_roles').addClass('col-sm-12');
     const points = new Array();
     var b;
     $('.main-toggle').click(function() {
@@ -190,64 +212,161 @@ $(document).ready(function() {
 
         $('#EditeRolesModal').modal('show');
         $.ajax({
-        type: 'GET',
-        url: 'http://127.0.0.1:8000/admin/show/' + id + "/" + user_id,
-        data: "",
-        success: function(response) {
-            console.log(response);
-            if (response.status == 404) {
-                console.log('error');
-                $('#error_message').html("");
-                $('#error_message').addClass("alert alert-danger");
-                $('#error_message').text(response.message);
-            } else {
-                $('#edit_user_name').val(response.user.name);
-                $('#edit_email').val(response.user.email);
-                $('#edit_password').val(response.user.password);
-                if( $('input:radio[name="rdio"]').val() == response.data.name){
-                    $('.A').css("background-color", "#D8D8D8");
-                    $('.A').attr('checked' , 'checked');
+            type: 'GET',
+            url: 'http://127.0.0.1:8000/admin/show/' + id + "/" + user_id,
+            data: "",
+            success: function(response) {
+                // console.log(response);
+                if (response.status == 404) {
+                    console.log('error');
+                    $('#error_message').html("");
+                    $('#error_message').addClass("alert alert-danger");
+                    $('#error_message').text(response.message);
+                } else {
+                    function r(f = []) {
+                        for (var i = 0; i < f.length; i++) {
+                            if (f[i] == $('.' + f[i]).data('v')) {
+                                $('.' + f[i] + "").removeClass('on');
+                            } else {
+                                $('.' + f[i]).removeClass('on');
+                            }
+                        }
+                    }
+                    var Permissions = ['role-view', 'role-create', 'role-update',
+                        'role-delete'
+                    ];
+                    var Members = ['member-view', 'member-create', 'member-update',
+                        'member-delete'
+                    ];
+                    var Settings = ['setting-view', 'setting-create', 'setting-update',
+                        'setting-delete'
+                    ];
+                    var categories = ['categories-view', 'categories-create',
+                        'categories-update', 'categories-delete'
+                    ];
+                    var ads = ['ads-view', 'ads-create', 'ads-update', 'ads-delete'];
+                    var product = ['product-view', 'product-create', 'product-update',
+                        'product-delete'
+                    ];
+                    var Customers = ['customer-view', 'customer-create', 'customer-update',
+                        'customer-delete'
+                    ];
+                    var order = ['order-view', 'order-create', 'order-update',
+                        'order-delete'
+                    ];
+                    var contact = ['contact-view', 'contact-create', 'contact-update',
+                        'contact-delete'
+                    ];
+                    var productList = ['productList-view', 'productList-create',
+                        'productList-update', 'productList-delete'
+                    ];
+                    var paymentMethod = ['paymentMethod-view', 'paymentMethod-create',
+                        'paymentMethod-update', 'paymentMethod-delete'
+                    ];
+                    var deliveryMethods = ['deliveryMethods-view', 'deliveryMethods-create',
+                        'deliveryMethods-update', 'deliveryMethods-delete'
+                    ];
+                    var Reports = ['report-view', 'report-create', 'report-update',
+                        'report-delete'
+                    ];
+                    var discountCodes = ['discountCodes-view', 'discountCodes-create',
+                        'discountCodes-update', 'discountCodes-delete'
+                    ];
+                    var workTime = ['workTime-view', 'workTime-create', 'workTime-update',
+                        'workTime-delete'
+                    ];
+                    var deliveryHour = ['deliveryHour-view', 'deliveryHour-create',
+                        'deliveryHour-update', 'deliveryHour-delete'
+                    ];
+                    var region = ['region-view', 'region-create', 'region-update',
+                        'region-delete'
+                    ];
+                    r(Permissions);
+                    r(Members);
+                    r(Settings);
+                    r(categories);
+                    r(ads);
+                    r(product);
+                    r(Customers);
+                    r(order);
+                    r(contact);
+                    r(productList);
+                    r(paymentMethod);
+                    r(deliveryMethods);
+                    r(Reports);
+                    r(discountCodes);
+                    r(workTime);
+                    r(deliveryHour);
+                    r(region);
+                    $('#edit_user_name').val(response.user.name);
+                    $('#edit_email').val(response.user.email);
+                    $('#edit_password').val(response.user.password);
+                    if ($('input:radio[name="rdio"]').val() == response.data.name) {
+                        $('.A').css("background-color", "#D8D8D8");
+                        $('.A').attr('checked', 'checked');
+                    }
+                    for (var i = 0; i < response.data.permissions.length; i++) {
+                        // console.log(response.data.permissions[i]);
+                        if (response.data.permissions[i] == $('.' + response.data
+                                .permissions[i]).data('v')) {
+                            $('.' + response.data.permissions[i] + "").addClass('on');
+                        } else {
+                            $('.' + response.data.permissions[i]).addClass('on');
+                        }
+                    }
                 }
-                // console.log(response.data.permissions);
-                // for(var i = 0 ; i < response.data.permissions.length ; i++){
-                //     console.log(response.data.permissions);
-                // }
-                $.each(response.data.permissions, function (key, error_value) {
-                    // if($(b).data('v') == ""+error_value){
-                    //     $(b).addClass('on');
-                    // }
-                    
-                    var b = "."+error_value;
-                    $(b).addClass('on');
-                    
-                });
             }
-        }
-    });
-    });
-    $(document).on('click', '.DeleteRole', function (e) {
+        });
+        $('.ERolesBut').click(function(e) {
             e.preventDefault();
-            var id_admin = $(this).data('id');
+            var data = {
+                name: $(".At:checked").val(),
+                permissions: points,
+                user_name: $('#edit_user_name').val(),
+                email: $('#edit_email').val(),
+                password: $('#edit_password').val()
+            };
+            console.log(data);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({
-                type: 'DELETE',
-                url: 'http://127.0.0.1:8000/admin/roles/' + id_admin,
-                data: '',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    $('#error_message').html("");
-                    $('#error_message').addClass("alert alert-danger");
-                    $('#error_message').text(response.message);
+                type: 'post',
+                url: '{{ url("admin/update/r") }}/' + id + "/" + user_id,
+                data: data,
+                success: function(response) {
+                    $('#CreateRolesModal').modal('hide');
                     table.ajax.reload();
                 }
             });
         });
-});
+    });
 
+    $(document).on('click', '.DeleteRole', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var admin_id = $(this).data('user');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'DELETE',
+            url: '{{ url("admin/destroy") }}/' + id + "/" + admin_id,
+            data: '',
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                $('#error_message').html("");
+                $('#error_message').addClass("alert alert-danger");
+                $('#error_message').text(response.message);
+                table.ajax.reload();
+            }
+        });
+    });
+});
 </script>
 @endsection

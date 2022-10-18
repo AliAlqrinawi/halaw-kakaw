@@ -16,4 +16,9 @@ class Pieces extends Model
         return $this->hasMany(Order::class , 'order_id' , 'id');
     }
 
+    public function clothe()
+    {
+        return $this->belongsTo(Clothes::class , 'clothe_id' , 'id');
+    }
+
 }

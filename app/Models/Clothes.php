@@ -16,6 +16,17 @@ class Clothes extends Model
     'quntaty' , 'cat_id' , 'user_id'
     , 'status'];
 
+
+    public static $rules = [
+        'title_ar' => 'required|min:3',
+        'title_en' => 'required|min:3',
+        'note_ar' => 'required|min:3',
+        'note_en' => 'required|min:3',
+        'price' => 'required|numeric',
+        'quntaty' => 'required|numeric',
+        'image' => 'required',
+    ];
+
     public function categories()
     {
         return $this->belongsTo(Categories::class , 'cat_id'  , 'id');
@@ -34,8 +45,13 @@ class Clothes extends Model
     {
         return $this->hasMany(Ads::class , 'product_id ' , 'id');
     }
+
     public function favorites()
     {
-        return $this->hasMany('\App\Models\Fav','charity_id','id');
+        return $this->hasMany('\App\Models\Fav', 'charity_id', 'id');
+    }
+    public function Pieces()
+    {
+        return $this->hasMany(Pieces::class, 'clothe_id', 'id');
     }
 }

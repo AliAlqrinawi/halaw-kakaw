@@ -28,6 +28,10 @@ return [
     'all' => 'All',
     'Details' => 'Details',
     'Sarech' => 'Sarech',
+    'Request_Accept' => 'Request Accept',
+    'Charged' => 'Charged',
+    'Receipt confirmed' => 'Receipt confirmed',
+    
     'js_lang' => [
         'activated' => 'مفعل',
         'disactivated' => 'غير مفعل',

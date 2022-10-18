@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Categories as Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
     public function category (){
-        return view('Category/index');
+        if(Gate::denies('categories-view')){
+            abort(403);
+        }
+        return view('Category.index');
     }
 
     public function get_categories (){
@@ -29,6 +34,7 @@ class CategoriesController extends Controller
     }
 
     public function add_category (Request $request){
+        $validator = Validator::make($request->all(), Category::$rules);
         $data = $request->except('image');
         if ($request->hasFile('image')){
             $file = $request->file('image');
@@ -43,12 +49,19 @@ class CategoriesController extends Controller
         // $category->image = $request->image;
         // $category->status = $request->status;
         // $category->save();
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else{
         Category::create($data);
-        return response()->json([
-            'message' => trans('category.js_lang.success_add_property'),
-            'status' => 200,
-            // 'data' => $category
-        ]);
+            return response()->json([
+                'message' => trans('category.success_add_property'),
+                'status' => 200,
+                // 'data' => $category
+            ]);
+        }
     }
 
 
@@ -70,23 +83,26 @@ class CategoriesController extends Controller
     }
 
     public function update (Request $request , $id){
+        //  return $request->hasFile('image');
+        $validator = Validator::make($request->all(), Category::$rules);
         $category = Category::find($id);
-        if ($category) {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        }else if ($category) {
             $data = $request->except('image');
             if ($request->hasFile('image')){
-                if (File::exists($category->image)){
-                    File::delete($category->image);
-                }
                 $file = $request->file('image');
                 $filename = $file->getClientOriginalName();
                 $local =  request()->getSchemeAndHttpHost();
                 $path = $file->storeAs('category' , $filename ,  ['disk' => 'uploads']);
                 $data['image']  = $local .'/'.'uploads/'.$path;
-                return $data['image'];
             }
             $category->update($data);
             return response()->json([
-                'message' => trans('category.js_lang.success_update_property'),
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $category
             ]);
@@ -104,7 +120,7 @@ class CategoriesController extends Controller
         if ($category) {
             $category->delete();
             return response()->json([
-                'message' => trans('category.js_lang.property_delete_success'),
+                'message' => trans('category.property_delete_success'),
                 'status' => 200,
             ]);
         } else {
@@ -123,7 +139,7 @@ class CategoriesController extends Controller
         $categories->status = request('status');
         $categories->update();
         return response()->json([
-            'message' => 'Update Success',
+            // 'message' => 'Update Success',
             'status' => 200,
         ]);
     }

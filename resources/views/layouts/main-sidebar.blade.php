@@ -35,20 +35,22 @@
                 </a>
             </li>
             <li class="side-item side-item-category">General</li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
-                    <img class="side-menu__icon" style=" width: 30px; height: 30px;"
-                        src="{{url('https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-monitor-online-education-icongeek26-outline-colour-icongeek26-1.png')}}" />
-                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.users')}}</span>
-                    <i class="angle fe fe-chevron-down"></i></a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('admin') }}">{{trans('menu.admins')}}</a></li>
-                    <li><a class="slide-item" style=" font-weight: bold;"
-                            href="{{ route('client') }}">{{trans('menu.customers')}}</a></li>
-                </ul>
-            </li>
-
+            @can('member-view')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
+                        <img class="side-menu__icon" style=" width: 30px; height: 30px;"
+                            src="{{url('https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-monitor-online-education-icongeek26-outline-colour-icongeek26-1.png')}}" />
+                        <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.users')}}</span>
+                        <i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item" style=" font-weight: bold;"
+                                href="{{ route('admin') }}">{{trans('menu.admins')}}</a></li>
+                        <!-- <li><a class="slide-item" style=" font-weight: bold;"
+                                href="{{ route('client') }}">{{trans('menu.customers')}}</a></li> -->
+                    </ul>
+                </li>
+            @endcan
+            @can('role-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('roles.index') }}">
                     <img class="side-menu__icon" src="{{url('https://img.icons8.com/nolan/344/service.png')}}"
@@ -56,7 +58,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.roles')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('categories-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('category') }}">
                     <img class="side-menu__icon"
@@ -65,7 +68,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.cats')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('product-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('prodect') }}">
                     <img class="side-menu__icon"
@@ -74,7 +78,23 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.products')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('productList-view')
+            <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
+                    <img class="side-menu__icon" style=" width: 30px; height: 30px;"
+                        src="{{url('https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-monitor-online-education-icongeek26-outline-colour-icongeek26-1.png')}}" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.notifyuser')}}</span>
+                    <i class="angle fe fe-chevron-down"></i></a>
+                <ul class="slide-menu">
+                    <li><a class="slide-item" style=" font-weight: bold;"
+                            href="{{ route('mmm') }}">{{trans('menu.better')}}</a></li>
+                    <li><a class="slide-item" style=" font-weight: bold;"
+                            href="{{ route('aaa') }}">{{trans('menu.modern')}}</a></li>
+                </ul>
+            </li>
+            @endcan
+            @can('discountCodes-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('coupons') }}">
                     <img class="side-menu__icon"
@@ -83,7 +103,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.coupons')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('ads-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('ads') }}">
                     <img class="side-menu__icon"
@@ -92,7 +113,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.ads')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('customer-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('app_user') }}">
                     <img class="side-menu__icon"
@@ -101,7 +123,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.appusers')}}</span>
                 </a>
             </li>
-            
+            @endcan
+            @can('order-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('orders') }}">
                     <img class="side-menu__icon"
@@ -110,7 +133,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.order')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('contact-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('contact') }}">
                     <img class="side-menu__icon"
@@ -119,7 +143,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.contact')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('paymentMethod-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('payment') }}">
                     <img class="side-menu__icon"
@@ -128,7 +153,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.payment')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('Worktime-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('times') }}">
                     <img class="side-menu__icon"
@@ -137,7 +163,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.times')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('deliveryHour-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('deliveryTypes') }}">
                     <img class="side-menu__icon"
@@ -146,7 +173,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.deliveryTypes')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('deliveryMethods-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('delivery') }}">
                     <img class="side-menu__icon"
@@ -155,7 +183,8 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.delivery')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('region-view')
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('countries') }}">
                     <img class="side-menu__icon"
@@ -164,7 +193,18 @@
                     <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.regions')}}</span>
                 </a>
             </li>
-
+            @endcan
+            @can('region-view')
+            <li class="slide">
+                <a class="side-menu__item" href="{{ route('cities') }}">
+                    <img class="side-menu__icon"
+                        src="{{url('https://img.icons8.com/nolan/344/region-code.png')}}"
+                        style=" width: 30px; height: 30px;" />
+                    <span class="side-menu__label" style=" font-weight: bold;">{{trans('menu.cities')}}</span>
+                </a>
+            </li>
+            @endcan
+            @can('setting-view')
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
                     <img class="side-menu__icon" style=" width: 30px; height: 30px;"
@@ -178,6 +218,7 @@
                             href="{{ route('setting.social') }}">{{trans('menu.social')}}</a></li>
                 </ul>
             </li>
+            @endcan
         </ul>
     </div>
 </aside>

@@ -40,6 +40,7 @@
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <ul id="list_error_message"></ul>
                 <form id="formcategory" enctype="multipart/form-data">
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -88,6 +89,7 @@
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+                <ul id="list_error_message2"></ul>
                 <form id="formeditadmin" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id_category">
                     <div class="row">
@@ -138,6 +140,7 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+            @can('categories-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddCategory">
@@ -145,9 +148,11 @@
                         </button>
                     </div>
                 </div>
+            @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('categories-view')
                     <table class="table table-hover" id="get_categories" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -156,12 +161,17 @@
                                 <th class="border-bottom-0">{{ trans('category.Description') }}</th>
                                 <th class="border-bottom-0">{{ trans('category.Image') }}</th>
                                 <th class="border-bottom-0">{{ trans('category.Status') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'categories-update' , 'categories-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
 
@@ -248,10 +258,15 @@ var table = $('#get_categories').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('Products-view')
                 <a href="{{ url('admin/clothes') }}/${data.id}" class="btn btn-success btn-sm" title="الاصناف"><i class="fa fa-clipboard"></i> {{ trans('category.Prodects') }}</a>
+                @endcan
+                @can('categories-update')
                 <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('categories-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
-                                
+                @endcan          
                                 `;
             },
             orderable: false,
@@ -283,13 +298,23 @@ $(document).on('click', '.AddCategory', function(e) {
         processData: false,
         success: function(response) {
             // console.log("Done");
-            $('#AddCategory').text('Saving');
-            $('#error_message').html("");
-            $('#error_message').addClass("alert alert-info");
-            $('#error_message').text(response.message);
-            $('#modalAddCategory').modal('hide');
-            $('#formcategory')[0].reset();
-            table.ajax.reload();
+            if (response.status == 400) {
+                    // errors
+                    $('#list_error_message').html("");
+                    $('#list_error_message').addClass("alert alert-danger");
+                    $.each(response.errors, function (key, error_value) {
+                        $('#list_error_message').append('<li>' + error_value + '</li>');
+                    });
+                } else {
+                    $('#AddCategory').text('Saving');
+                    $('#error_message').html("");
+                    $('#error_message').addClass("alert alert-success");
+                    $('#error_message').text(response.message);
+                    $('#modalAddCategory').modal('hide');
+                    $('#formcategory')[0].reset();
+                    table.ajax.reload();
+                }
+
         }
     });
 });
@@ -334,7 +359,7 @@ $(document).on('click', '#EditClient', function(e) {
         image: $('#image').val(),
         status: $('#status').val(),
     };
-    // let formdata = new FormData($('#formeditadmin')[0]);
+    let formdata = new FormData($('#formeditadmin')[0]);
     var id_category = $('#id_category').val();
     console.log(data);
     $.ajaxSetup({
@@ -345,16 +370,17 @@ $(document).on('click', '#EditClient', function(e) {
     $.ajax({
         type: 'POST',
         url: '{{ url("admin/category/update") }}/' + id_category,
-        data: data,
-        // dataType: false,
+        data: formdata,
+        contentType: false,
+        processData: false,
         success: function(response) {
             console.log(response);
             if (response.status == 400) {
                 // errors
-                $('#list_error_messagee').html("");
-                $('#list_error_messagee').addClass("alert alert-danger");
+                $('#list_error_message2').html("");
+                $('#list_error_message2').addClass("alert alert-danger");
                 $.each(response.errors, function(key, error_value) {
-                    $('#list_error_messagee').append('<li>' + error_value + '</li>');
+                    $('#list_error_message2').append('<li>' + error_value + '</li>');
                 });
             } else if (response.status == 404) {
                 $('#error_message').html("");
@@ -363,7 +389,7 @@ $(document).on('click', '#EditClient', function(e) {
             } else {
                 $('#EditClient').text('Saving');
                 $('#error_message').html("");
-                $('#error_message').addClass("alert alert-info");
+                $('#error_message').addClass("alert alert-success");
                 $('#error_message').text(response.message);
                 $('#modalEditCategory').modal('hide');
                 table.ajax.reload();

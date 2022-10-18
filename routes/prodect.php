@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProdectController;
+use App\Http\Controllers\ProductsDetailsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

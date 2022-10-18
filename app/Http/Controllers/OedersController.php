@@ -34,7 +34,7 @@ class OedersController extends Controller
 
         Order::create($request);
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             // 'data' => $category
         ]);
@@ -63,7 +63,7 @@ class OedersController extends Controller
         if ($category) {
             $category->update($request);
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $category
             ]);
@@ -81,7 +81,7 @@ class OedersController extends Controller
         if ($category) {
             $category->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {
@@ -95,12 +95,21 @@ class OedersController extends Controller
 
     public function updateStatus(Request $request)
     {
+        // return $request->all();
         $id = $request->id;
         $categories = Order::find($id);
-        $categories->status = request('status');
+        if($request->status == 'new'){
+            $categories->status = 'shipping';
+        }
+        if($request->status == 'shipping'){
+            $categories->status = 'shipping_complete';
+        }
+        if($request->status == 'shipping_complete'){
+            $categories->status = 'complete';
+        }
         $categories->update();
         return response()->json([
-            'message' => 'Update Success',
+            // 'message' => 'Update Success',
             'status' => 200,
         ]);
     }

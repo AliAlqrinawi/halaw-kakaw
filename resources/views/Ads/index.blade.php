@@ -24,7 +24,6 @@
             <h4 class="content-title mb-0 my-auto">{{ trans('ads.home') }}</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
             {{ trans('ads.content_title') }}</span>
         </div>
-
     </div>
 </div>
 <!-- breadcrumb -->
@@ -185,6 +184,7 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+            @can('ads-create')
                 <div class="row row-xs wd-xl-80p">
                     <div class="col-sm-6 col-md-3 mg-t-10">
                         <button class="btn btn-info-gradient btn-block" id="ShowModalAddAds">
@@ -192,9 +192,11 @@
                         </button>
                     </div>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('ads-view')
                     <table class="table table-hover" id="get_Ads" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -205,12 +207,17 @@
                                 <th class="border-bottom-0">{{ trans('ads.cost') }}</th>
                                 <th class="border-bottom-0">{{ trans('ads.Status') }}</th>
                                 <th class="border-bottom-0">{{ trans('ads.Created_at') }}</th>
-                                <th class="border-bottom-0">{{ trans('category.Processes') }}</th>
+                                <th class="border-bottom-0">
+                                @canany([ 'ads-update' , 'ads-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                @endcan
                 </div>
             </div>
         </div>
@@ -282,8 +289,14 @@ var table = $('#get_Ads').DataTable({
         {
             'data': null,
             render: function(data, row, type) {
-                return `<button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
-                                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAds" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                return `
+                @can('ads-update')
+                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditAds" data-id="${data.id}"><i class="las la-pen"></i></button>
+                @endcan
+                @can('ads-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteAds" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false

@@ -8,6 +8,8 @@ return [
     'zon_name' => 'أسم الحى',
     'page_title_city' => 'عرض كامل المناطق',
     'page_title_zon' => 'عرض كامل الاحياء',
+    'add' => 'اضافة محافظات',
+    'Cities' => 'احياء المنطقة',
     'js_lang' => [
         'success_add' => 'تم اضافة المدينة بنجاح',
         'success_update' => 'تم تحديث المدينة بنجاح',

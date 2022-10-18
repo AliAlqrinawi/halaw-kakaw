@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UsersAndAdminController extends Controller
@@ -14,6 +15,9 @@ class UsersAndAdminController extends Controller
 
     // Admins
     public function admin (){
+        if(Gate::denies('member-view')){
+            abort(403);
+        }
         return view('Admin/index');
     }
 
@@ -49,7 +53,7 @@ class UsersAndAdminController extends Controller
         $role_user->user_id = $admin->id;
         $role_user->save();
         return response()->json([
-            'message' => 'Data Found',
+            'message' => trans('category.success_add_property'),
             'status' => 200,
             'data' => $admin
         ]);
@@ -80,7 +84,7 @@ class UsersAndAdminController extends Controller
             $admin->password = Hash::make($request->password);
             $admin->update();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_update_property'),
                 'status' => 200,
                 'data' => $admin
             ]);
@@ -97,7 +101,7 @@ class UsersAndAdminController extends Controller
         if ($admin) {
             $admin->delete();
             return response()->json([
-                'message' => 'Data Found',
+                'message' => trans('category.success_delete_property'),
                 'status' => 200,
             ]);
         } else {

@@ -121,6 +121,7 @@
         </div>
     </div>
 </div>
+@can('order-view')
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
@@ -170,11 +171,13 @@
         </div>
     </div>
 </div>
+@endcan
 <div class="row">
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
+                @can('order-view')
                     <table class="table table-hover" id="get_categories" style=" text-align: center;">
                         <thead>
                             <tr>
@@ -183,12 +186,17 @@
                                 <th class="border-bottom-0">{{ trans('orders.status') }}</th>
                                 <th class="border-bottom-0">{{ trans('orders.payment') }}</th>
                                 <th class="border-bottom-0">{{ trans('orders.total') }}</th>
-                                <th class="border-bottom-0">{{ trans('orders.Processes') }}</th>
+                                <th class="border-bottom-0">         
+                                @canany([ 'order-view' , 'order-delete' ])
+                                {{ trans('category.Processes') }}
+                                @endcanany
+                            </th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                    @endcan
                 </div>
             </div>
 
@@ -261,7 +269,7 @@ $('#s').click(function(e) {
                     } else if (row.status == 'shipping_complete') {
                         return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping_complete') }}</button>`;
                     } else if (row.status == 'complete') {
-                        return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
+                        return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
                     } else {
                         return '';
                     }
@@ -277,12 +285,19 @@ $('#s').click(function(e) {
                 'data': null,
                 render: function(data, row, type) {
                     return `
+                @can('order-view')
                 <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
                 data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
-                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> Details</button>
-                <button class="modal-effect btn btn-sm btn-info" id="ShowModalEditCategory" data-id="${data.id}"><i class="las la-pen"></i></button>
-                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>`;
+                data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
+                @endcan
+                <button class="btn btn-success btn-sm" id="Request_Accept" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> {{ trans('orders.Request_Accept') }} </i></button>
+                <button class="btn btn-success btn-sm" id="charged" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> {{ trans('orders.Charged') }} </i></button>
+                <button class="btn btn-success btn-sm" id="Receipt_confirmed" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard">  {{ trans('orders.Receipt confirmed') }}</i></button>
+                @can('order-delete')
+                <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
+                @endcan
+                `;
                 },
                 orderable: false,
                 searchable: false
@@ -321,7 +336,7 @@ var table = $('#get_categories').DataTable({
                 } else if (row.status == 'shipping_complete') {
                     return `<button class="btn btn-info-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.shipping_complete') }}</button>`;
                 } else if (row.status == 'complete') {
-                    return `<button class="btn btn-danger-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
+                    return `<button class="btn btn-success-gradient btn-block" id="status" data-id="${row.id}" data-viewing_status="${row.status}">{{ trans('orders.complete') }}</button>`;
                 } else {
                     return '';
                 }
@@ -337,12 +352,19 @@ var table = $('#get_categories').DataTable({
             'data': null,
             render: function(data, row, type) {
                 return `
+                @can('order-view')
                 <button class="btn btn-success btn-sm" id="Management" data-id="${data.id}" data-created="${data.created_at}" data-payment="${data.payment.title_en}"
                 data-address="${data.address.address}" data-delivery_type="${data.delivery_type_title.title_ar}" data-user_id="${data.user.id}"
                 data-user_name="${data.user.first_name + " " + data.user.last_name}"
                 data-mobile_number="${data.user.mobile_number}" data-user_agent="${data.user_agent}"><i class="fa fa-clipboard"></i> {{ trans('orders.Details') }}</button>
+                @endcan
+                <button class="btn btn-success btn-sm" id="Request_Accept" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> {{ trans('orders.Request_Accept') }} </i></button>
+                <button class="btn btn-success btn-sm" id="charged" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard"> {{ trans('orders.Charged') }} </i></button>
+                <button class="btn btn-success btn-sm" id="Receipt_confirmed" data-id="${data.id}" data-status="${data.status}"><i class="las la-clipboard">  {{ trans('orders.Receipt confirmed') }}</i></button>
+                @can('order-delete')
                 <button class="modal-effect btn btn-sm btn-danger" id="DeleteCategory" data-id="${data.id}"><i class="las la-trash"></i></button>
-`;
+                @endcan
+                `;
             },
             orderable: false,
             searchable: false
@@ -426,6 +448,84 @@ $(document).on('click', '#Management', function(e) {
     $('#Mobile_number').text(mobile_number);
     $('#Device_type').text(user_agent);
 
+});
+$(document).on('click', '#Request_Accept', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#charged', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order2/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
+});
+$(document).on('click', '#Receipt_confirmed', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    var data = {
+        id:id,
+        status:status
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '{{ url("order3/update/status") }}',
+        data: data,
+        success: function(response) {
+            $('#error_message').html("");
+            $('#error_message').addClass("alert alert-danger");
+            $('#error_message').text(response.message);
+            table.ajax.reload();
+        }
+    });
 });
 </script>
 
